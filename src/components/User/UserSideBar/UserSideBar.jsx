@@ -26,9 +26,9 @@ import { userActions } from "../../../redux/userAuth";
 
   const menus = [
     { name: "Home", link: "/", icon: BiHomeAlt },
-    { name: "Messages", link: "/user/messages", icon: BiMessageSquareDetail },
-    { name: "settings", link: "/user/settings", icon: FiSettings },
-    { name: "Notifications", link: "/user/notifications", icon: MdOutlineNotifications },
+    { name: "Messages", link: "/messages", icon: BiMessageSquareDetail },
+    { name: "settings", link: "/settings", icon: FiSettings },
+    { name: "Notifications", link: "/notifications", icon: MdOutlineNotifications },
   ];
   const user= useSelector((state) => state?.user?.user);
  useEffect(()=>{

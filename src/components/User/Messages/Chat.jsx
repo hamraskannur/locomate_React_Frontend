@@ -45,7 +45,6 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
     setNewMessages(message);
   };
   const handlePostMessage = async (e) => {
-    e.preventdefault;
     if (newMessages) {
       const messageAdd = {
         senderId: currentUser,

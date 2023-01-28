@@ -14,13 +14,17 @@ const Report = () => {
     functionGetAllBlockPost();
   }, []);
  const handleBlockPost =async (postId) => {
- 
+
      const response=await blockPost({postId,status:true})
   
  }
 const handleUnBlockPost =async (postId) =>{
     const response=await blockPost({postId,status:false})
 
+}
+const viewUser=async (item) =>{
+  setOpenUserReport(true)
+   setShowAllReport(item)
 }
   return (
       <>
@@ -55,7 +59,7 @@ const handleUnBlockPost =async (postId) =>{
               <td>
                 <button
                   type="button"
-                  onClick={()=>{setOpenUserReport(true), setShowAllReport(item)} }
+                  onClick={()=>viewUser(item) }
                   className="mt-4 inline-block px-6 py-2.5 bg-slate-700 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-slate-600 hover:shadow-lg focus:bg-slate-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-700 active:shadow-lg transition duration-150 ease-in-out"
                   >
                   view user

@@ -47,10 +47,10 @@ function Post({ post, onePost, admin }) {
     } else {
       if (userId === user) {
 
-        navigate("/user/myAccount");
+        navigate("/myAccount");
       } else {
         
-        navigate(`/user/getAccount/${user}`);
+        navigate('/FriendsAccount',{ state: { userId: user, admin: false,  }} );
       }
     }
   };

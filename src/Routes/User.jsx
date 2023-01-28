@@ -1,31 +1,34 @@
 import { Route, Routes } from 'react-router-dom';
 import React from 'react';
-import Home from '../page/UserPages/Home';
-import LoginPage from '../page/UserPages/LoginPage';
-import Signup from '../page/UserPages/SignupPage';
-import VerifyPage from '../page/UserPages/VerifyPage';
-import UserProtectRouter from '../components/User/Routes/UserProtectRouter';
-import PublicRoute from '../components/User/Routes/PublicRoute';
-import MyAccount from '../page/UserPages/MyAccount';
-import EditProfilePage from '../page/UserPages/EditProfilePage'
-import OnePostPage from '../page/UserPages/OnePostPage';
-import FriendsAccount from '../page/UserPages/FriendsAccount';
+import Home from '../pages/user/Home'
+import Signup from '../pages/user/Signup';
+import MyAccountPage from '../pages/user/MyAccount';
+import MessagesPage from '../pages/user/Messages';
+import Login from '../pages/user/Login';
+import FriendsAccountPage from '../pages/user/FriendsAccount';
+import FriendsPage from '../pages/user/Friends';
+import EditProfilePage from '../pages/user/EditProfile';
+import VerifyPage from '../pages/user/VerifyPage';
+import UserProtectRouter from '../components/User/Routes/UserProtectRouter'
+import PublicRoute from '../components/User/Routes/PublicRoute'
 
 function User() {
   return (
     <>
       <Routes>
         <Route  path="/" element={<UserProtectRouter> <Home /> </UserProtectRouter>} />
-        <Route exact path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
         <Route exact path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
-        <Route exact path="/verify/:id/:token" element={<PublicRoute><VerifyPage /></PublicRoute>} />
-        <Route exact path="/myAccount" element={<UserProtectRouter><MyAccount/> </UserProtectRouter>} />
-        <Route exact path="/editProfile" element={<UserProtectRouter> <EditProfilePage/> </UserProtectRouter>} />
-        <Route exact path='/onePost/:userId/:PostId' element={<UserProtectRouter><OnePostPage /> </UserProtectRouter>} />
-        <Route exact path='/getAccount/:userId' element={<UserProtectRouter><FriendsAccount/> </UserProtectRouter>} />
+        <Route exact path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+        <Route exact path="/myAccount" element={<UserProtectRouter><MyAccountPage/> </UserProtectRouter>} />
+        <Route exact path="/messages" element={<UserProtectRouter><MessagesPage /></UserProtectRouter>} />
+        <Route exact path='/FriendsAccount' element={<UserProtectRouter><FriendsAccountPage /> </UserProtectRouter>} />
+        <Route exact path="/friends" element={<UserProtectRouter> <FriendsPage /> </UserProtectRouter>} />
+        <Route exact path="/editProfile" element={<UserProtectRouter> <EditProfilePage /> </UserProtectRouter>} />
+        <Route exact path="/verify/:id/:token" element={<UserProtectRouter><VerifyPage /></UserProtectRouter>} />
       </Routes>
     </>
   );
 }
 
 export default User;
+

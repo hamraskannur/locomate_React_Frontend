@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { BsFillPeopleFill } from "react-icons/bs";
 import AllPost from "./AllPost";
@@ -22,7 +22,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
   const [followingCount,setFollowingCount]=useState(userData?.Following?.length)
 
   const editUser = () => {
-    navigate("/user/editProfile");
+    navigate("/editProfile");
   };
   const followUserHandler = async (followId) => {
     const response = await followUser({ followId });
@@ -53,8 +53,24 @@ const ProfilePage = ({ userData, type ,admin}) => {
 
   const createMessage = async (senderId) => {
     const response = await createChat({ senderId, receiverId: userId });
-    navigate("/user/Messages");
+    navigate("/Messages");
   };
+  const openPost=()=>{
+    setOnePostId(null)
+    setSelectOption("post")
+  }
+  const clickFollowers =()=>{
+    setOnePostId(null)
+    setSelectOption("Followers");
+  }
+  const clickFollowing = () =>{
+    setOnePostId(null) 
+     setSelectOption("Following");
+  }
+  const clickSavePost = () =>{
+    setOnePostId(null) 
+    setSelectOption("SavedPost")
+  }
   return (
     <div
       className=" bg-white  shadow:lg
@@ -151,7 +167,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
       <div className="flex  mt-2  justify-center">
         {(userData?.public || type || follow || admin) && (
           <span
-            onClick={() => {setOnePostId(null),setSelectOption("post")}}
+            onClick={openPost}
             className="bg-snow-drift-50 rounded-lg shadow-md w-28 shadow-heavy-metal-800 px-5 py-1 cursor-pointer hover:bg-snow-drift-300"
           >
             <div className="flex justify-center">
@@ -161,7 +177,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
           </span>
         )}
         <span
-          onClick={() => {setOnePostId(null),setSelectOption("Followers");}}
+          onClick={clickFollowers}
           className="ml-2 bg-snow-drift-50 rounded-lg shadow-md w-28 shadow-heavy-metal-800 px-5 py-1 cursor-pointer hover:bg-snow-drift-300"
         >
           <div className="flex ">
@@ -175,7 +191,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
           <p className="text-center">Followers</p>
         </span>
         <span
-          onClick={() => {setOnePostId(null), setSelectOption("Following");  }}
+          onClick={clickFollowing}
           className="ml-2 bg-snow-drift-50 rounded-lg shadow-md w-28 shadow-heavy-metal-800 px-5 py-1 cursor-pointer hover:bg-snow-drift-300"
         >
           <div className="flex ">
@@ -194,14 +210,14 @@ const ProfilePage = ({ userData, type ,admin}) => {
         {(userData?.public || type || admin) && (
           <>
             <div className="flex">
-              <div onClick={() => {setOnePostId(null) ,setSelectOption("post")}}
+              <div onClick={openPost}
                 className="cursor-pointer hover:bg-[#bbc0c7] rounded-md font-medium hover:scale-110"
               >
                 <h1>Post</h1>
               </div>
             </div>
            {!admin && <div
-              onClick={() =>{setOnePostId(null), setSelectOption("SavedPost")}}
+              onClick={clickSavePost}
               className="ml-14 cursor-pointer hover:bg-[#bbc0c7] rounded-md font-medium hover:scale-110"
             >
               <h1>Saved post</h1>

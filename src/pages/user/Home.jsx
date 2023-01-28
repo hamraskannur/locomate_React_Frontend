@@ -1,4 +1,3 @@
-import { redirect } from "next/dist/server/api-utils";
 import React from "react";
 import NavBar from "../../components/User/NavBar/NavBar";
 import Post from "../../components/User/Posts/Post";

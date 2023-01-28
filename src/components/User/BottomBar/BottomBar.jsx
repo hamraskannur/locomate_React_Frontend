@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import { MdOutlineNotifications } from "react-icons/md";  
 import { useNavigate } from 'react-router-dom'
 import {userActions} from '../../../redux/userAuth'
+import { useDispatch } from "react-redux";
 
-FiSettings;
 
 const BottomBar = () => {
   const navigate = useNavigate()  
-
+  const dispatch =useDispatch()
 
   const menus = [
     { name: "Home", link: "/", icon: BiHomeAlt },
