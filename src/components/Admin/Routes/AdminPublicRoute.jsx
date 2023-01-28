@@ -1,27 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from "../../../redux/userAuth"
-import { useRouter } from "next/router";
+import { useSelector } from 'react-redux';
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
-
- const  PublicRoute = ({ children}) => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-
-  useEffect(() => {
-    const publicFu =  () =>{
-       dispatch(userActions.userAddDetails({  token: localStorage.getItem('token')  }));
-    }
-    publicFu()
-  }, []);
-  const user = useSelector((state) => state?.user?.userToken);
-  if (user && localStorage.getItem("admin")) {
-       router.push('/admin');
-   }else{
-    return children;
+function AdminPublicRoute(props) {
+  const admin = useSelector((state) => state?.admin?.adminToken);
+  if (admin) {
+    return <Navigate to="/admin" />;
   }
+  return props.children;
 }
 
-export default PublicRoute;
+export default AdminPublicRoute;
+
 
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom";
 import {
   showPassword,
   showRepeatPassword,
@@ -14,7 +14,7 @@ import {
 } from "./functions";
 
 function Signup() {
-  const router = useRouter();
+  const navigate = useNavigate()  
   const [passwordShown, setPasswordShown] = useState(false);
   const [repeatPasswordShown, setRepeatPasswordShown] = useState(false);
 
@@ -254,7 +254,7 @@ function Signup() {
                 <small
                   role="presentation"
                   className="text-slate-900 cursor-pointer"
-                  onClick={() => router.push("/user/login")}
+                  onClick={() => navigate("/user/login")}
                 >
                   Have an account? Login
                 </small>

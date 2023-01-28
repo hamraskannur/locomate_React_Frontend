@@ -6,7 +6,7 @@ const avatar = ({img}) => {
       <div className="w-9 rounded-full overflow-hidden">
         <img
           src={img}
-          alt=""
+          alt="img"
         />
      </div>
     </div>

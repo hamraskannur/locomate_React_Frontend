@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import AddPost from "../AddPost/AddPost";
 import { useSelector } from "react-redux";
@@ -14,7 +14,7 @@ function NavBar() {
         GatherUnite
       </h2>
       <div className="flex gap-4  items-center">
-        <Link href="/user/myAccount">
+        <Link to="/user/myAccount">
           <div className="flex ">
             <div className=" w-8 rounded-full border-white border overflow-hidden shadow-sm shadow-gray-500">
               <img

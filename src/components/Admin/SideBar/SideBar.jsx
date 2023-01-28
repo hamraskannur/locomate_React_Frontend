@@ -3,11 +3,10 @@ import { HiMenuAlt3 } from 'react-icons/hi';
 import { RiDashboardLine, RiAdvertisementFill } from 'react-icons/ri';
 import { ImUsers } from 'react-icons/im';
 import { BiLogOut } from 'react-icons/bi';
-import Link from 'next/link'
-import { useRouter } from 'next/router';
+import { Link, useNavigate } from "react-router-dom";
 
 function SideBar() {
-  const router = useRouter();
+  const navigate = useNavigate()  
 
   const menus = [
     { name: 'Dashboard', link: '/', icon: RiDashboardLine },
@@ -16,7 +15,7 @@ function SideBar() {
   ];
   const logOut = (e) => {
     localStorage.clear();
-    router.push("/user/login");
+    navigate("/user/login");
   };
   const [open, setOpen] = useState(true);
   return (
@@ -36,7 +35,7 @@ function SideBar() {
         <div className="mt-4 flex flex-col gap-4 relative">
           {menus?.map((menu, i) => (
             <Link
-              href={menu?.link}
+              to={menu?.link}
               key={menu?.name}
               className="group flex items-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
             >

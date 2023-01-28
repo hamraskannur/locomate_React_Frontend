@@ -3,7 +3,6 @@ import { io } from "socket.io-client";
 import { userChat } from "../../../Api/userApi/chatRequest";
 import AllUser from "./AllUser";
 import Chat from "./Chat";
-import User from "./user";
 import { useSelector } from "react-redux";
 
 const Messages = () => {

@@ -1,18 +1,18 @@
 import React,{useState ,useEffect } from 'react'
-import { useRouter } from "next/router"; 
 import ProfilePage from "../ProfilePage/ProfilePage";
 import { getFriendsAccount } from '../../../Api/userApi/postRequest';
 import { startLoading,completedLoading } from '../../../redux/topLoadingBar'
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar'
+import { useLocation } from 'react-router-dom';
 
 const FriendsAccount = () => {
-    const router = useRouter()
-    const dispatch = useDispatch()
+  const location = useLocation()
+  const dispatch = useDispatch()
     const { progress } = useSelector((state) => state.loader);
 
-    const { userId,admin }  = router.query
-    console.log(userId);
+    const { userId,admin }  = location.state
+
     const [userData, setUserData] = useState([])
     
     useEffect(()=>{

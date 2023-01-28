@@ -1,14 +1,13 @@
-import React from "react";
-import { useState } from "react";
+import React,{ useState } from "react";
 import { useDispatch } from "react-redux";
-import { editePost } from "../../../Api/userApi/postRequest";
+import { editPost } from "../../../Api/userApi/postRequest";
 import { AddPostActions } from "../../../redux/AddPost";
 
 const EditPost = ({  setEditPost, img, description, postId }) => {
   const dispatch = useDispatch();
   const [newDescription, setNewDescription] = useState(description);
   const submitHandler = async () => {
-    const response = await editePost({ postId, newDescription });
+    const response = await editPost({ postId, newDescription });
     if (response.success) {
       setEditPost(false)
       await dispatch(AddPostActions.postAdd());

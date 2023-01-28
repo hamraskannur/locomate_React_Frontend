@@ -2,7 +2,6 @@
 import OutsideClickHandler from "react-outside-click-handler";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/router";
 import Moment from "react-moment";
 import { FcLike } from "react-icons/fc";
 import { useEffect } from "react";
@@ -18,13 +17,14 @@ import {
   likePostReq,
   savePost,
 } from "../../../Api/userApi/postRequest";
-import EditPost from "../editPost/editPost";
+import EditPost from "../editPost/EditPost";
 import ReportPost from "../ReportPost/ReportPost";
+import { useNavigate } from "react-router-dom";
 
 function Post({ post, onePost, admin }) {
   const user = useSelector((state) => state?.user?.user);
   const userId = user?._id;
-  const router = useRouter();
+  const navigate = useNavigate()  
   const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState(false);
   const [like, setLike] = useState(post?.likes?.includes(userId));
@@ -43,21 +43,14 @@ function Post({ post, onePost, admin }) {
 
   const getAccountPage = async (user) => {
     if (admin) {
-      router.push(
-        {
-          pathname: "/admin/oneUser",
-          query: {
-            userId: userId,
-            admin: true,
-          },
-        },
-        "/admin/getviewUser"
-      );
+      navigate('/admin/oneUser', { state: { userId: userId, admin: true,  } })
     } else {
       if (userId === user) {
-        router.push("/user/myAccount");
+
+        navigate("/user/myAccount");
       } else {
-        router.push(`/user/getAccount/${user}`);
+        
+        navigate(`/user/getAccount/${user}`);
       }
     }
   };

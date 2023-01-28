@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { addPost } from '../../../Api/userApi/postRequest';
 import { AddPostActions } from '../../../redux/AddPost'
+import S3 from "aws-sdk/clients/s3";
 
 export default function AddPost({ AddPost, setAddPost }) {
   const [files, setFile] = useState([]);

@@ -1,18 +1,17 @@
 import React, { use, useState } from "react";
-import Router from "next/router";
 import { useSelector } from "react-redux";
 import { BsFillPeopleFill } from "react-icons/bs";
 import AllPost from "./AllPost";
-import PrivatePage from "./privatePage";
+import PrivatePage from "./PrivatePage";
 import { followUser } from "../../../Api/userApi/followRequest";
 import { createChat } from "../../../Api/userApi/chatRequest";
-import { useRouter } from "next/router";
 import ShowUser from "../ShowUser/ShowUser";
 import Post from "../Posts/Posts"
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = ({ userData, type ,admin}) => {
   const userId = useSelector((state) => state?.user?.user?._id);
-  const router = useRouter();
+  const navigate = useNavigate()
   const [PostCount, setPostCount] = useState(0);
   const [selectOption, setSelectOption] = useState("post");
   const [follow, setFollow] = useState(userData?.Followers.includes(userId));
@@ -23,7 +22,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
   const [followingCount,setFollowingCount]=useState(userData?.Following?.length)
 
   const editUser = () => {
-    Router.push("/user/editProfile");
+    navigate("/user/editProfile");
   };
   const followUserHandler = async (followId) => {
     const response = await followUser({ followId });
@@ -54,7 +53,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
 
   const createMessage = async (senderId) => {
     const response = await createChat({ senderId, receiverId: userId });
-    router.push("/user/Messages");
+    navigate("/user/Messages");
   };
   return (
     <div

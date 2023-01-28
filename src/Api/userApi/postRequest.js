@@ -17,14 +17,12 @@ export const addPost = async (formData) => {
 
 export const getAllProduct = async () => {
   try {
-    dispatch(startLoading())
     const { data } = await userApi.get("/getMyPost", {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     }); 
-    dispatch(completedLoading())
     return data.allPost;
   } catch (error) {
     console.log(error);
@@ -243,7 +241,7 @@ export const deletePost = async (postId) => {
 }
 
 
-export const editePost = async (postData) => {
+export const editPost = async (postData) => {
   try {
 
     const { data } =await userApi.put("/editPost",postData, {

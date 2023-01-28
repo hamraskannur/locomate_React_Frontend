@@ -1,7 +1,6 @@
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   getFollowingUser,
   getFollowersUser,
@@ -10,7 +9,7 @@ import {
 const  ShowUser = ({ type, userId ,admin}) => {
   const user = useSelector((state) => state?.user?.user?._id);
 
-  const router = useRouter();  
+  const navigate = useNavigate()
   const [users, setUsers] = useState();
   useEffect(() => {
     const getUserData = async (type) => {
@@ -29,21 +28,14 @@ const  ShowUser = ({ type, userId ,admin}) => {
 
   const goToAccountPage=(userId)=>{
    if(admin){
-    router.push(
-      {
-        pathname: "/admin/oneUser",
-        query: {
-          userId: userId,
-          admin:true
-        },
-      },
-      "/admin/getviewUser"
-    )
+ 
+    navigate('/admin/oneUser', { state: { userId: userId,admin:true } })
+
    }else{
      if (user === userId) {
-       router.push("/user/myAccount");
+      navigate("/user/myAccount");
      } else {
-       router.push(`/user/getAccount/${userId}`);
+      navigate(`/user/getAccount/${userId}`);
      }
    }
 

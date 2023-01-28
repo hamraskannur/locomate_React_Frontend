@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { useSession, signIn, signOut } from "next-auth/react";
 import { userActions } from "../../../redux/userAuth";
+import { useNavigate } from "react-router-dom";
 import {
   emailChangeHandler,
   passwordChangeHandler,
@@ -14,7 +13,7 @@ import {
 
 function Login() {
 
-  const router = useRouter();
+  const navigate = useNavigate()  
   const [ErrMessage, setErrMessage] = useState("");
   const dispatch = useDispatch();
   const [passwordShown, setPasswordShown] = useState(false);
@@ -24,7 +23,6 @@ function Login() {
 
   const loginHandler = async (event) => {
     event.preventDefault();
-    console.log("req,va");
     await submitHandler(
       
       enteredEmail,
@@ -43,20 +41,20 @@ function Login() {
         token: response.token,
         })
       );
-      router.push("/");
+      navigate("/");
     } else {
       setErrMessage(response.message);
     }
   
   };
-  const handleGoogleLogin = async () => {
-    signIn("google", { callbackUrl: "http://localhost:3000/user/loginWait" });
+  // const handleGoogleLogin = async () => {
+  //   signIn("google", { callbackUrl: "http://localhost:3000/user/loginWait" });
     
-  };
-  const handleGithubLogin = async () => {
-    signIn("github", { callbackUrl: "http://localhost:3000/user/loginWait" });
+  // };
+  // const handleGithubLogin = async () => {
+  //   signIn("github", { callbackUrl: "http://localhost:3000/user/loginWait" });
 
-  }
+  // }
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -136,7 +134,7 @@ function Login() {
                     type="button"
                     className=" text-sm text-slate-900 cursor-pointer"
                     onClick={() => {
-                      router.push("/user/signup");
+                      navigate("/user/signup");
                     }}
                   >
                     Don't have an account? Sign up
@@ -160,7 +158,7 @@ function Login() {
               <div className=" border-none sm:flex	 md:flex	 lg:flex	2xl:flex xl:flex">
                 <button
                   type="button"
-                  onClick={handleGoogleLogin}
+                  // onClick={handleGoogleLogin}
                   className=" group h-12 px-14 border-2 border-gray-300 rounded-full transition duration-300 
                         hover:border-slate-700 focus:bg-blue-50 active:bg-blue-100"
                 >
@@ -175,7 +173,8 @@ function Login() {
                     </span>
                   </div>
                 </button>
-                <button onClick={handleGithubLogin}
+                <button 
+                // onClick={handleGithubLogin}
                   className=" mt-5 sm:mt-0	 md:mt-0	ml-8 lg:mt-0	2xl:mt-0 xl:mt-0	  group h-12 px-14 border-2 border-gray-300 rounded-full transition duration-300 
                                   hover:border-slate-700 focus:bg-blue-50 active:bg-blue-100"
                 >

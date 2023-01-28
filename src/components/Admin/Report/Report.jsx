@@ -1,7 +1,4 @@
-import { useRouter } from "next/router";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React,{ useState,useEffect }  from "react";
 import { blockPost, getAllBlockPost } from "../../../Api/adminApi/PostRequest";
 import ReportUsers from "../ReportUsers/ReportUsers";
 
@@ -12,7 +9,6 @@ const Report = () => {
   useEffect(() => {
    const functionGetAllBlockPost =async () => {
        const response=await getAllBlockPost()
-       console.log(response.Posts);
       setPost(response.Posts)
     };
     functionGetAllBlockPost();

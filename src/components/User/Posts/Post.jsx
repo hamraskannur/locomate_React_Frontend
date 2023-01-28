@@ -1,4 +1,3 @@
-import useSWR from "swr";
 import React,{ useState, useEffect } from "react";
 import { getAllPosts } from "../../../Api/userApi/postRequest";
 import Posts from "./Posts";

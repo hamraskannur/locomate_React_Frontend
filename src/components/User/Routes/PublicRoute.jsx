@@ -1,39 +1,28 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { userActions } from "../../../redux/userAuth"
-import { useRouter } from "next/router";
-import { getMyProfile } from '../../../Api/userApi/profileApi';
 
-
- const  PublicRoute = ({ children}) => {
-   let token 
+function PublicRoute(props) {
   const dispatch = useDispatch();
-  const router = useRouter();
 
   useEffect(() => {
     const publicFu = async () =>{
-      if (token || localStorage.getItem("token") && localStorage.getItem("user")) {
-      let  userData = await getMyProfile();
-        dispatch(
-          userActions.userAddDetails({
-            token: localStorage.getItem("token"),
-            user: userData[0],
-          })
-        );
-      }
+     await  dispatch(userActions.userAddDetails({ name: localStorage.getItem('userName'), token: localStorage.getItem('token') , Id: localStorage.getItem('UserId')  }));
     }
     publicFu()
-    if (localStorage.getItem("user")) {
-         router.push('/');
-     }
-    }, [token]);
-    token = useSelector((state) => state?.user?.userToken);
-    if(!token){
-      return children;
-    }
-  
+  }, []);
+
+  const user = useSelector((state) => state?.user?.userToken);
+  if (user) {
+    return <Navigate to="/" />;
+  }else{
+    return props.children;
+
+  }
 }
-  
+
 export default PublicRoute;
+
 
 

@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
-import { useRouter } from "next/router";
+import { useLocation, useNavigate } from 'react-router-dom';
 import { verifySignUp } from '../../../Api/userApi/userAuthRequest';
 
 function Verify() {
-  const router = useRouter()
-  const { userId, Token }  = router.query
+  const navigate = useNavigate()  
+  const location = useLocation()
+  const { userId, Token }  = location.state
     const [ErrMessage, setErrMessage] = useState('');
   const submitVerify = async (event) => {
     console.log(userId);
@@ -13,7 +14,7 @@ function Verify() {
     event.preventDefault();
     const verify = await verifySignUp(userId,Token);
     if (verify.Status) {
-      router.push('/user/login');
+      navigate('/user/login');
     } else {
       setErrMessage(verify.message);
     }

@@ -1,35 +1,20 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "../../../redux/userAuth";
-import { useRouter } from "next/router";
-import { getMyProfile } from "../../../Api/userApi/profileApi";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { userActions } from '../../../redux/userAuth';
 
-const UserProtectRouter = ({ children }) => {
+function UserProtectRouter(props) {
   const dispatch = useDispatch();
-  const router = useRouter();
 
-  const token = useSelector((state) => state?.user?.userToken);
-  let userData;
   useEffect(() => {
-    const publicFu = async () => {
-      if (token || localStorage.getItem("token") && localStorage.getItem("user")) {
-        userData = await getMyProfile();
-        dispatch(
-          userActions.userAddDetails({
-            token: localStorage.getItem("token"),
-            user: userData[0],
-          })
-        );
-      }
-    };
-    publicFu();
-    if (!localStorage.getItem("user")) {
-      router.push("/user/login");
-    }
-  }, [token]);
-  if (token && localStorage.getItem("user")) {
-    return children;
+    dispatch(userActions.userAddDetails({ name: localStorage.getItem('userName'), token: localStorage.getItem('token') , Id: localStorage.getItem('UserId')}));
+  }, []);
+
+  const user = useSelector((state) => state?.user?.userToken);
+  if (user) {
+    return props.children;
   }
-};
+  return <Navigate to="/login" />;
+}
 
 export default UserProtectRouter;

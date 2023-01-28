@@ -2,14 +2,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { React, useState, useEffect } from 'react';
-import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux';
 import { emailChangeHandler, passwordChangeHandler, showPassword } from './functions';
 import { adminActions } from '../../../redux/adminAuth';
 import { adminLogin } from '../../../Api/adminApi/adminAuthRequest';
+import { useNavigate } from 'react-router-dom';
 
 function AdminLogin() {
-  const router = useRouter()
+  const navigate = useNavigate()  
   const dispatch = useDispatch();
 
   const [passwordShown, setPasswordShown] = useState(false);
@@ -34,7 +34,7 @@ function AdminLogin() {
       localStorage.setItem('token', response.token);
       localStorage.setItem('admin', true);
       dispatch(adminActions.AddAdmin({ token: response.token }));
-      router.push('/admin');
+      navigate('/admin');
     } else {
       setErrMessage(response.message);
     }

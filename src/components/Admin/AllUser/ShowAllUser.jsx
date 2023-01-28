@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAllUser, blockUser } from "../../../Api/adminApi/adminApi";
 
 function ShowAllUser() {
-  const router = useRouter();
+  const navigate = useNavigate()  
   const [users, setUser] = useState([]);
   const [loading, setLoading] = useState(0);
 
@@ -19,17 +19,9 @@ function ShowAllUser() {
     setLoading(1);
   };
   const getUserPage = async (userId) => {
-        router.push(
-          {
-            pathname: "/admin/oneUser",
-            query: {
-              userId: userId,
-              admin:true
-            },
-          },
-          "/admin/getviewUser"
-        )
-      
+       
+        navigate('/admin/oneUser', { state: {  userId: userId, admin:true } })
+
   };
   useEffect(() => {
     getAllUser().then((response) => {

@@ -6,12 +6,14 @@ import {
   likeMainComment,
   postReplayComment,
 } from "../../../Api/userApi/postRequest";
-import { MdDelete } from "react-icons/md"
 import { useSelector } from "react-redux";
 import ReplayComment from "./ReplayComment";
 import InputEmoji from "react-input-emoji";
+import { useNavigate } from "react-router-dom";
 
 const Comment = ({ comment }) => {
+  const navigate = useNavigate()  
+
   const user = useSelector((state) => state?.user?.user);
   const userId = user._id;
   const [AllReplayComment, setAllReplayComment] = useState();
@@ -24,9 +26,9 @@ const Comment = ({ comment }) => {
 
   const getUserAccount = () =>{
     if (userId === user) {
-      router.push("/user/myAccount");
+      navigate("/user/myAccount");
     } else {
-      router.push(`/user/getAccount/${user}`);
+      navigate(`/user/getAccount/${user}`);
     }
   }
 

@@ -1,11 +1,11 @@
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
-import { useRouter } from "next/router";  
+import { useNavigate } from "react-router-dom";
 
 const Card = ({data,functionName , button ,request ,deleteReq}) => {
-    const router = useRouter();
-    const getAccountPage = async (user) => {
-          router.push(`/user/getAccount/${user}`);
+  const navigate = useNavigate()  
+  const getAccountPage = async (user) => {
+    navigate(`/user/getAccount/${user}`);
       };
   return (
     <>

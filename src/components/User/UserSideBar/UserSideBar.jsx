@@ -10,10 +10,9 @@ import {
 import { MdOutlineNotifications } from "react-icons/md";
 import { AiOutlineSave } from "react-icons/ai";
 import { DiGitPullRequest } from "react-icons/di";
-import Link from "next/link";
+import { Link, useNavigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { sideBarAction } from "../../../redux/sideBar";
-import { useRouter } from "next/router";
 import AddPost from "../AddPost/AddPost";
 import { userActions } from "../../../redux/userAuth";
 
@@ -23,7 +22,7 @@ import { userActions } from "../../../redux/userAuth";
   const [userPublic , setUserPublic] =useState(false)
   const [count , setCount] =useState(0)
   const dispatch = useDispatch();
-  const router = useRouter();
+  const navigate = useNavigate()
 
   const menus = [
     { name: "Home", link: "/", icon: BiHomeAlt },
@@ -42,7 +41,7 @@ import { userActions } from "../../../redux/userAuth";
   const logOut = (e) => {
     localStorage.clear();
     dispatch(userActions.userLogout());
-    router.push("/user/login");
+    navigate("/user/login");
   };
  
   return (
@@ -64,9 +63,9 @@ import { userActions } from "../../../redux/userAuth";
           <div className="mt-4 flex flex-col gap-4 relative">
             {menus?.map((menu, i) => (
               <Link
-                href={`${menu?.link}`}
+                to={`${menu?.link}`}
                 key={menu?.name}
-                className={`${router.pathname === menu?.link ? "bg-[#bbc0c7] " : ""} group flex items-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md`}
+                className={`${ window.location.pathname === menu?.link ? "bg-[#bbc0c7] " : ""} group flex items-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md`}
               >
                 <div>{React.createElement(menu?.icon, { size: "20" })}</div>
                 <h2 style={{ transitionDelay: `${i + 3}00ms` }} className={`whitespace-pre duration-500 ${
@@ -88,8 +87,8 @@ import { userActions } from "../../../redux/userAuth";
 
          {!userPublic && <div className="mt-4 flex flex-col gap-4 relative">
          <Link
-                href='/user/friends'
-                className={`${router.pathname === '/user/Friends' ? "bg-[#bbc0c7] " : ""} group flex items-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md`}
+                to='/user/friends'
+                className={`${ window.location.pathname === '/user/Friends' ? "bg-[#bbc0c7] " : ""} group flex items-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md`}
               >
          
               <div>{React.createElement(DiGitPullRequest, { size: "20" })}           
