@@ -41,7 +41,7 @@ import { userActions } from "../../../redux/userAuth";
   const logOut = (e) => {
     localStorage.clear();
     dispatch(userActions.userLogout());
-    navigate("/user/login");
+    navigate("/login");
   };
  
   return (
