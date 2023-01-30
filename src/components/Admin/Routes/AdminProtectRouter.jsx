@@ -7,7 +7,7 @@ function AdminProtectRouter(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(adminActions.AddAdmin({ token: localStorage.getItem('token') }));
+    dispatch(adminActions.AddAdmin({ token: localStorage.getItem('adminToken') }));
   }, []);
 
   const admin = useSelector((state) => state?.admin?.adminToken);

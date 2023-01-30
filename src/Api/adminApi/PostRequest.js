@@ -16,7 +16,7 @@ export const getOneUser =async (userId) =>{
     const { data } = await userApi.get(`/getFriendsAccount/${userId}`, {
       withCredentials: true,
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
       },
     });
     return data.FriendsAccount;
@@ -30,7 +30,7 @@ export const getUserAllPost = async (userId) => {
     const { data } = await userApi.get(`/getUserAllPost/${userId}`, {
       withCredentials: true,
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
       },
     });
     return data.AllPosts;
@@ -44,7 +44,7 @@ export const getComments = async (postId) => {
     const { data } = await userApi.get(`/getComment/${postId}`, {
       withCredentials: true,
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
       },
     });
     if (data.success) {
@@ -60,7 +60,7 @@ export const getReplayComment = async (commentId) => {
     const { data } = await userApi.get(`/getReplayComment/${commentId}`, {
       withCredentials: true,
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
       },
     });
     return data.comments;

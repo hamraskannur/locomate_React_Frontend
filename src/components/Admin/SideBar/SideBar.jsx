@@ -21,9 +21,9 @@ function SideBar() {
   };
   const [open, setOpen] = useState(true);
   return (
-    <div className="max-sm:absolute max-md:absolute max-lg:absolute  sticky top-16  ">
+    <div className=" max-sm:absolute max-md:absolute max-lg:absolute  sticky top-16">
       <div
-        className={`bg-[#F9F9F9] min-h-screen ${
+        className={`bg-[#F9F9F9]  h-[91vh]  ${
           open ? 'w-72' : 'w-16'
         } duration-500   text-black px-4  `}
       >

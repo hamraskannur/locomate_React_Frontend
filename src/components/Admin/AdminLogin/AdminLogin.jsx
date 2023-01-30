@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { React, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { emailChangeHandler, passwordChangeHandler, showPassword } from './functions';
@@ -31,8 +28,7 @@ function AdminLogin() {
     event.preventDefault();
     const response = await adminLogin({ email: enteredEmail, password: enteredPassword });
     if (response.Status) {
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('admin', true);
+      localStorage.setItem('adminToken', response.token);
       dispatch(adminActions.AddAdmin({ token: response.token }));
       navigate('/admin');
     } else {
