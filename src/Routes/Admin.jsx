@@ -16,7 +16,7 @@ function Admin() {
         <Route path='/' element={<AdminProtectRouter><AdminHome /></AdminProtectRouter>} />
         <Route path='/login' element={<AdminPublicRoute><Login /></AdminPublicRoute>} />
         <Route path='/showUsers' element={<AdminProtectRouter><ShowUsers /></AdminProtectRouter>} />
-        <Route path='/showUsers' element={<AdminProtectRouter><ReportedPost /></AdminProtectRouter>} />
+        <Route path='/dkdd' element={<AdminProtectRouter><ReportedPost /></AdminProtectRouter>} />
         <Route path='/oneUser' element={<AdminProtectRouter><OneUser /></AdminProtectRouter>} />
         <Route path='/OnePostReport' element={<AdminProtectRouter><OnePostReport /></AdminProtectRouter>} />
         <Route path='/userProfile' element={<AdminProtectRouter><OneUser/> </AdminProtectRouter>} />

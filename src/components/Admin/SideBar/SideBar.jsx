@@ -3,6 +3,7 @@ import { HiMenuAlt3 } from 'react-icons/hi';
 import { RiDashboardLine, RiAdvertisementFill } from 'react-icons/ri';
 import { ImUsers } from 'react-icons/im';
 import { BiLogOut } from 'react-icons/bi';
+import { MdReport } from 'react-icons/md';
 import { Link, useNavigate } from "react-router-dom";
 
 function SideBar() {
@@ -12,6 +13,7 @@ function SideBar() {
     { name: 'Dashboard', link: '/', icon: RiDashboardLine },
     { name: 'Users', link: '/admin/showUsers', icon: ImUsers },
     { name: 'Advertisement', link: '/admin/advertisement', icon: RiAdvertisementFill },
+    { name: 'report', link: '/admin/report', icon: MdReport }
   ];
   const logOut = (e) => {
     localStorage.clear();
@@ -19,7 +21,7 @@ function SideBar() {
   };
   const [open, setOpen] = useState(true);
   return (
-    <div className="max-sm:absolute max-md:absolute max-lg:absolute  sticky top-0   ">
+    <div className="max-sm:absolute max-md:absolute max-lg:absolute  sticky top-16  ">
       <div
         className={`bg-[#F9F9F9] min-h-screen ${
           open ? 'w-72' : 'w-16'
