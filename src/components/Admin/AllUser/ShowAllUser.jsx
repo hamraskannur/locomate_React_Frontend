@@ -20,7 +20,7 @@ function ShowAllUser() {
   };
   const getUserPage = async (userId) => {
        
-        navigate('/admin/oneUser', { state: {  userId: userId, admin:true } })
+        navigate('/admin/userProfile', { state: {  userId: userId, admin:true } })
 
   };
   useEffect(() => {

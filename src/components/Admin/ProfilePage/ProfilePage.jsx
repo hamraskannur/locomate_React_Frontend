@@ -9,7 +9,7 @@ import ShowUser from "../ShowUser/ShowUser";
 import Post from "../Posts/Posts"
 import { useNavigate } from "react-router-dom";
 
-const ProfilePage = ({ userData, type ,admin}) => {
+const ProfilePage = ({ userData, type }) => {
   const navigate = useNavigate()
   const [PostCount, setPostCount] = useState(0);
   const [selectOption, setSelectOption] = useState("post");
@@ -18,9 +18,6 @@ const ProfilePage = ({ userData, type ,admin}) => {
 
   const [followersCount,setFollowersCount]=useState(userData?.Followers?.length)
   const [followingCount,setFollowingCount]=useState(userData?.Following?.length)
-
-      
-
 
   const openPost=()=>{
     setOnePostId(null)
@@ -141,7 +138,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
         
           </>
       </div>
-      {(admin) && !onePostId &&  selectOption === "post" && (
+      { !onePostId &&  selectOption === "post" && (
         <div className="mt-5">
           <AllPost
             userId={userData?._id}
@@ -152,22 +149,10 @@ const ProfilePage = ({ userData, type ,admin}) => {
           />
         </div>
       )}
-          {admin && !onePostId && selectOption === "SavedPost" && (
-        <div className="mt-5">
-          <AllPost
-
-            userId={userData?._id}
-            SavedPost={true}
-            type={type}
-            postCount={setPostCount}
-            setOnePostId={setOnePostId}
-          />
-        </div>
-      )}
-         {(admin) && onePostId && (
+          
+         { onePostId && (
         <div className="mt-5">
           <Post
-          admin={admin}
            onePost={true}
             post={onePostId}
             SavedPost={true}
@@ -178,9 +163,9 @@ const ProfilePage = ({ userData, type ,admin}) => {
         </div>
       )}
 
-      {(admin) && selectOption != "post" && !onePostId && selectOption != "SavedPost" && (
+      {selectOption != "post" && !onePostId && selectOption != "SavedPost" && (
         <div className="mt-5">
-          <ShowUser admin={admin} userId={userData?._id} type={selectOption} />
+          <ShowUser userId={userData?._id} type={selectOption} />
         </div>
       )}
 

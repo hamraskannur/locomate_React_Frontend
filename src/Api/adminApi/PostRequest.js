@@ -11,12 +11,12 @@ export const blockPost =async (formData) => {
     return data;
 }
 
-export const getOneUser =async () =>{
+export const getOneUser =async (userId) =>{
   try {
     const { data } = await userApi.get(`/getFriendsAccount/${userId}`, {
       withCredentials: true,
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("AdminToken"),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
     return data.FriendsAccount;
@@ -24,3 +24,47 @@ export const getOneUser =async () =>{
     console.log(error);
   }
 }
+
+export const getUserAllPost = async (userId) => {
+  try {
+    const { data } = await userApi.get(`/getUserAllPost/${userId}`, {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    return data.AllPosts;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getComments = async (postId) => {
+  try {
+    const { data } = await userApi.get(`/getComment/${postId}`, {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    if (data.success) {
+      return data.comments;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getReplayComment = async (commentId) => {
+  try {
+    const { data } = await userApi.get(`/getReplayComment/${commentId}`, {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    return data.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -19,7 +19,6 @@ const Post = () => {
       newPost = newPost?.reverse();
       setPosts(newPost);
       dispatch(completedLoading())
-
     };
     getPost();
   }, [update]);

@@ -11,7 +11,7 @@ function AllUser() {
     <div className="flex bg-[#F3F3F6]">
       <SideBar />
       <div className="w-6/12 max-sm:w-full max-md:w-full max-lg:w-full">
-        <FriendsAccount />
+        {/* <FriendsAccount /> */}
         <OneUser/>
       </div>
     </div>

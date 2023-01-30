@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getSavedPost, getUserAllPost } from "../../../Api/userApi/postRequest";
+import {  getUserAllPost } from "../../../Api/adminApi/PostRequest";
 
 const AllPost = ({ userId, type, postCount, SavedPost,setOnePostId }) => {
   const [posts, setPosts] = useState([]);
   let newPost;
   useEffect(() => {
     const getPost = async () => {
-      if (SavedPost) {
-      const response= await getSavedPost(userId)
-      console.log(response);
-      setPosts(response)
-      } else {
+    
         if (userId) {
           newPost = await getUserAllPost(userId);
           setPosts(newPost);
           postCount(newPost.length);
         }
-      }
+      
     };
     getPost();
   }, [userId]);

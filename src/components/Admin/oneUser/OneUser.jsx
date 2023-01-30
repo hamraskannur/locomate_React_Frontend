@@ -9,9 +9,10 @@ const OneUser = () => {
     const dispatch=useDispatch()
     const location = useLocation()
     const [userData,setUserData]=useState()
-    const { userId,admin }  = location.state
+    const userId   = location.state.userId
     useEffect(()=>{
         const myProfile = async() =>{
+          console.log(userId);
        if(userId){
         const newUserData = await getOneUser(userId)
           setUserData(newUserData)
@@ -21,7 +22,7 @@ const OneUser = () => {
    },[userId])
   return (
     <>
-     <ProfilePage userData={userData[0]}  admin={admin}  />  
+     {userData && <ProfilePage userData={userData[0]}    />  }
     </>
   )
 }

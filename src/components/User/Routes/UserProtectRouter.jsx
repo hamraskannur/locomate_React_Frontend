@@ -22,13 +22,15 @@ function UserProtectRouter(props) {
     }
     routerFunction()
     if(!localStorage.getItem("token")){
-      return <Navigate to="/login" />;
     }
   }, []);
-
+  
   const user = useSelector((state) => state?.user?.userToken);
   if (user) {
     return props.children;
+  }else{
+    
+    return <Navigate to="/login" />;
   }
   
 }
