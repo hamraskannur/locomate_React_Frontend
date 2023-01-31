@@ -11,6 +11,7 @@ import EditProfilePage from '../pages/user/EditProfile';
 import VerifyPage from '../pages/user/VerifyPage';
 import UserProtectRouter from '../components/User/Routes/UserProtectRouter'
 import PublicRoute from '../components/User/Routes/PublicRoute'
+import Shorts from '../pages/user/shorts'
 
 function User() {
   return (
@@ -25,6 +26,7 @@ function User() {
         <Route exact path="/friends" element={<UserProtectRouter> <FriendsPage /> </UserProtectRouter>} />
         <Route exact path="/editProfile" element={<UserProtectRouter> <EditProfilePage /> </UserProtectRouter>} />
         <Route exact path="/verify/:id/:token" element={<UserProtectRouter><VerifyPage /></UserProtectRouter>} />
+        <Route exact path='/shorts' element={<UserProtectRouter><Shorts /></UserProtectRouter>} />
       </Routes>
     </>
   );

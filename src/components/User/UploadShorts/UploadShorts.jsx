@@ -3,6 +3,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 
 import S3 from "aws-sdk/clients/s3";
 import { uploadImage } from "../../../Api/userApi/profileApi";
+import { uploadVideo } from "../../../Api/userApi/videoRequest";
 
 export default function UploadShorts({ setShortsModal }) {
   const [files, setFile] = useState(null);
@@ -68,7 +69,11 @@ export default function UploadShorts({ setShortsModal }) {
                 });
             };
             if(uploadVideoData){
-            //  const response=await uploadVideo(uploadVideoData)
+             const response=await uploadVideo(uploadVideoData)
+             if(response.status){
+                setShortsModal(false)
+             }
+             
             }
       
     } else {

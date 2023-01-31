@@ -73,10 +73,10 @@ const Messages = () => {
                   {chat?.map((chat) => (
                     <div onClick={() => clickUser(chat)  }>
                       <AllUser
+                        key={chat._id}
                         data={chat}
                         currentUserId={user?._id}
                         onlineUsers={onlineUsers}
-                        key={chat._id}
                       />
                     </div>
                   ))}
