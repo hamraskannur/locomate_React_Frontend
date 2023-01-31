@@ -1,7 +1,7 @@
 import { adminAPI, userApi } from '../../utils/Apis/Apis';
 
-export const getAllBlockPost = async () => {
-  const { data } = await adminAPI.get('/getAllBlockPost', { withCredentials: true });
+export const getAllReportPost = async () => {
+  const { data } = await adminAPI.get('/getAllReportPost', { withCredentials: true });
   return data;
 };
 
@@ -27,7 +27,7 @@ export const getOneUser =async (userId) =>{
 
 export const getUserAllPost = async (userId) => {
   try {
-    const { data } = await userApi.get(`/getUserAllPost/${userId}`, {
+    const { data } = await adminAPI.get(`/getUserAllPost/${userId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("adminToken"),
@@ -41,7 +41,7 @@ export const getUserAllPost = async (userId) => {
 
 export const getComments = async (postId) => {
   try {
-    const { data } = await userApi.get(`/getComment/${postId}`, {
+    const { data } = await adminAPI.get(`/getComment/${postId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("adminToken"),
@@ -57,7 +57,7 @@ export const getComments = async (postId) => {
 
 export const getReplayComment = async (commentId) => {
   try {
-    const { data } = await userApi.get(`/getReplayComment/${commentId}`, {
+    const { data } = await adminAPI.get(`/getReplayComment/${commentId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("adminToken"),

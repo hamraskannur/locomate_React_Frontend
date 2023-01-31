@@ -1,5 +1,5 @@
 import React,{ useState,useEffect }  from "react";
-import { blockPost, getAllBlockPost } from "../../../Api/adminApi/PostRequest";
+import { blockPost, getAllReportPost} from "../../../Api/adminApi/PostRequest";
 import ReportUsers from "../ReportUsers/ReportUsers";
 
 const Report = () => {
@@ -7,11 +7,11 @@ const Report = () => {
   const [ShowAllReport,setShowAllReport]=useState()
   const [openUserReport,setOpenUserReport]=useState(false)
   useEffect(() => {
-   const functionGetAllBlockPost =async () => {
-       const response=await getAllBlockPost()
+   const functionGetAllReportPost =async () => {
+       const response=await getAllReportPost()
       setPost(response.Posts)
     };
-    functionGetAllBlockPost();
+    functionGetAllReportPost();
   }, []);
  const handleBlockPost =async (postId) => {
 

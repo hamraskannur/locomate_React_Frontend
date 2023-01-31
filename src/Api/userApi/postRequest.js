@@ -1,9 +1,8 @@
 import { userApi } from "../../utils/Apis/Apis";
-import { startLoading,completedLoading } from '../../redux/topLoadingBar'
 
 export const addPost = async (formData) => {
   try {
-    const { data } = await userApi.post("/addPost", formData, {
+    const { data } = await userApi.post("/post/addPost", formData, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -31,7 +30,7 @@ export const getAllProduct = async () => {
 
 export const getAllPosts = async () => {
   try {
-    const { data } = await userApi.get("/getAllPosts", {
+    const { data } = await userApi.get("/post/getAllPosts", {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -45,7 +44,7 @@ export const getAllPosts = async () => {
 
 export const getOnePost = async (userId, PostId) => {
   try {
-    const { data } = await userApi.get(`/getOnePost/${userId}/${PostId}`, {
+    const { data } = await userApi.get(`/post/getOnePost/${userId}/${PostId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -73,7 +72,7 @@ export const getFriendsAccount = async (userId) => {
 
 export const likePostReq = async (PostId) => {
   try {
-    const { data } = await userApi.get(`/likePostReq/${PostId}`, {
+    const { data } = await userApi.get(`/post/likePostReq/${PostId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -88,7 +87,7 @@ export const likePostReq = async (PostId) => {
 export const postComment = async (postId, comment) => {
   try {
     const { data } = await userApi.post(
-      `/postComment/${postId}`,
+      `/post/postComment/${postId}`,
       { comment },
       {
         withCredentials: true,
@@ -113,7 +112,7 @@ export const postComment = async (postId, comment) => {
 
 export const getComments = async (postId) => {
   try {
-    const { data } = await userApi.get(`/getComment/${postId}`, {
+    const { data } = await userApi.get(`/post/getComment/${postId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -129,7 +128,7 @@ export const getComments = async (postId) => {
 
 export const getUserAllPost = async (userId) => {
   try {
-    const { data } = await userApi.get(`/getUserAllPost/${userId}`, {
+    const { data } = await userApi.get(`/post/getUserAllPost/${userId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -143,7 +142,7 @@ export const getUserAllPost = async (userId) => {
 
 export const likeMainComment = async (formData) => {
   try {
-    const { data } = await userApi.post("/likeMainComment", formData, {
+    const { data } = await userApi.post("/post/likeMainComment", formData, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -157,7 +156,7 @@ export const likeMainComment = async (formData) => {
 
 export const postReplayComment = async (formData) => {
   try {
-    const { data } = await userApi.post("/postReplayComment", formData, {
+    const { data } = await userApi.post("/post/postReplayComment", formData, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -171,7 +170,7 @@ export const postReplayComment = async (formData) => {
 
 export const getReplayComment = async (commentId) => {
   try {
-    const { data } = await userApi.get(`/getReplayComment/${commentId}`, {
+    const { data } = await userApi.get(`/post/getReplayComment/${commentId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -185,7 +184,7 @@ export const getReplayComment = async (commentId) => {
 
 export const likeReplayComment = async (formData) => {
   try {
-    const { data } = await userApi.post("/likeReplayComment", formData, {
+    const { data } = await userApi.post("/post/likeReplayComment", formData, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -199,7 +198,7 @@ export const likeReplayComment = async (formData) => {
 
 export const savePost = async (formData) => {
   try {
-    const { data } = await userApi.put("/savePost", formData, {
+    const { data } = await userApi.put("/post/savePost", formData, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -213,7 +212,7 @@ export const savePost = async (formData) => {
   
 export const getSavedPost = async (userId) => {
   try {
-    const { data } = await userApi.get(`/getSavedPost/${userId}`, {
+    const { data } = await userApi.get(`/post/getSavedPost/${userId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -228,7 +227,7 @@ export const getSavedPost = async (userId) => {
 export const deletePost = async (postId) => {
   try {
 
-    const { data } =await userApi.delete(`/deletePost/${postId}`, {
+    const { data } =await userApi.delete(`/post/deletePost/${postId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

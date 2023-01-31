@@ -17,7 +17,7 @@ export const userChat = async (userId) => {
 
 export const getMessages = async (chatId) => {
   try {
-    const { data } = await userApi.get(`/getMessages/${chatId}`, {
+    const { data } = await userApi.get(`/chat/getMessages/${chatId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -31,7 +31,7 @@ export const getMessages = async (chatId) => {
 
 export const AddMessage = async (formData) => {
   try {
-    const { data } = await userApi.post("/addMessage", formData, {
+    const { data } = await userApi.post("/chat/addMessage", formData, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -45,7 +45,7 @@ export const AddMessage = async (formData) => {
 
 export const createChat = async (formData) => {
   try {
-    const { data } = await userApi.post("/createChat", formData, {
+    const { data } = await userApi.post("/chat/createChat", formData, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
