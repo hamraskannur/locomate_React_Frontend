@@ -13,11 +13,11 @@ function SideBar() {
     { name: 'Dashboard', link: '/', icon: RiDashboardLine },
     { name: 'Users', link: '/admin/showUsers', icon: ImUsers },
     { name: 'Advertisement', link: '/admin/advertisement', icon: RiAdvertisementFill },
-    { name: 'report', link: '/admin/report', icon: MdReport }
+    { name: 'report', link: '/admin/reportedPost', icon: MdReport }
   ];
   const logOut = (e) => {
     localStorage.clear();
-    navigate("/user/login");
+    navigate("/admin/login");
   };
   const [open, setOpen] = useState(true);
   return (

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { BiBlock } from "react-icons/bi";
 
 function Post({ post, onePost }) {
+  console.log(post);
   const navigate = useNavigate();
   const [count, setCount] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -84,7 +85,7 @@ function Post({ post, onePost }) {
                         
                         {React.createElement(BiBlock, { size: "25" })}
 
-                          Block User
+                          Block Post
                         </p>
                       </div>
                     </div>

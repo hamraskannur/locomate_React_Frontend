@@ -69,9 +69,7 @@ const Comment = ({ comment }) => {
             >
               Like
             </h1>
-              <div className="ml-1">
-                {React.createElement(AiFillLike, { size: "15" })}
-              </div>
+           
             <h1 className="self-center text-gray-500 text-xs ml-1 cursor-pointer flex">
               {likeCount}
             </h1>

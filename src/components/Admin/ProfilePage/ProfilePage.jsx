@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { BsFillPeopleFill } from "react-icons/bs";
 import AllPost from "./AllPost";
-import PrivatePage from "./PrivatePage";
-import { followUser } from "../../../Api/userApi/followRequest";
-import { createChat } from "../../../Api/userApi/chatRequest";
 import ShowUser from "../ShowUser/ShowUser";
 import Post from "../Posts/Posts"
-import { useNavigate } from "react-router-dom";
 
 const ProfilePage = ({ userData, type }) => {
-  const navigate = useNavigate()
   const [PostCount, setPostCount] = useState(0);
   const [selectOption, setSelectOption] = useState("post");
  
@@ -31,10 +25,7 @@ const ProfilePage = ({ userData, type }) => {
     setOnePostId(null) 
      setSelectOption("Following");
   }
-  const clickSavePost = () =>{
-    setOnePostId(null) 
-    setSelectOption("SavedPost")
-  }
+
   return (
     <div
       className=" bg-white  shadow:lg

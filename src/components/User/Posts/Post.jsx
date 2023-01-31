@@ -26,16 +26,12 @@ const Post = () => {
 
   return (
     <>
-   {progress===100 ? <div>
       {posts.map((post) => (
-        <Posts post={post} key={post?._id} onePost={false} />
+        <>
+       {post.status && <Posts post={post} key={post?._id} onePost={false} />}
+       </>
+
         ))}
-    </div>:<LoadingBar
-        color="#f11946"
-        progress={progress}
-        height={3}
-        loaderSpeed={1000}
-      />}
         </>
   );
 };

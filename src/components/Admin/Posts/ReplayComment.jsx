@@ -36,9 +36,7 @@ const ReplayComment = ({data }) => {
             Like 
           </h1>
 
-              <div className="ml-1 mt-1">
-                {React.createElement(AiFillLike, { size: "15" })}
-              </div>
+       
          <h1 className="ml-1 text-xs mt-1">{likeCount}</h1>
             </div>
         </div>

@@ -243,7 +243,7 @@ export const deletePost = async (postId) => {
 export const editPost = async (postData) => {
   try {
 
-    const { data } =await userApi.put("/editPost",postData, {
+    const { data } =await userApi.put("/post/editPost",postData, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -258,7 +258,7 @@ export const editPost = async (postData) => {
 export const reportPost = async (postData) => {
   try {
 
-    const { data } =await userApi.put("/reportPost",postData, {
+    const { data } =await userApi.put("/post/reportPost",postData, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

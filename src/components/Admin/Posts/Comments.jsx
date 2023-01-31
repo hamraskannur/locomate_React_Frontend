@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { getComments } from "../../../Api/userApi/postRequest";
+import { getComments } from "../../../Api/adminApi/PostRequest";
 import Comment from "./Comment";
 import { useSelector } from "react-redux";
 
 function Comments({ postId, setCount, count }) {
-
-  const [comment, setComment] = useState([]);
+     console.log(postId);
+  const [comment, setComment] = useState();
   
   useEffect(() => {
     const getCommentAll = async () => {
@@ -23,7 +23,7 @@ function Comments({ postId, setCount, count }) {
    
       <div
         className={
-          comment.length > 0
+          comment
             ? "h-96	overflow-y-scroll scrollbar-hide"
             : "h-0 overflow-y-scroll scrollbar-hide"
         }
