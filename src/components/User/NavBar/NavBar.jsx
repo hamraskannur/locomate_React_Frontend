@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsFillPlusSquareFill } from "react-icons/bs";
-import AddPost from "../AddPost/AddPost";
+import { FiSettings } from "react-icons/fi";
+import AddPost from "../UploadPhoto/UploadPhoto";
 import { useSelector } from "react-redux";
 
 function NavBar() {
-  const [showModal, setShowModal] = useState(false);             
+  const [showModal, setShowModal] = useState(false);   
+  const [addPost,setAddPost]=useState(false)
   const user = useSelector((state) => state?.user?.user);
 
   return (
@@ -29,12 +31,26 @@ function NavBar() {
             </div>
           </div>
         </Link>
-        <div  onClick={() => setShowModal(!showModal)}>
+        <div  onClick={()=>{setAddPost(!addPost)}}>
           <h1  className="hidden max-sm:inline-block max-md:inline-block max-lg:inline-block text-white ml-0">
             {React.createElement(BsFillPlusSquareFill, { size: "25" })}
           </h1>
         </div>
-        <AddPost AddPost={showModal} setAddPost={setShowModal} />
+        <div  >
+          <h1  className="hidden max-sm:inline-block max-md:inline-block max-lg:inline-block text-white ml-0">
+            {React.createElement(FiSettings, { size: "25" })}
+          </h1>
+        </div>
+
+        {addPost &&<div className=" w-40 mr-2  ml-auto mt-14 border-2 h-20 bg-white fixed overflow-x-hidden overflow-y-auto  inset-0 z-50 outline-none focus:outline-none">
+            <div onClick={() => setShowModal(!showModal)} className="group flex items-center justify-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md">
+            <h1 >Upload Photo</h1>
+            </div>
+            <div className="group flex items-center justify-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md">
+            <h1 >Upload Shorts</h1>
+            </div>
+        </div>}
+       {showModal && <AddPost AddPost={showModal} setAddPost={setShowModal} />}
 
       </div>
     </div>

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import {BiLogOut, BiHomeAlt, BiMessageSquareDetail, BiVideo } from "react-icons/bi";
-import { FiSettings } from "react-icons/fi";
 import { DiGitPullRequest } from "react-icons/di";
 import { Link } from "react-router-dom";
-import { MdOutlineNotifications } from "react-icons/md";  
+import { MdOutlineNotifications, MdSlowMotionVideo } from "react-icons/md";  
 import { useNavigate } from 'react-router-dom'
 import {userActions} from '../../../redux/userAuth'
 import { useDispatch } from "react-redux";
@@ -15,9 +14,9 @@ const BottomBar = () => {
 
   const menus = [
     { name: "Home", link: "/", icon: BiHomeAlt },
-    { name: "Messages", link: "/user/messages", icon: BiMessageSquareDetail },  
-    { name: "settings", link: "/user/settings", icon: FiSettings },
-    { name: "Notifications", link: "/user/notifications", icon: MdOutlineNotifications }
+    { name: "shorts", link: "/shorts", icon:MdSlowMotionVideo  },
+    { name: "Messages", link: "/messages", icon: BiMessageSquareDetail },  
+    { name: "settings", link: "/settings", icon:  MdOutlineNotifications},
   ];
   const logOut = (e) => {
     localStorage.clear();
@@ -37,12 +36,12 @@ const BottomBar = () => {
         ))}
 
             <Link
-            to="/user/friends"
+            to="/friends"
             >
             <div  className="hover:bg-[#bbc0c7] rounded-md p-2">{React.createElement(DiGitPullRequest, { size: "20" })}</div>
             </Link>
           
-            <div   onClick={() => logOut()} className="hover:bg-[#bbc0c7] rounded-md p-2">{React.createElement(BiLogOut, { size: "20" })}</div>
+            {/* <div   onClick={() => logOut()} className="hover:bg-[#bbc0c7] rounded-md p-2">{React.createElement(BiLogOut, { size: "20" })}</div> */}
 
     </div>
 

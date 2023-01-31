@@ -5,7 +5,7 @@ import { addPost } from '../../../Api/userApi/postRequest';
 import { AddPostActions } from '../../../redux/AddPost'
 import S3 from "aws-sdk/clients/s3";
 
-export default function AddPost({ AddPost, setAddPost }) {
+export default function UploadPhoto({ AddPost, setAddPost }) {
   const [files, setFile] = useState([]);
   const [ImageLinks, setImageLinks] = useState([]);
   const [message, setMessage] = useState();
@@ -89,7 +89,7 @@ export default function AddPost({ AddPost, setAddPost }) {
 
   return (
     <>
-      {AddPost ? (
+      
         <>
           <div className=" justify-center w-full items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
@@ -97,7 +97,7 @@ export default function AddPost({ AddPost, setAddPost }) {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">Add Post</h3>
+                  <h3 className="text-3xl font-semibold mx-auto">Upload Photo</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setAddPost(false)}
@@ -203,7 +203,6 @@ export default function AddPost({ AddPost, setAddPost }) {
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
-      ) : null}
     </>
   );
 }

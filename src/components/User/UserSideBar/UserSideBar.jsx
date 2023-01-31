@@ -5,21 +5,24 @@ import {
   BiLogOut,
   BiHomeAlt,
   BiMessageSquareDetail,
-  BiVideo,
+  BiPhotoAlbum,
 } from "react-icons/bi";
-import { MdOutlineNotifications } from "react-icons/md";
+import { MdOutlineNotifications,MdSlowMotionVideo  } from "react-icons/md";
 import { AiOutlineSave } from "react-icons/ai";
 import { DiGitPullRequest } from "react-icons/di";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { sideBarAction } from "../../../redux/sideBar";
-import AddPost from "../AddPost/AddPost";
+import AddPost from "../UploadPhoto/UploadPhoto";
 import { userActions } from "../../../redux/userAuth";
+import UploadShorts from "../UploadShorts/UploadShorts";
 
 
  const  UserSideBar = ()=> {
   const [showModal, setShowModal] = useState(false);
+  const [shortsModal, setShortsModal] = useState(false);
   const [userPublic , setUserPublic] =useState(false)
+  const [addPost , setAddPost] =useState(false)
   const [count , setCount] =useState(0)
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -27,8 +30,10 @@ import { userActions } from "../../../redux/userAuth";
   const menus = [
     { name: "Home", link: "/", icon: BiHomeAlt },
     { name: "Messages", link: "/messages", icon: BiMessageSquareDetail },
-    { name: "settings", link: "/settings", icon: FiSettings },
     { name: "Notifications", link: "/notifications", icon: MdOutlineNotifications },
+    { name: "shorts", link: "/shorts", icon:MdSlowMotionVideo  },
+    { name: "settings", link: "/settings", icon: FiSettings }
+    
   ];
   const user= useSelector((state) => state?.user?.user);
  useEffect(()=>{
@@ -46,10 +51,6 @@ import { userActions } from "../../../redux/userAuth";
  
   return (
     <>
-
-
-
-    
     <div className="h-full sticky top-16  ">
       <div className="hidden md:inline-block border-r-4 border-slate-700 ">
         <div className={`bg-white h-[91vh]  ${sideBar ? "w-72" : "w-16"} duration-500   text-black px-4  `}>
@@ -63,8 +64,8 @@ import { userActions } from "../../../redux/userAuth";
           <div className="mt-4 flex flex-col gap-4 relative">
             {menus?.map((menu, i) => (
               <Link
+              key={menu?.name}
                 to={`${menu?.link}`}
-                key={menu?.name}
                 className={`${ window.location.pathname === menu?.link ? "bg-[#bbc0c7] " : ""} group flex items-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md`}
               >
                 <div>{React.createElement(menu?.icon, { size: "20" })}</div>
@@ -87,7 +88,7 @@ import { userActions } from "../../../redux/userAuth";
 
          {!userPublic && <div className="mt-4 flex flex-col gap-4 relative">
          <Link
-                to='/user/friends'
+                to='/friends'
                 className={`${ window.location.pathname === '/user/Friends' ? "bg-[#bbc0c7] " : ""} group flex items-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md`}
               >
          
@@ -119,7 +120,7 @@ import { userActions } from "../../../redux/userAuth";
           <div className="mt-4 flex flex-col gap-4 relative">
             <button
               type="button"
-              onClick={() => setShowModal(!showModal)}
+              onClick={() => setAddPost(!addPost)}
               className="group flex items-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
             >
               <div>{React.createElement(AiOutlineSave, { size: "20" })}</div>
@@ -129,7 +130,7 @@ import { userActions } from "../../../redux/userAuth";
                   !sideBar && "opacity-0 translate-x-28 overflow-hidden"
                 }`}
               >
-                Add Post
+                Upload  Post
               </h2>
               <h2
                 className={`${
@@ -138,9 +139,60 @@ import { userActions } from "../../../redux/userAuth";
            rounded-md drop-shadow-lg px-0 py-0 group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300
            group-hover:w-fit`}
               >
-                Add Post
+                Upload  Post
               </h2>
             </button>
+
+           { addPost && <><button
+              type="button"
+              onClick={() => setShowModal(!showModal)}
+              className="group flex items-center text-sm gap-3.5   font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
+            >
+              <div>{React.createElement(BiPhotoAlbum, { size: "20" })}</div>
+              <h2
+                style={{ transitionDelay: "1100ms" }}
+                className={`whitespace-pre duration-500 ${
+                  !sideBar && "opacity-0 translate-x-28 overflow-hidden"
+                }`}
+              >
+                Upload Photo
+              </h2>
+              <h2
+                className={`${
+                  sideBar && "hidden"
+                } absolute left-48 bg-white font-semibold w-0 overflow-hidden whitespace-pre text-gray-900
+           rounded-md drop-shadow-lg px-0 py-0 group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300
+           group-hover:w-fit`}
+              >
+                Upload  Photo
+              </h2>
+            </button>
+            <button
+              type="button"
+              onClick={() => setShortsModal(!showModal)}
+              className="group flex items-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
+            >
+              <div>{React.createElement(MdSlowMotionVideo, { size: "20" })}</div>
+              <h2
+                style={{ transitionDelay: "1100ms" }}
+                className={`whitespace-pre duration-500 ${
+                  !sideBar && "opacity-0 translate-x-28 overflow-hidden"
+                }`}
+              >
+                Upload Shorts
+              </h2>
+              <h2
+                className={`${
+                  sideBar && "hidden"
+                } absolute left-48 bg-white font-semibold w-0 overflow-hidden whitespace-pre text-gray-900
+           rounded-md drop-shadow-lg px-0 py-0 group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300
+           group-hover:w-fit`}
+              >
+                Upload Shorts
+              </h2>
+
+            </button></>}
+
           </div>
 
           <div
@@ -173,7 +225,8 @@ import { userActions } from "../../../redux/userAuth";
           </div>
         </div>
       </div>
-      <AddPost AddPost={showModal} setAddPost={setShowModal} />
+     {showModal && <AddPost setAddPost={setShowModal} />}
+      {shortsModal &&  <UploadShorts setShortsModal={setShortsModal}/>}
     </div>
     </>
   );
