@@ -34,6 +34,7 @@ import UploadShorts from "../UploadShorts/UploadShorts";
     { name: "shorts", link: "/shorts", icon:MdSlowMotionVideo  },
     { name: "settings", link: "/settings", icon: FiSettings }
     
+
   ];
   const user= useSelector((state) => state?.user?.user);
  useEffect(()=>{

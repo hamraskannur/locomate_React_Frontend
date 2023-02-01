@@ -4,7 +4,7 @@ import Post from "../Posts/Posts";
 
 const ReportUsers = () => {
   const location=useLocation()
-  const { item }  = location.state
+    const { item }  = location.state
 
   const [report, setReport] = useState(item);
   const [ShowPost,setShowPost]=useState(false)

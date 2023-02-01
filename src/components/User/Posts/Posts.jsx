@@ -383,7 +383,7 @@ function Post({ post, onePost }) {
             )}
           </div>
        {editPost && <EditPost img={post?.img[0]} description={post?.description} postId={post?._id} setEditPost={setEditPost}/>}
-      {report && <ReportPost setReport={setReport} postId={post?._id}/>}
+      {report && <ReportPost video={false} setReport={setReport} postId={post?._id}/>}
       </div>
     </>
   );

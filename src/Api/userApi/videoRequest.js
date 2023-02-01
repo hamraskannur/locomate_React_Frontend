@@ -138,4 +138,31 @@ export const uploadVideo = async (formData) => {
       console.log(error);
     }
   };
+  export const editShorts = async (ShortsData) => {
+    try {
   
+      const { data } =await userApi.put("/video/editShorts",ShortsData, {
+        withCredentials: true,
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      return data
+    } catch (error) {
+      console.log(error);
+    } 
+  }
+
+  export const getUserAllShorts = async (userId) => {
+    try {
+      const { data } = await userApi.get(`/video/getUserAllShorts/${userId}`, {
+        withCredentials: true,
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      return data.AllPosts;
+    } catch (error) {
+      console.log(error);
+    }
+  };

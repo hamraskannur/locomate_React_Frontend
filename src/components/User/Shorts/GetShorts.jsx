@@ -20,7 +20,7 @@ const GetShorts = () => {
 
     };
     getPost();
-  }, [update]);
+  }, [update===true]);
 
   return (
     <>

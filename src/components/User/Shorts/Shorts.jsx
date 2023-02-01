@@ -18,7 +18,7 @@ import {
   savePost,
 } from "../../../Api/userApi/postRequest";
 import { likeShortReq, deleteShort } from '../../../Api/userApi/videoRequest'
-import EditPost from "../editPost/EditPost";
+import EditShorts from "../editShorts/EditShorts";
 import ReportPost from "../ReportPost/ReportPost";
 import { useNavigate } from "react-router-dom";
 
@@ -73,8 +73,8 @@ function Shorts({ shorts, onePost }) {
     } else {
     }
   };
-  const handleDeletePost = async (postId) => {
-    const response = await deleteShort(postId);
+  const handleDeleteShorts = async (ShortsId) => {
+    const response = await deleteShort(ShortsId);
     if (response.success) {
      await dispatch(AddPostActions.postAdd());
     }
@@ -82,14 +82,14 @@ function Shorts({ shorts, onePost }) {
 
 
 
- const submit = (postId) => {
+ const submit = (ShortsId) => {
     confirmAlert({
       title: 'Confirm to ',
       message: 'Are you delete your post.',
       buttons: [
         { 
           label: 'Yes',
-          onClick: () => {handleDeletePost(postId)}
+          onClick: () => {handleDeleteShorts(ShortsId)}
         },
         {
           label: 'No',
@@ -157,57 +157,10 @@ function Shorts({ shorts, onePost }) {
                   setDropdownOpen(false);
                 }}
               >
-                <div className="relative">
+                <div className="relative z-50">
                   {dropdownOpen && !currentUser && (
-                    <div className="cursor-pointer absolute right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => handleSavePost(shorts?._id)}
-                      >
-                        {savedStatus ? (
-                          <p
-                            href=""
-                            className="flex gap-3 py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all hover:shadow-md shadow-gray-400"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="black"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-6 h-6"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                              />
-                            </svg>
-                            Save shorts
-                          </p>
-                        ) : (
-                          <p
-                            href=""
-                            className="flex gap-3  py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all  hover:shadow-md shadow-gray-400"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-6 h-6"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                              />
-                            </svg>
-                            Save shorts
-                          </p>
-                        )}
-                      </div>
+                    <div className=" cursor-pointer absolute right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
+                      
                       <div onClick={()=>setReport(true)}>
 
                       <p
@@ -236,54 +189,7 @@ function Shorts({ shorts, onePost }) {
                   )}
                   {dropdownOpen && currentUser && (
                     <div className="cursor-pointer absolute right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => handleSavePost(shorts?._id)}
-                      >
-                        {savedStatus ? (
-                          <p
-                            href=""
-                            className="flex gap-3 py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all hover:shadow-md shadow-gray-400"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="black"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-6 h-6"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                              />
-                            </svg>
-                            Save post
-                          </p>
-                        ) : (
-                          <p
-                            href=""
-                            className="flex gap-3  py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all  hover:shadow-md shadow-gray-400"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-6 h-6"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                              />
-                            </svg>
-                            Save post
-                          </p>
-                        )}
-                      </div>
+                      
 
                       <div onClick={()=>setEditPost(true)} className="cursor-pointer">
                         <p
@@ -316,8 +222,8 @@ function Shorts({ shorts, onePost }) {
           <p className="my-3 max-w-6xl text-sm">{shorts?.description}</p>
           <div className="rounded-md overflow-hidden w-full">
           <video className="w-full" controls>
-                      <source src={shorts?.img} />
-                    </video>
+                 <source src={shorts?.img} />
+            </video>
           </div>
         </div>
           <>
@@ -367,8 +273,8 @@ function Shorts({ shorts, onePost }) {
               <Comments postId={shorts?._id} setCount={setCount} count={count} />
             )}
           </div>
-       {editPost && <EditPost img={shorts?.img[0]} description={shorts?.description} postId={shorts?._id} setEditPost={setEditPost}/>}
-      {report && <ReportPost setReport={setReport} postId={shorts?._id}/>}
+       {editPost && <EditShorts img={shorts?.img} description={shorts?.description} postId={shorts?._id} setEditPost={setEditPost}/>}
+      {report && <ReportPost video={true} setReport={setReport} postId={shorts?._id}/>}
       </div>
     </>
   );

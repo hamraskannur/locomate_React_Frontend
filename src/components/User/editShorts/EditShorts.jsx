@@ -1,13 +1,13 @@
 import React,{ useState } from "react";
 import { useDispatch } from "react-redux";
-import { editPost } from "../../../Api/userApi/postRequest";
+import { editShorts } from "../../../Api/userApi/videoRequest";
 import { AddPostActions } from "../../../redux/AddPost";
 
 const EditPost = ({  setEditPost, img, description, postId }) => {
   const dispatch = useDispatch();
   const [newDescription, setNewDescription] = useState(description);
   const submitHandler = async () => {
-    const response = await editPost({ postId, newDescription });
+    const response = await editShorts({ postId, newDescription });
     if (response.success) {
       setEditPost(false)
       await dispatch(AddPostActions.postAdd());
@@ -25,14 +25,16 @@ const EditPost = ({  setEditPost, img, description, postId }) => {
               <h3 className="text-3xl font-semibold">Edit Post</h3>
             </div>
             {/*body*/}
-            <div className="flex  mt-5    w-[50vh]  px-3 ">
+            <div className="flex  mt-5   w-[50vh]  px-3 ">
               <div className="rounded-lg shadow-xl bg-gray-50 w-full ">
                 <div className="m-4">
                   <span className="flex justify-center items-center text-[12px] mb-1 text-red-500">
                     {/* {message} */}
                   </span>
                   <div className="flex items-center justify-center w-full">
-                    <img src={img ? img : ""} alt="logo" />
+                  <video className="w-full" controls>
+                 <source src={img} />
+            </video>
                   </div>
                 </div>
                 <label className="ml-2">Description</label>

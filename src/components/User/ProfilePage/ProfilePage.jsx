@@ -8,6 +8,7 @@ import { createChat } from "../../../Api/userApi/chatRequest";
 import ShowUser from "../ShowUser/ShowUser";
 import Post from "../Posts/Posts"
 import { useNavigate } from "react-router-dom";
+import Shorts from "./Shorts";
 
 const ProfilePage = ({ userData, type ,admin}) => {
   const userId = useSelector((state) => state?.user?.user?._id);
@@ -273,8 +274,13 @@ const ProfilePage = ({ userData, type ,admin}) => {
           />
         </div>
       )}
+   {(userData?.public || type || follow || admin) && selectOption === "shorts" && (
+        <div className="mt-5">
+        <Shorts userId={userData?._id}/>
+        </div>
+      )}
 
-      {(userData?.public || type || follow || admin) && selectOption != "post" && !onePostId && selectOption != "SavedPost" && (
+      {(userData?.public || type || follow || admin) && selectOption != "post" && selectOption != "shorts" && !onePostId && selectOption != "SavedPost" && (
         <div className="mt-5">
           <ShowUser admin={admin} userId={userData?._id} type={selectOption} />
         </div>

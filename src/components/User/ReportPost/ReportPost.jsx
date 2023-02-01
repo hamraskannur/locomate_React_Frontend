@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { reportPost } from '../../../Api/userApi/postRequest';
 
-const ReportPost = ({setReport ,postId}) => {
+const ReportPost = ({setReport ,postId,video}) => {
     const [newDescription, setNewDescription] = useState("");
 
     const submitHandler =async () => {
-      const response=await reportPost({newDescription,postId})
+      const response=await reportPost({newDescription,postId,video})
       if(response.success){
         setReport(false)
       }
