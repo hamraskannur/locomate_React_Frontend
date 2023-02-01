@@ -32,7 +32,7 @@ function Comments({ postId, setCount, count }) {
     try {
       const response = await postComment(postId, newComment);
       response.username=user.username
-      response.ProfileImg=user.ProfileIm
+      response.ProfileImg=user.ProfileImg
       response.likes=[]
       response._id=response._id
       setComment([response, ...comment]);

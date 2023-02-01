@@ -15,8 +15,8 @@ function Comments({ postId, setCount, count }) {
   
   useEffect(() => {
     const getCommentAll = async () => {
-      const response = await getShortsComments(postId);
-      console.log(response);
+      let response = await getShortsComments(postId);
+      response = response?.reverse();
       setComment(response);
       setCount(response.length);
     };
@@ -29,16 +29,16 @@ function Comments({ postId, setCount, count }) {
 
   const handlePostComment = async () => {
     if (newComment.trim().length === 0) return;
+
     try {
       const response = await postShortsComment(postId, newComment);
-      response.username=user.username
-      response.ProfileImg=user.ProfileIm
-      response.likes=[]
-      response._id=response._id
+  
       setComment([response, ...comment]);
       setCount(count + 1);
       setNewComment("");
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="comment bg-white border-slate-300 p-2 rounded-md border-2">

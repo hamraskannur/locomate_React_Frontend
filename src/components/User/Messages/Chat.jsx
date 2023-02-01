@@ -54,7 +54,6 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
 
       try {
         const data = await AddMessage(messageAdd);
-        console.log(data);
         setMessages([...messages, data]);
         setNewMessages("");
       } catch (error) {

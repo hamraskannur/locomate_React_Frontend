@@ -59,6 +59,10 @@ const ProfilePage = ({ userData, type ,admin}) => {
     setOnePostId(null)
     setSelectOption("post")
   }
+  const openShorts=()=>{
+    setOnePostId(null)
+    setSelectOption("shorts")
+  }
   const clickFollowers =()=>{
     setOnePostId(null)
     setSelectOption("Followers");
@@ -175,6 +179,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
             </div>
             <p className="text-center">Posts</p>
           </span>
+          
         )}
         <span
           onClick={clickFollowers}
@@ -216,6 +221,12 @@ const ProfilePage = ({ userData, type ,admin}) => {
                 <h1>Post</h1>
               </div>
             </div>
+            <div
+              onClick={openShorts}
+              className="ml-14 cursor-pointer hover:bg-[#bbc0c7] rounded-md font-medium hover:scale-110"
+            >
+              <h1>Shorts</h1>
+            </div>
            {!admin && <div
               onClick={clickSavePost}
               className="ml-14 cursor-pointer hover:bg-[#bbc0c7] rounded-md font-medium hover:scale-110"
@@ -248,7 +259,8 @@ const ProfilePage = ({ userData, type ,admin}) => {
           />
         </div>
       )}
-         {(userData?.public || type || follow || admin) && onePostId && (
+
+       {(userData?.public || type || follow || admin) && onePostId && (
         <div className="mt-5">
           <Post
           admin={admin}

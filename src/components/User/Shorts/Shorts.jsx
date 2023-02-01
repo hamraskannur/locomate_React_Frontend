@@ -55,7 +55,6 @@ function Shorts({ shorts, onePost }) {
   };
   const handleSavePost = async (postId) => {
     const response = await savePost({ postId });
-    console.log(response);
     if (response.success) {
       setSavedStatus(!savedStatus);
     }
@@ -101,11 +100,6 @@ function Shorts({ shorts, onePost }) {
 
 
 
-  const copy = async (postId) => {
-    const url = `${process.env.NEXT_PUBLIC_USER_API}/onePost/${postId}`;
-    await navigator.clipboard.writeText(url);
-    alert("Text copied");
-  };
 
   return (
     <>
@@ -365,13 +359,7 @@ function Shorts({ shorts, onePost }) {
                 </svg>
                 {count != 0 && count}
               </button>
-              <button
-                onClick={() => copy(shorts._id)}
-                type="button"
-                className="flex gap-2 items-center"
-              >
-                copy Link
-              </button>
+            
             </div>
           </>
           <div className="mt-3">

@@ -10,7 +10,6 @@ import { likeShortsMainComment, shortsReplayComment } from "../../../Api/userApi
 
 const Comment = ({ comment }) => {
   const navigate = useNavigate()  
-  console.log(comment);
 
   const user = useSelector((state) => state?.user?.user);
   const userId = user._id;
@@ -20,7 +19,6 @@ const Comment = ({ comment }) => {
   const [like, setLike] = useState(comment.likes.includes(userId));
   const [likeCount, setLikeCount] = useState(comment?.likes?.length);
   const [replayCommentCount, setReplayCommentCount] = useState(comment?.replayComment?.length);
-
 
   const getUserAccount = () =>{
     if (userId === user) {
@@ -49,13 +47,13 @@ const Comment = ({ comment }) => {
 
   const handleShortsReplayComment = async () => {
     if (newComment.trim().length === 0) return;
+ 
+
     try {
       const commentId = comment._id;
-      const response = await shortsReplayComment({ commentId, newComment });
-      response.username = user.username;
-      response.ProfileImg = user.ProfileImg;
-      response.likes=[]
-      setAllReplayComment([response, ...AllReplayComment]);
+      let response = await shortsReplayComment({ commentId, newComment });
+      response=response.reverse()
+      setAllReplayComment(response);
       setReplayCommentCount(replayCommentCount + 1);
       setNewComment("");
     } catch (error) {
@@ -134,7 +132,7 @@ const Comment = ({ comment }) => {
                 />
               </div>
               {AllReplayComment?.map((data) => (
-                <ReplayComment data={data} userId={user._id} key={data._id}/>
+                <ReplayComment data={data} userId={user._id} commentId={comment._id} key={data._id}/>
               ))}
             </>
           )}

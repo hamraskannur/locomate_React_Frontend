@@ -67,7 +67,6 @@ export const uploadVideo = async (formData) => {
         },
       });
       if (data.success) {
-        console.log( data.comments);
         return data.comments;
       }
     } catch (error) {
@@ -89,13 +88,9 @@ export const uploadVideo = async (formData) => {
         }
       );
       if (data.success) {
-        const newComment = {
-          ...data.comment,
-          userId: data.comment.userId._id,
-          firstName: data.comment.userId.username,
-        };
+      
   
-        return newComment;
+        return data.comment;
       }
     } catch (error) {
       console.log(error);
@@ -129,3 +124,18 @@ export const uploadVideo = async (formData) => {
       console.log(error);
     }
   };
+
+  export const likeShortsReplayComment = async (formData) => {
+    try {
+      const { data } = await userApi.post("/video/likeShortsReplayComment", formData, {
+        withCredentials: true,
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
