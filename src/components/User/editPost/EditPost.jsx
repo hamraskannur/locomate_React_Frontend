@@ -1,15 +1,15 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editPost } from "../../../Api/userApi/postRequest";
 import { AddPostActions } from "../../../redux/AddPost";
 
-const EditPost = ({  setEditPost, img, description, postId }) => {
+const EditPost = ({ setEditPost, img, description, postId }) => {
   const dispatch = useDispatch();
   const [newDescription, setNewDescription] = useState(description);
   const submitHandler = async () => {
     const response = await editPost({ postId, newDescription });
     if (response.success) {
-      setEditPost(false)
+      setEditPost(false);
       await dispatch(AddPostActions.postAdd());
     }
   };
@@ -31,8 +31,10 @@ const EditPost = ({  setEditPost, img, description, postId }) => {
                   <span className="flex justify-center items-center text-[12px] mb-1 text-red-500">
                     {/* {message} */}
                   </span>
-                  <div className="flex items-center justify-center w-full">
-                    <img src={img ? img : ""} alt="logo" />
+                  <div className="rounded-md overflow-hidden w-full">
+                    <video className="w-full" controls>
+                      <source src={img} />
+                    </video>
                   </div>
                 </div>
                 <label className="ml-2">Description</label>

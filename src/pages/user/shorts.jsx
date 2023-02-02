@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../../components/User/NavBar/NavBar";
-import Shorts from "../../components/User/Shorts/GetShorts"
+import Shorts from "../../components/User/Shorts/Short"
 import Suggestion from "../../components/User/Suggestion/Suggestion";
 import UserSideBar from "../../components/User/UserSideBar/UserSideBar";
 import UserProtectRouter from "../../components/User/Routes/UserProtectRouter";

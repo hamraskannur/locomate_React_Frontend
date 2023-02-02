@@ -8,12 +8,11 @@ const GetShorts = () => {
   const [posts, setPosts] = useState([]);
 
   const dispatch = useDispatch()
-  let newPost;
   const update = useSelector((state) => state.addPost.AddPost); 
   useEffect(() => {
     const getPost = async () => {
       dispatch(startLoading())
-      newPost = await getAllVideo();
+      let newPost = await getAllVideo();
       newPost = newPost?.reverse();
       setPosts(newPost);
       dispatch(completedLoading())
@@ -26,7 +25,7 @@ const GetShorts = () => {
     <>
       {posts.map((post) => (
         <>
-       {post.status && <Shorts shorts={post} key={post?._id} onePost={false} />}
+       {post.status && <Shorts post={post} key={post?._id} onePost={false} />}
        </>
 
         ))}

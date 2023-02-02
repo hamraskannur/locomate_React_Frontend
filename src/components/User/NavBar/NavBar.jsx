@@ -4,10 +4,12 @@ import { BsFillPlusSquareFill } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import AddPost from "../UploadPhoto/UploadPhoto";
 import { useSelector } from "react-redux";
+import UploadShorts from "../UploadShorts/UploadShorts";
 
 function NavBar() {
   const [showModal, setShowModal] = useState(false);   
   const [addPost,setAddPost]=useState(false)
+  const [shortsModal, setShortsModal] = useState(false);
   const user = useSelector((state) => state?.user?.user);
 
   return (
@@ -51,6 +53,7 @@ function NavBar() {
             </div>
         </div>}
        {showModal && <AddPost AddPost={showModal} setAddPost={setShowModal} />}
+       {shortsModal &&  <UploadShorts setShortsModal={setShortsModal}/>}
 
       </div>
     </div>

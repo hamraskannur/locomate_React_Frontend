@@ -17,9 +17,7 @@ import {
   likePostReq,
   savePost,
 } from "../../../Api/userApi/postRequest";
-import EditPost from "../editPost/EditPost";
-import ReportPost from "../ReportPost/ReportPost";
-import { useNavigate } from "react-router-dom";
+  import { useNavigate } from "react-router-dom";
 
 function Post({ post, onePost }) {
   const user = useSelector((state) => state?.user?.user);
@@ -313,7 +311,7 @@ function Post({ post, onePost }) {
         <div>
           <p className="my-1 max-w-6xl text-sm">{post?.description} </p>
           <div className="rounded-md overflow-hidden w-full">
-          <video className="w-full" controls>
+          <video className="w-full " controls>
                  <source src={post?.shorts} />
             </video>
           </div>
@@ -366,8 +364,6 @@ function Post({ post, onePost }) {
               <Comments postId={post?._id} setCount={setCount} count={count} />
             )}
           </div>
-       {editPost && <EditPost img={post?.shorts} description={post?.description} postId={post?._id} setEditPost={setEditPost}/>}
-      {report && <ReportPost video={false} setReport={setReport} postId={post?._id}/>}
       </div>
     </>
   );

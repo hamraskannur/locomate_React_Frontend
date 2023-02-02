@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { blockPost, getAllReportPost } from "../../../Api/adminApi/PostRequest";
+import { MdSlowMotionVideo  } from "react-icons/md";
 
 const Report = () => {
   const navigate = useNavigate();
@@ -36,8 +37,8 @@ const Report = () => {
   };
   return (
     <>
-      <div className="container mx-auto bg-[#FFFFFF] max-md:pl-16 m-5">
-        <div className="p-5 h-screen min-w-full bg-[#FFFFFF]">
+      <div className="container mx-auto bg-[#FFFFFF] max-md:pl-16  ">
+        <div className="p-5 h-full min-w-full bg-[#FFFFFF]">
           <table className="w-full mt-5">
             <thead className="bg-gray-50 border-b-2 border-stone-700 ">
               <tr>
@@ -65,13 +66,20 @@ const Report = () => {
                     <td className="p-3 pt-7  text-sm text-gray-700">
                       {index + 1}
                     </td>
-                    <td className="p-3 pt-7 text-sm text-gray-700 ">
-                      <img
-                        className="h-10 w-20"
-                        src={item?.PostId?.img[0]}
-                        alt="logo"
-                      />
-                    </td>
+                    {item?.PostId?.shorts ? (
+                      <div className="m-2 ml-5">
+                        <div>{React.createElement(MdSlowMotionVideo, { size: "40" })}</div>
+                      </div>
+
+                    ) : (
+                      <td className="p-3 pt-7 text-sm text-gray-700 ">
+                        <img
+                          className="h-10 w-20"
+                          src={item?.PostId?.img[0]}
+                          alt="logo"
+                        />
+                      </td>
+                    )}
                     <td className="p-3 pt-7 text-sm text-gray-700">
                       {item.userText.length}
                     </td>

@@ -68,3 +68,17 @@ export const getReplayComment = async (commentId) => {
     console.log(error);
   }
 };
+
+export const getOnePost = async (PostId) => {
+  try {
+    const { data } = await adminAPI.get(`/getOnePost/${PostId}`, {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

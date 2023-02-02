@@ -10,6 +10,7 @@ const MyShorts = ({ userId }) => {
   useEffect(() => {
     let getAllShorts = async () => {
       const shorts = await getUserAllShorts(userId);
+      console.log(shorts);
       setShorts(shorts);
     };
     getAllShorts();
@@ -18,7 +19,7 @@ const MyShorts = ({ userId }) => {
     <>
       {shorts.length>0 && shorts?.map((shorts) => (
         <>
-          {shorts.status && <Shorts shorts={shorts} key={shorts?._id} />}
+          {shorts.status && <Shorts post={shorts} key={shorts?._id} />}
         </>
       ))}
         {shorts.length === 0  && (

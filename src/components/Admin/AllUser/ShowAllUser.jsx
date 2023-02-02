@@ -29,7 +29,7 @@ function ShowAllUser() {
     });
   }, [loading === 1]);
   return (
-    <div className="container mx-auto bg-[#FFFFFF] max-md:pl-16">
+    <div className="container mx-auto bg-[#FFFFFF] max-md:pl-16 ">
       <div className="p-5 h-screen min-w-full bg-[#FFFFFF]">
         <table className="w-full mt-5">
           <thead className="bg-gray-50 border-b-2 border-stone-700 ">

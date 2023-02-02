@@ -10,7 +10,7 @@ function reportedPost() {
     <AdminProtectRouter>
       <div className="bg-[#F3F3F6]">
         <AdminNavBar />
-        <div className="bg-[#F3F3F6] flex ">
+        <div className="bg-[#F3F3F6] flex  ">
           <SideBar />
           <Report />
         </div>

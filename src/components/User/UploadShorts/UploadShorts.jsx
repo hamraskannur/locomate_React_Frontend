@@ -105,7 +105,7 @@ export default function UploadShorts({ setShortsModal }) {
                 </button>
               </div>
               {/*body*/}
-              <div className="flex  mt-5 max-sm:w-full max-md:w-full max-lg:w-full   w-[60vh]  px-3 ">
+              <div className="flex  mt-5 max-sm:w-full max-md:w-full max-lg:w-full z-50  w-[60vh]  px-3 ">
                 <div className="rounded-lg shadow-xl bg-gray-50 w-full ">
                   {!files && (
                     <div className="m-4">
