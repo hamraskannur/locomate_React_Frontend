@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AdminHome from '../pages/admin/AdminHome';
 import Login from '../pages/admin/Login';
 import ShowUsers from '../pages/admin/ShowUsers'
 import AdminProtectRouter from '../components/Admin/Routes/AdminProtectRouter'
@@ -13,9 +12,8 @@ function Admin() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<AdminProtectRouter><AdminHome /></AdminProtectRouter>} />
         <Route path='/login' element={<AdminPublicRoute><Login /></AdminPublicRoute>} />
-        <Route path='/showUsers' element={<AdminProtectRouter><ShowUsers /></AdminProtectRouter>} />
+        <Route path='/' element={<AdminProtectRouter><ShowUsers /></AdminProtectRouter>} />
         <Route path='/reportedPost' element={<AdminProtectRouter><ReportedPost /></AdminProtectRouter>} />
         <Route path='/oneUser' element={<AdminProtectRouter><OneUser /></AdminProtectRouter>} />
         <Route path='/OnePostReport' element={<AdminProtectRouter><OnePostReport /></AdminProtectRouter>} />

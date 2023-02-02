@@ -10,7 +10,7 @@ import Post from "../Posts/Posts"
 import { useNavigate } from "react-router-dom";
 import Shorts from "./Shorts";
 
-const ProfilePage = ({ userData, type ,admin}) => {
+const ProfilePage = ({ userData, type }) => {
   const userId = useSelector((state) => state?.user?.user?._id);
   const navigate = useNavigate()
   const [PostCount, setPostCount] = useState(0);
@@ -123,7 +123,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
             {userData?.description ? userData?.description : ""}
           </p>
           <div className="flex justify-end mr-5">
-            {type && !admin && (
+            {type && (
               <button
                 onClick={editUser}
                 className="ml-5 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1  px-4 rounded-l"
@@ -134,7 +134,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
           </div>
 
           <div className="flex">
-            {!type && !follow && !Requested && !admin && (
+            {!type && !follow && !Requested  && (
               <button
                 onClick={() => followUserHandler(userData?._id)}
                 className="flex justify-between bg-slate-700 hover:bg-slate-600 text-white font-bold py-1  px-4 rounded-l"
@@ -142,7 +142,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
                 follow
               </button>
             )}
-            {!type && follow && !Requested && !admin && (
+            {!type && follow && !Requested  && (
               <button
                 onClick={() => followUserHandler(userData?._id)}
                 className="flex justify-between bg-slate-700 hover:bg-slate-600 text-white font-bold py-1  px-4 rounded-l"
@@ -150,7 +150,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
                 UnFollow
               </button>
             )}
-            {!type && Requested && !admin && (
+            {!type && Requested  && (
               <button
                 onClick={() => followUserHandler(userData?._id)}
                 className="flex justify-between bg-slate-500 hover:bg-slate-600 text-white font-bold py-1  px-4 rounded-l"
@@ -158,7 +158,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
                 Requested
               </button>
             )}
-            {!type && !admin && (
+            {!type  && (
               <button
                 onClick={() => createMessage(userData?._id)}
                 className=" ml-5 flex justify-between bg-slate-700 hover:bg-gray-400 text-white font-bold py-1  px-4 rounded-l"
@@ -170,7 +170,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
         </div>
       </div>
       <div className="flex  mt-2  justify-center">
-        {(userData?.public || type || follow || admin) && (
+        {(userData?.public || type || follow ) && (
           <span
             onClick={openPost}
             className="bg-snow-drift-50 rounded-lg shadow-md w-28 shadow-heavy-metal-800 px-5 py-1 cursor-pointer hover:bg-snow-drift-300"
@@ -213,7 +213,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
       </div>
 
       <div className="flex items-center justify-center mt-5">
-        {(userData?.public || type || follow || admin) && (
+        {(userData?.public || type || follow ) && (
           <>
             <div className="flex">
               <div onClick={openPost}
@@ -228,16 +228,16 @@ const ProfilePage = ({ userData, type ,admin}) => {
             >
               <h1>Shorts</h1>
             </div>
-           {!admin && <div
+            <div
               onClick={clickSavePost}
               className="ml-14 cursor-pointer hover:bg-[#bbc0c7] rounded-md font-medium hover:scale-110"
             >
               <h1>Saved post</h1>
-            </div>}
+            </div>
           </>
         )}
       </div>
-      {(userData?.public || type || follow || admin) && !onePostId &&  selectOption === "post" && (
+      {(userData?.public || type || follow ) && !onePostId &&  selectOption === "post" && (
         <div className="mt-5">
           <AllPost
             userId={userData?._id}
@@ -248,7 +248,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
           />
         </div>
       )}
-          {(userData?.public || type || follow || admin) && !onePostId && selectOption === "SavedPost" && (
+          {(userData?.public || type || follow ) && !onePostId && selectOption === "SavedPost" && (
         <div className="mt-5">
           <AllPost
 
@@ -261,10 +261,9 @@ const ProfilePage = ({ userData, type ,admin}) => {
         </div>
       )}
 
-       {(userData?.public || type || follow || admin) && onePostId && (
+       {(userData?.public || type || follow ) && onePostId && (
         <div className="mt-5">
           <Post
-          admin={admin}
            onePost={true}
             post={onePostId}
             SavedPost={true}
@@ -274,19 +273,19 @@ const ProfilePage = ({ userData, type ,admin}) => {
           />
         </div>
       )}
-   {(userData?.public || type || follow || admin) && selectOption === "shorts" && (
+   {(userData?.public || type || follow ) && selectOption === "shorts" && (
         <div className="mt-5">
         <Shorts userId={userData?._id}/>
         </div>
       )}
 
-      {(userData?.public || type || follow || admin) && selectOption != "post" && selectOption != "shorts" && !onePostId && selectOption != "SavedPost" && (
+      {(userData?.public || type || follow ) && selectOption != "post" && selectOption != "shorts" && !onePostId && selectOption != "SavedPost" && (
         <div className="mt-5">
-          <ShowUser admin={admin} userId={userData?._id} type={selectOption} />
+          <ShowUser  userId={userData?._id} type={selectOption} />
         </div>
       )}
 
-      {!userData?.public && !type && !follow && !admin && (
+      {!userData?.public && !type && !follow &&  (
         <div className="shadow-md shadow-gray-400">
           <PrivatePage />
         </div>

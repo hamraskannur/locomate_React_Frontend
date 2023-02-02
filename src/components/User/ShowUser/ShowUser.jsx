@@ -6,7 +6,7 @@ import {
   getFollowersUser,
 } from "../../../Api/userApi/followRequest";
 
-const  ShowUser = ({ type, userId ,admin}) => {
+const  ShowUser = ({ type, userId }) => {
   const user = useSelector((state) => state?.user?.user?._id);
 
   const navigate = useNavigate()
@@ -27,17 +27,13 @@ const  ShowUser = ({ type, userId ,admin}) => {
 
 
   const goToAccountPage=(userId)=>{
-   if(admin){
- 
-    navigate('/admin/oneUser', { state: { userId: userId,admin:true } })
-
-   }else{
+   
      if (user === userId) {
       navigate("/user/myAccount");
      } else {
       navigate(`/user/getAccount/${userId}`);
      }
-   }
+   
 
   }
   return (

@@ -10,8 +10,12 @@ function onePostReport() {
       <div className="bg-[#F3F3F6]">
         <AdminNavBar />
         <div className="bg-[#F3F3F6] flex ">
+        <div className="sticky">
           <SideBar />
+          </div>
+          <div className="w-full ">
           <ReportUsers />
+          </div>
         </div>
       </div>
     </AdminProtectRouter>

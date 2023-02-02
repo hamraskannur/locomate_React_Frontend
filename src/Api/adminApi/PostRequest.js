@@ -1,3 +1,4 @@
+import { async } from 'q';
 import { adminAPI, userApi } from '../../utils/Apis/Apis';
 
 export const getAllReportPost = async () => {
@@ -82,3 +83,19 @@ export const getOnePost = async (PostId) => {
     console.log(error);
   }
 };
+
+export const getUserAllShorts =async (UserId) => {
+  try {
+    const { data } = await adminAPI.get(`/getUserAllShorts/${UserId}`, {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+
+
+}

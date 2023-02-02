@@ -1,99 +1,35 @@
 /* eslint-disable max-len */
 import OutsideClickHandler from "react-outside-click-handler";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import Moment from "react-moment";
-import { FcLike } from "react-icons/fc";
+import { FcLikePlaceholder } from "react-icons/fc";
 import { useEffect } from "react";
-import { MdDelete } from "react-icons/md";
-import { BsPencilSquare } from "react-icons/bs";
+
 import Comments from "./Comments";
 import Avatar from "./Avatar";
-import { AddPostActions } from "../../../redux/AddPost";
-import { confirmAlert } from 'react-confirm-alert'; // Import
+
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-import {
-  deletePost,
-  likePostReq,
-  savePost,
-} from "../../../Api/userApi/postRequest";
+
   import { useNavigate } from "react-router-dom";
 
 function Post({ post, onePost }) {
   const user = useSelector((state) => state?.user?.user);
   const userId = user?._id;
   const navigate = useNavigate()  
-  const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState(false);
-  const [like, setLike] = useState(post?.likes?.includes(userId));
   const [count, setCount] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [PostLength, setPostLength] = useState(post?.likes?.length);
-  const [savedStatus, setSavedStatus] = useState(false);
-  const [editPost,setEditPost] = useState(false)
-  const [report,setReport]=useState(false)
 
   useEffect(() => {
-    setSavedStatus(user?.saved?.includes(post?._id));
     setCurrentUser(userId === post?.userId?._id);
   }, [post,user,userId]);
 
   const getAccountPage = async (user) => {
- 
-      if (userId === user) {
-
-        navigate("/myAccount");
-      } else {
-        
-        navigate('/FriendsAccount',{ state: { userId: user,  }} );
-      }
+    navigate('/admin/userProfile', { state: {  userId: user, admin:true } })
     
-  };
-  const handleSavePost = async (postId) => {
-    const response = await savePost({ postId });
-    console.log(response);
-    if (response.success) {
-      setSavedStatus(!savedStatus);
-    }
-  };
-
-  const likePost = async (PostId) => {
-    const data = await likePostReq(PostId);
-    if (data.success) {
-      if (like) {
-        setPostLength(PostLength - 1);
-        setLike(false);
-      } else {
-        setLike(true);
-        setPostLength(PostLength + 1);
-      }
-    } else {
-    }
-  };
-  const handleDeletePost = async (postId) => {
-    const response = await deletePost(postId);
-    if (response.success) {
-     await dispatch(AddPostActions.postAdd());
-    }
-  };
-
-
-
- const submit = (postId) => {
-    confirmAlert({
-      title: 'Confirm to ',
-      message: 'Are you delete your post.',
-      buttons: [
-        { 
-          label: 'Yes',
-          onClick: () => {handleDeletePost(postId)}
-        },
-        {
-          label: 'No',
-        }
-      ]
-    });
   };
 
   return (
@@ -158,30 +94,8 @@ function Post({ post, onePost }) {
                     <div className="cursor-pointer absolute z-50 right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
                       <div
                         className="cursor-pointer"
-                        onClick={() => handleSavePost(post?._id)}
                       >
-                        {savedStatus ? (
-                          <p
-                            href=""
-                            className="flex gap-3 py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all hover:shadow-md shadow-gray-400"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="black"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-6 h-6"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                              />
-                            </svg>
-                            Save post
-                          </p>
-                        ) : (
+                         
                           <p
                             href=""
                             className="flex gap-3  py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all  hover:shadow-md shadow-gray-400"
@@ -202,108 +116,13 @@ function Post({ post, onePost }) {
                             </svg>
                             Save post
                           </p>
-                        )}
+                      
                       </div>
-                      <div onClick={()=>setReport(true)}>
-
-                      <p
-                        href=""
-                        className="flex gap-3 py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all hover:shadow-md shadow-gray-400"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
-                          />
-                        </svg>
-                        Report
-                      </p>
-                    </div>
+                    
                     </div>
 
                   )}
-                  {dropdownOpen && currentUser &&  (
-                    <div className="cursor-pointer absolute right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => handleSavePost(post?._id)}
-                      >
-                        {savedStatus ? (
-                          <p
-                            href=""
-                            className="flex gap-3 py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all hover:shadow-md shadow-gray-400"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="black"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-6 h-6"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                              />
-                            </svg>
-                            Save post
-                          </p>
-                        ) : (
-                          <p
-                            href=""
-                            className="flex gap-3  py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all  hover:shadow-md shadow-gray-400"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-6 h-6"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                              />
-                            </svg>
-                            Save post
-                          </p>
-                        )}
-                      </div>
-
-                      <div onClick={()=>setEditPost(true)} className="cursor-pointer">
-                        <p
-                          href=""
-                          className="flex gap-3 py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all hover:shadow-md shadow-gray-400"
-                        >
-                          <div>
-                            {React.createElement(BsPencilSquare, {
-                              size: "20",
-                            })}
-                          </div>
-                          Edit post
-                        </p>
-                      </div>
-                      <div onClick={() => submit(post?._id)}>
-                        <p className="flex gap-3 py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all hover:shadow-md shadow-gray-400">
-                          <div>
-                            {React.createElement(MdDelete, { size: "20" })}
-                          </div>
-                          Delete post
-                        </p>
-                      </div>
-                    </div>
-                  )}
+                
                 </div>
               </OutsideClickHandler>
             </div>
@@ -317,25 +136,12 @@ function Post({ post, onePost }) {
           </div>
         </div>
           <>
-            {" "}
             <div className="flex mt-2 gap-4">
               <button type="button" className="flex gap-2 items-center">
-                {like ? (
-                  <div onClick={() => likePost(post._id)}>
-                    {React.createElement(FcLike, { size: "25" })}
+                  <div >
+                    {React.createElement(FcLikePlaceholder, { size: "25" })}
                   </div>
-                ) : (
-                  <svg
-                    onClick={() => likePost(post._id)}
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                  >
-                    <path fill="none" d="M0 0H24V24H0z" />
-                    <path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228zm6.826 1.641c-1.5-1.502-3.92-1.563-5.49-.153l-1.335 1.198-1.336-1.197c-1.575-1.412-3.99-1.35-5.494.154-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454z" />
-                  </svg>
-                )}
+               
                 {PostLength}
               </button>
               <button

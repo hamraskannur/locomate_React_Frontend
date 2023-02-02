@@ -11,8 +11,12 @@ function reportedPost() {
       <div className="bg-[#F3F3F6]">
         <AdminNavBar />
         <div className="bg-[#F3F3F6] flex  ">
+        <div className="sticky">
           <SideBar />
-          <Report />
+          </div>
+          <div className="w-full">
+            <Report />
+          </div>
         </div>
       </div>
     </AdminProtectRouter>

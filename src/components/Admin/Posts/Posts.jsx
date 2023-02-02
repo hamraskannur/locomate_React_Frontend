@@ -7,12 +7,14 @@ import Avatar from "./Avatar";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { useNavigate } from "react-router-dom";
 import { BiBlock } from "react-icons/bi";
+import { FcLikePlaceholder } from "react-icons/fc";
 
 function  Post({ post, onePost }) {
   const navigate = useNavigate();
   const [count, setCount] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [commentsOpen, setCommentsOpen] = useState(false);
+  const [PostLength, setPostLength] = useState(post?.likes?.length);
 
   const getAccountPage = async (userId) => {
     navigate("/admin/userProfile", { state: { userId: userId } });
@@ -23,7 +25,7 @@ function  Post({ post, onePost }) {
       <div
         className={`${
           onePost ? "shadow-sm" : "shadow-lg"
-        } bg-white    shadow-gray-400 rounded-md p-4 mb-5 max-w-max  w-10/12  `}
+        } bg-white    shadow-gray-400 rounded-md p-4 mb-5 max-w-max  w-10/12 mx-auto  `}
       >
         <div className="flex gap-3">
           <div>
@@ -113,6 +115,13 @@ function  Post({ post, onePost }) {
         {
           <>
             <div className="flex mt-5 gap-4">
+            <button type="button" className="flex gap-2 items-center">
+                  <div className="text-black">
+                    {React.createElement(FcLikePlaceholder, { size: "25" })}
+                  </div>
+               
+                {PostLength}
+              </button>
               <button
                 type="button"
                 onClick={() => {

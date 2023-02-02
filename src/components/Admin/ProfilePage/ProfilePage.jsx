@@ -3,6 +3,7 @@ import { BsFillPeopleFill } from "react-icons/bs";
 import AllPost from "./AllPost";
 import ShowUser from "../ShowUser/ShowUser";
 import Post from "../Posts/Posts"
+import Shorts from './GetAllShorts'
 
 const ProfilePage = ({ userData, type }) => {
   const [PostCount, setPostCount] = useState(0);
@@ -25,7 +26,10 @@ const ProfilePage = ({ userData, type }) => {
     setOnePostId(null) 
      setSelectOption("Following");
   }
-
+  const openShorts=()=>{
+    setOnePostId(null)
+    setSelectOption("shorts")
+  }
   return (
     <div
       className=" bg-white  shadow:lg
@@ -119,13 +123,20 @@ const ProfilePage = ({ userData, type }) => {
 
       <div className="flex items-center justify-center mt-5">
           <>
-            <div className="flex">
+          <div className="flex">
               <div onClick={openPost}
                 className="cursor-pointer hover:bg-[#bbc0c7] rounded-md font-medium hover:scale-110"
               >
                 <h1>Post</h1>
               </div>
             </div>
+            <div
+              onClick={openShorts}
+              className="ml-14 cursor-pointer hover:bg-[#bbc0c7] rounded-md font-medium hover:scale-110"
+            >
+              <h1>Shorts</h1>
+            </div>
+          
         
           </>
       </div>
@@ -134,9 +145,18 @@ const ProfilePage = ({ userData, type }) => {
           <AllPost
             userId={userData?._id}
             type={type}
-            SavedPost={false}
             postCount={setPostCount}
             setOnePostId={setOnePostId}
+          />
+        </div>
+      )}
+       { selectOption === "shorts" && (
+        <div className="mt-5">
+          <Shorts
+          userId={userData?._id}
+           onePost={true}
+            post={onePostId}
+           
           />
         </div>
       )}
@@ -146,15 +166,12 @@ const ProfilePage = ({ userData, type }) => {
           <Post
            onePost={true}
             post={onePostId}
-            SavedPost={true}
-            type={type}
-            postCount={setPostCount}
-            setOnePostId={setOnePostId}
+           
           />
         </div>
       )}
 
-      {selectOption != "post" && !onePostId && selectOption != "SavedPost" && (
+      {selectOption != "post" && !onePostId && selectOption != "SavedPost" && selectOption === !"shorts" && (
         <div className="mt-5">
           <ShowUser userId={userData?._id} type={selectOption} />
         </div>

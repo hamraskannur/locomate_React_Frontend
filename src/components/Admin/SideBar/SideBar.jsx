@@ -10,9 +10,7 @@ function SideBar() {
   const navigate = useNavigate()  
 
   const menus = [
-    { name: 'Dashboard', link: '/', icon: RiDashboardLine },
-    { name: 'Users', link: '/admin/showUsers', icon: ImUsers },
-    { name: 'Advertisement', link: '/admin/advertisement', icon: RiAdvertisementFill },
+    { name: 'Users', link: '/admin/', icon: ImUsers },
     { name: 'report', link: '/admin/reportedPost', icon: MdReport }
   ];
   const logOut = (e) => {
@@ -21,7 +19,7 @@ function SideBar() {
   };
   const [open, setOpen] = useState(true);
   return (
-    <div className=" max-sm:absolute max-md:absolute max-lg:absolute  sticky top-16">
+    <div className=" max-sm:absolute max-md:absolute max-lg:absolute sticky top-16">
       <div
         className={`bg-[#F9F9F9]  h-[91vh]  ${
           open ? 'w-72' : 'w-16'

@@ -19,20 +19,22 @@ function Comments({ postId, setCount, count }) {
 
 
   return (
-    <div className="comment bg-white border-slate-300 p-2 rounded-md border-2  ">
+    <>
+  {comment &&  <div className="comment bg-white border-slate-300 p-2 rounded-md border-2  ">
    
       <div
         className={
           comment
-            ? "h-96	overflow-y-scroll scrollbar-hide"
-            : "h-0 overflow-y-scroll scrollbar-hide"
+          ? "h-96	overflow-y-scroll scrollbar-hide"
+          : "h-0 overflow-y-scroll scrollbar-hide"
         }
-      >
+        >
         {comment?.map((comment) => (
-         <Comment comment={comment} key={comment?._id} />
-        ))}
+          <Comment comment={comment} key={comment?._id} />
+          ))}
       </div>
-    </div>
+    </div>}
+          </>
   );
 }
 

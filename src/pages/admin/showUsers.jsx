@@ -10,8 +10,12 @@ function showUsers() {
       <div className="bg-[#F3F3F6]">
         <AdminNavBar />
         <div className="bg-[#F3F3F6] flex ">
+        <div className="sticky">
           <SideBar />
+          </div>
+          
           <ShowAllUser />
+
         </div>
       </div>
     </AdminProtectRouter>
