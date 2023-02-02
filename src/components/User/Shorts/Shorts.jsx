@@ -222,7 +222,7 @@ function Shorts({ shorts, onePost }) {
           <p className="my-1 max-w-6xl text-sm">{shorts?.description}</p>
           <div className="rounded-md overflow-hidden w-full">
           <video className="w-full" controls>
-                 {/* <source src={shorts?.img} /> */}
+                 <source src={shorts?.img} />
             </video>
           </div>
         </div>

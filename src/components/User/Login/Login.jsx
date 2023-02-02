@@ -129,7 +129,15 @@ function Login() {
                 {ErrMessage && 
                   <small className=" text-red-600">{ErrMessage}</small>
                 }
-                <div className="relative ">
+                 <div className="relative ">
+                  <button
+                    type="button"
+                    className=" text-sm text-slate-900 cursor-pointer"
+                  
+                  >
+                   forgot your password?
+                  </button>
+                  <br/>
                   <button
                     type="button"
                     className=" text-sm text-slate-900 cursor-pointer"
@@ -140,6 +148,7 @@ function Login() {
                     Don't have an account? Sign up
                   </button>
                 </div>
+                
                 <div className="relative ">
                   <button
                   onClick={loginHandler} 
