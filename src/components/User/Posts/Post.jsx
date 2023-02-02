@@ -26,13 +26,16 @@ const Post = () => {
 
   return (
     <>
+    <div className="bg-[#F3F3F6] h-full">
+      
       {posts.map((post) => (
         <>
        {post.status && <Posts post={post} key={post?._id} onePost={false} />}
        </>
 
         ))}
-        </>
+    </div>
+        </> 
   );
 };
 

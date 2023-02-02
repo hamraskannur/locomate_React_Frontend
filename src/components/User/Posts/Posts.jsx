@@ -98,14 +98,6 @@ function Post({ post, onePost }) {
     });
   };
 
-
-
-  const copy = async (postId) => {
-    const url = `${process.env.NEXT_PUBLIC_USER_API}/onePost/${postId}`;
-    await navigator.clipboard.writeText(url);
-    alert("Text copied");
-  };
-
   return (
     <>
      
@@ -113,7 +105,7 @@ function Post({ post, onePost }) {
       <div
         className={`${
           onePost ? "shadow-md" : "shadow-lg"
-        } bg-white    shadow-gray-400 rounded-md p-4 mx-5 mb-5 max-w-max md:mt-6  `}
+        } bg-[#F3F3F6]    shadow-gray-400 rounded-md p-3 mx-5 mb-5 mt-5 max-w-max md:mt-6  `}
       >
         <div className="flex gap-3 ">
           <div>
@@ -318,7 +310,7 @@ function Post({ post, onePost }) {
             </div>
         </div>
         <div>
-          <p className="my-3 max-w-6xl text-sm">{post?.description}</p>
+          <p className="my-1 max-w-6xl text-sm">{post?.description}</p>
           <div className="rounded-md overflow-hidden w-full">
             <img
               className="w-full h-80"
@@ -330,7 +322,7 @@ function Post({ post, onePost }) {
         </div>
           <>
             {" "}
-            <div className="flex mt-5 gap-4">
+            <div className="flex mt-2 gap-4">
               <button type="button" className="flex gap-2 items-center">
                 {like ? (
                   <div onClick={() => likePost(post._id)}>
@@ -368,13 +360,7 @@ function Post({ post, onePost }) {
                 </svg>
                 {count != 0 && count}
               </button>
-              <button
-                onClick={() => copy(post._id)}
-                type="button"
-                className="flex gap-2 items-center"
-              >
-                copy Link
-              </button>
+           
             </div>{" "}
           </>
           <div className="mt-3">

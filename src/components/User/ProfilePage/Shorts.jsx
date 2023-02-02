@@ -21,6 +21,20 @@ const MyShorts = ({ userId }) => {
           {shorts.status && <Shorts shorts={shorts} key={shorts?._id} />}
         </>
       ))}
+        {shorts.length === 0  && (
+        <div className="">
+          <div className="flex justify-center  bg-white">
+            <img
+              className="bg-white h-28"
+              src="https://freepngimg.com/thumb/photography/59850-and-instagram-photography-black-logo-white.png  "
+              alt="img"
+            />
+          </div>
+          <div className="flex justify-center">
+            <h1 className="not-italic">share your post</h1>
+          </div>
+        </div>
+      )}
     </>
   );
 };

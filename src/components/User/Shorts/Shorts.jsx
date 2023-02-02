@@ -108,7 +108,7 @@ function Shorts({ shorts, onePost }) {
       <div
         className={`${
           onePost ? "shadow-md" : "shadow-lg"
-        } bg-white    shadow-gray-400 rounded-md p-4 mx-5 mb-5  md:mt-6  max-w-max  `}
+        } bg-white    shadow-gray-400 rounded-md p-4 mx-5 mb-5 mt-5  md:mt-6  max-w-max  `}
       >
         <div className="flex gap-3 ">
           <div>
@@ -219,7 +219,7 @@ function Shorts({ shorts, onePost }) {
             </div>
         </div>
         <div>
-          <p className="my-3 max-w-6xl text-sm">{shorts?.description}</p>
+          <p className="my-1 max-w-6xl text-sm">{shorts?.description}</p>
           <div className="rounded-md overflow-hidden w-full">
           <video className="w-full" controls>
                  <source src={shorts?.img} />

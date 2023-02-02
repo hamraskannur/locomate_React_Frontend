@@ -36,11 +36,11 @@ function NavBar() {
             {React.createElement(BsFillPlusSquareFill, { size: "25" })}
           </h1>
         </div>
-        <div  >
+        <Link to='/settings' >
           <h1  className="hidden max-sm:inline-block max-md:inline-block max-lg:inline-block text-white ml-0">
             {React.createElement(FiSettings, { size: "25" })}
           </h1>
-        </div>
+        </Link>
 
         {addPost &&<div className=" w-40 mr-2  ml-auto mt-14 border-2 h-20 bg-white fixed overflow-x-hidden overflow-y-auto  inset-0 z-50 outline-none focus:outline-none">
             <div onClick={() => setShowModal(!showModal)} className="group flex items-center justify-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md">

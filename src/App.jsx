@@ -6,7 +6,7 @@ import Admin from './Routes/Admin';
 
 function App() {
   return (
-    <div>
+    <div  >
       <Router>
         <Routes>
           <Route path="/*" element={<User />} />

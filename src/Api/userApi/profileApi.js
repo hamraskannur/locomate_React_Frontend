@@ -54,3 +54,17 @@ export const saveUserData = async (formData) => {
     console.log(error);
   }
 };
+
+export const changeToPrivate=async (checked)=>{
+  try {
+    const { data } = await userApi.put("/changeToPrivate",checked, {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}

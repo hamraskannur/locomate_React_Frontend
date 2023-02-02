@@ -213,7 +213,7 @@ const ProfilePage = ({ userData, type ,admin}) => {
       </div>
 
       <div className="flex items-center justify-center mt-5">
-        {(userData?.public || type || admin) && (
+        {(userData?.public || type || follow || admin) && (
           <>
             <div className="flex">
               <div onClick={openPost}
