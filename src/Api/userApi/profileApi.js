@@ -68,3 +68,15 @@ export const changeToPrivate=async (checked)=>{
     console.log(error);
   }
 }
+
+export const searchUserApi = async (searchData) => {
+  console.log(searchData);
+  const { data } = await userApi.post('/searchUser', { searchData },  {
+    withCredentials: true,
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  })
+  console.log(data, "searchData");
+  return data
+}

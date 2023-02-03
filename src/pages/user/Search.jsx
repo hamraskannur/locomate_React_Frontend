@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { searchUserApi } from "../../../api/user";
-import React from "react";
 import NavBar from "../../components/User/NavBar/NavBar";
-import Post from "../../components/User/Posts/Post";
 import Suggestion from "../../components/User/Suggestion/Suggestion";
 import UserSideBar from "../../components/User/UserSideBar/UserSideBar";
 import UserProtectRouter from "../../components/User/Routes/UserProtectRouter";
 import BottomBar from "../../components/User/BottomBar/BottomBar";
+import SearchBar from "../../components/User/Search/SearchBar";
+import SearchResults from "../../components/User/Search/SearchResults";
+import { searchUserApi } from "../../Api/userApi/profileApi";
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -16,7 +16,8 @@ const Search = () => {
     try {
       const fetchSearchData = async () => {
         if (searchInput !== "") {
-          let searchResponse = await searchUserApi(searchInput);
+            console.log(searchInput);
+          const  searchResponse = await searchUserApi(searchInput);
           setSearchUsers(searchResponse);
         } else {
           setSearchUsers([]);
@@ -34,8 +35,10 @@ const Search = () => {
         <NavBar />
         <div className="flex ">
           <UserSideBar />
-          <div className="w-6/12 max-sm:w-full max-md:w-full max-lg:w-full">
-            <Post />
+          <div className="w-6/12 max-sm:w-full mx-auto max-md:w-full max-lg:w-full">
+          <h2 className="hidden md:block text-3xl m-5 text-heavy-metal-500 mx-auto opacity-40">Search here</h2>
+                <SearchBar setSearchInput={setSearchInput} />
+                <SearchResults searchResults={searchUsers} />
           </div>
           <div className=" p-10 max-sm:hidden max-md:hidden max-lg:hidden">
             <Suggestion />

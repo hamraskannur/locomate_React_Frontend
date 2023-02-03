@@ -18,6 +18,7 @@
     "react-app-env": "^1.2.3",
     "react-confirm-alert": "^3.0.6",
     "react-cookie": "^4.1.1",
+    "react-debounce-input": "^3.3.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-input-emoji": "^4.3.0",
