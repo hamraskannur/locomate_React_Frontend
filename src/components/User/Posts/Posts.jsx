@@ -311,7 +311,7 @@ function Post({ post, onePost }) {
             </div>
         </div>
         <div>
-          <p className="my-1 max-w-6xl text-sm">{post?.description}</p>
+          <p className="my-1 break-all text-sm">{post?.description}</p>
           <div className="rounded-md overflow-hidden w-full">
             <img
               className="w-full h-80"

@@ -5,9 +5,11 @@ import { ImUsers } from 'react-icons/im';
 import { BiLogOut } from 'react-icons/bi';
 import { MdReport } from 'react-icons/md';
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
 function SideBar() {
   const navigate = useNavigate()  
+
 
   const menus = [
     { name: 'Users', link: '/admin/', icon: ImUsers },

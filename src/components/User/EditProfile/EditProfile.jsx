@@ -1,8 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { saveUserData, uploadImage,getUserData } from "../../../Api/userApi/profileApi";
+import {
+  saveUserData,
+  uploadImage,
+  getUserData,
+} from "../../../Api/userApi/profileApi";
 import { TiTick } from "react-icons/ti";
+import { useDispatch } from "react-redux";
+import { hideLoading, showLoading } from "../../../redux/loadingBar";
 
 const EditProfile = () => {
+  const dispatch = useDispatch();
+
   const proImageRef = useRef();
   const coverImageRef = useRef();
   const [proImg, setProImg] = useState();
@@ -14,11 +22,13 @@ const EditProfile = () => {
 
   let user;
   useEffect(() => {
+    dispatch(showLoading());
     async function getUser() {
       user = await getUserData();
       setUserData(user[0]);
     }
     getUser();
+    dispatch(hideLoading());
   }, []);
   const handleEdit = async (e) => {
     const { name, value } = e.target;
@@ -27,15 +37,14 @@ const EditProfile = () => {
 
   const submitHandler = async (e) => {
     if (userData.username.trim().length > 0) {
-      if(userData.name.trim().length > 0){
-
+      if (userData.name.trim().length > 0) {
         if (coverImg) {
           const coverImageLink = await uploadImage(coverImg);
           userData.coverImg = coverImageLink;
           setCoverImg(null);
         }
         if (proImg) {
-          const proImageLink= await uploadImage(proImg);
+          const proImageLink = await uploadImage(proImg);
           userData.ProfileImg = proImageLink;
           setProImg(null);
         }
@@ -43,14 +52,13 @@ const EditProfile = () => {
         if (response?.success === true) {
           setSuccess(true);
         } else if (response?.success === "noUpdates") {
-          setSuccess(false)
+          setSuccess(false);
           setNoUpdates(true);
         } else {
           setImgErr(response.message);
         }
-      }else{
+      } else {
         setImgErr("please fill name");
-
       }
     } else {
       setImgErr("please fill userName");
@@ -61,7 +69,7 @@ const EditProfile = () => {
     let file = e.target.files;
     const fileType = file[0]["type"];
     const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
-    if (validImageTypes.includes(fileType)){
+    if (validImageTypes.includes(fileType)) {
       setCoverImg(e.target.files);
       setImgErr("");
     } else {
@@ -87,7 +95,6 @@ const EditProfile = () => {
 
   return (
     <>
-   
       {/* <section className=" py-1 bg-blueGray-50"> */}
       <div className="w-full lg:w-8/12 px-4 mx-auto mt-6 ">
         <div className=" flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
@@ -115,7 +122,7 @@ const EditProfile = () => {
                 <p>successfully updated you data</p>
               </div>
             )}
-             {noUpdates && (
+            {noUpdates && (
               <div
                 class="flex items-center w-full m-4 bg-green-200 text-white text-sm font-bold px-4 py-3"
                 role="alert"
@@ -127,62 +134,60 @@ const EditProfile = () => {
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
             <form>
               <h1 className="  text-blueGray-400 text-sm mt-5 mb-2 font-bold uppercase">
-              click and Edit your image
+                click and Edit your image
               </h1>
 
               <div className="">
                 <div className="relative">
-
-                <div
-                  onClick={() => coverImageRef.current.click()}
-                  className=" h-40 w-full overflow-hidden flex rounded-md justify-center items-center"
-                >
-                  <img
-                    className="cursor-pointer"
-                    src={
-                      coverImg
-                        ? URL?.createObjectURL(coverImg[0])
-                        : userData?.coverImg
-                        ? userData?.coverImg
-                        :"https://media.easemytrip.com/media/Blog/India/637033873695687971/637033873695687971fsrzol.jpg  "
-                    }
-                    alt="cover"
-                  />
-                  <input
-                    type="file"
-                    name="cover_img"
-                    onChange={coverImgChangeHandler}
-                    ref={coverImageRef}
-                    hidden
-                  />
-                </div>
-                <div className="absolute top-14 left-4 ">
                   <div
-                    onClick={() => proImageRef.current.click()}
-                    className="w-36 h-36 rounded-full object-cover overflow-hidden shadow-sm  shadow-gray-500"
+                    onClick={() => coverImageRef.current.click()}
+                    className=" h-40 w-full overflow-hidden flex rounded-md justify-center items-center"
                   >
                     <img
-                    className="bg-white"
+                      className="cursor-pointer"
                       src={
-                        proImg
-                          ? URL.createObjectURL(proImg[0])
-                          : userData?.ProfileImg
-                          ? userData?.ProfileImg
-                          : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+                        coverImg
+                          ? URL?.createObjectURL(coverImg[0])
+                          : userData?.coverImg
+                          ? userData?.coverImg
+                          : "https://media.easemytrip.com/media/Blog/India/637033873695687971/637033873695687971fsrzol.jpg  "
                       }
-                      alt="avatars"
+                      alt="cover"
                     />
-
                     <input
                       type="file"
-                      name="Profile_img"
-                      onChange={proImgChangeHandler}
-                      ref={proImageRef}
+                      name="cover_img"
+                      onChange={coverImgChangeHandler}
+                      ref={coverImageRef}
                       hidden
                     />
                   </div>
-                  </div>
+                  <div className="absolute top-14 left-4 ">
+                    <div
+                      onClick={() => proImageRef.current.click()}
+                      className="w-36 h-36 rounded-full object-cover overflow-hidden shadow-sm  shadow-gray-500"
+                    >
+                      <img
+                        className="bg-white"
+                        src={
+                          proImg
+                            ? URL.createObjectURL(proImg[0])
+                            : userData?.ProfileImg
+                            ? userData?.ProfileImg
+                            : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+                        }
+                        alt="avatars"
+                      />
 
+                      <input
+                        type="file"
+                        name="Profile_img"
+                        onChange={proImgChangeHandler}
+                        ref={proImageRef}
+                        hidden
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
               <h6 className=" text-blueGray-400 text-sm mt-12 mb-6 font-bold uppercase ">

@@ -22,6 +22,7 @@ import ReportPost from "../ReportPost/ReportPost";
 import { useNavigate } from "react-router-dom";
 
 function Post({ post, onePost }) {
+  console.log(post);
   const user = useSelector((state) => state?.user?.user);
   const userId = user?._id;
   const navigate = useNavigate()  
@@ -311,7 +312,7 @@ function Post({ post, onePost }) {
             </div>
         </div>
         <div>
-          <p className="my-1 max-w-6xl text-sm">{post?.description} </p>
+          <p className="my-1 break-all text-sm">{post?.description} </p>
           <div className="rounded-md overflow-hidden w-full">
           <video className="w-full" controls>
                  <source src={post?.shorts} />

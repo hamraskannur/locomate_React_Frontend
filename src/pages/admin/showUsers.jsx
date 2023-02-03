@@ -13,9 +13,7 @@ function showUsers() {
         <div className="sticky">
           <SideBar />
           </div>
-          
           <ShowAllUser />
-
         </div>
       </div>
     </AdminProtectRouter>

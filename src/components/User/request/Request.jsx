@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { getAllRequest , acceptRequest ,deleteRequests } from "../../../Api/userApi/followRequest";
 import Card from "../card/Card";
+import { useDispatch } from "react-redux";
+import { hideLoading, showLoading } from "../../../redux/loadingBar";  
 
 const Request = () => {
+  const dispatch = useDispatch();
     const [request,setRequest] = useState([])
     const [loading,setLoading] = useState(0)
     useEffect(()=>{
-        const req =async () => {
-            const request=await getAllRequest()
-            setRequest(request)
-        }
-        req()
+      dispatch(showLoading());
+      const req =async () => {
+        const request=await getAllRequest()
+        setRequest(request)
+      }
+      req()
+      dispatch(hideLoading());
     },[loading===1])
     const acceptReq = async (acceptId) => {
         setLoading(0)

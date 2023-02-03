@@ -99,3 +99,32 @@ export const getUserAllShorts =async (UserId) => {
 
 
 }
+
+export const getFollowingUser = async (usersId) => {
+  try {
+     const { data } =await adminAPI.get(`/getFollowingUser/${usersId}`, {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
+      },
+    })
+    console.log(data.user);
+   return data.user
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getFollowersUser = async (usersId) => {
+  try {
+     const { data } =await userApi.get(`/getFollowersUser/${usersId}`, {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
+      },
+    })
+   return data.user
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -2,10 +2,10 @@ import React,{ useState, useEffect } from "react";
 import { getAllPosts } from "../../../Api/userApi/postRequest";
 import Posts from "./Posts";
 import { useDispatch, useSelector } from "react-redux";
-import { startLoading,completedLoading } from '../../../redux/topLoadingBar'
-import LoadingBar from 'react-top-loading-bar'
+import { hideLoading, showLoading } from "../../../redux/loadingBar";  
 
 const Post = () => {
+
   const [posts, setPosts] = useState([]);
   const { progress } = useSelector((state) => state.loader);
 
@@ -13,15 +13,15 @@ const Post = () => {
   let newPost;
   const update = useSelector((state) => state.addPost.AddPost); 
   useEffect(() => {
+    dispatch(showLoading());
     const getPost = async () => {
-      dispatch(startLoading())
       newPost = await getAllPosts();
       newPost = newPost?.reverse();
       setPosts(newPost);
-      dispatch(completedLoading())
-
+      
     };
     getPost();
+    dispatch(hideLoading());
   }, [update]);
 
   return (

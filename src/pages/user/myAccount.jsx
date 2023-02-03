@@ -5,21 +5,12 @@ import Suggestion from "../../components/User/Suggestion/Suggestion";
 import MyAccount from "../../components/User/ProfilePage/MyAccount";
 import UserProtectRouter from "../../components/User/Routes/UserProtectRouter";
 import BottomBar from "../../components/User/BottomBar/BottomBar";
-import { useSelector } from "react-redux";
-import LoadingBar from "react-top-loading-bar";
 
 const MyAccountPage = () => {
-  const { progress } = useSelector((state) => state.loader);
 
   return (
     <UserProtectRouter>
-      <LoadingBar
-        color="#f11946"
-        progress={progress}
-        height={3}
-        loaderSpeed={1000}
-      />
-      {progress === 100 && (
+     
         <div className="bg-[#F3F3F6]">
           <NavBar />
           <div className="flex ">
@@ -35,7 +26,6 @@ const MyAccountPage = () => {
             <BottomBar />
           </div>
         </div>
-      )}
     </UserProtectRouter>
   );
 };

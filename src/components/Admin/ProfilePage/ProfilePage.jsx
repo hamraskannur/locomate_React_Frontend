@@ -170,6 +170,11 @@ const ProfilePage = ({ userData, type }) => {
           />
         </div>
       )}
+   {selectOption != "post" && selectOption != "shorts" && !onePostId  && (
+        <div className="mt-5">
+          <ShowUser  userId={userData?._id} type={selectOption} />
+        </div>
+      )}
 
       {selectOption != "post" && !onePostId && selectOption != "SavedPost" && selectOption === !"shorts" && (
         <div className="mt-5">

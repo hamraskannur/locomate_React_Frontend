@@ -48,7 +48,7 @@ function NavBar() {
             <div onClick={() => setShowModal(!showModal)} className="group flex items-center justify-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md">
             <h1 >Upload Photo</h1>
             </div>
-            <div className="group flex items-center justify-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md">
+            <div onClick={() => setShortsModal(!shortsModal)} className="group flex items-center justify-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md">
             <h1 >Upload Shorts</h1>
             </div>
         </div>}

@@ -22,7 +22,6 @@ export const submitHandler = async (
   setErrMessage,
   setResponse
 ) => {
-  console.log("money");
   if (enteredEmail.trim().length > 0) {
     if (enteredPassword.trim().length > 0) {
       if (enteredEmail.includes("@") && enteredEmail.trim().length > 7) {
@@ -33,12 +32,15 @@ export const submitHandler = async (
           });
           setResponse(response);
         } else {
+          console.log("password minimum 5 numbers");
           setErrMessage("password minimum 5 numbers");
         }
       } else {
+        console.log("wrong email");
         setErrMessage("wrong email");
       }
     } else {
+      console.log("fill Password");
       setErrMessage("fill Password");
     }
   } else {

@@ -10,7 +10,7 @@ function AllUser() {
       <div className="bg-[#F3F3F6]">
         <AdminNavBar />
         <div className="flex ">
-          <div className="sticky">
+          <div className="sticky ">
           <SideBar />
           </div>
           <div className="w-6/12 max-sm:w-full max-md:w-full max-lg:w-full scroll">

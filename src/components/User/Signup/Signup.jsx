@@ -254,7 +254,7 @@ function Signup() {
                 <small
                   role="presentation"
                   className="text-slate-900 cursor-pointer"
-                  onClick={() => navigate("/user/login")}
+                  onClick={() => navigate("/login")}
                 >
                   Have an account? Login
                 </small>

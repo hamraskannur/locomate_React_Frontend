@@ -6,6 +6,7 @@ import {
   BiHomeAlt,
   BiMessageSquareDetail,
   BiPhotoAlbum,
+  BiSearch
 } from "react-icons/bi";
 import { MdOutlineNotifications,MdSlowMotionVideo  } from "react-icons/md";
 
@@ -30,12 +31,11 @@ import UploadShorts from "../UploadShorts/UploadShorts";
 
   const menus = [
     { name: "Home", link: "/", icon: BiHomeAlt },
+    { name: "search", link: "/search", icon: BiSearch },
     { name: "Messages", link: "/messages", icon: BiMessageSquareDetail },
-    { name: "Notifications", link: "/notifications", icon: MdOutlineNotifications },
+    { name: "notification", link: "/notifications", icon: MdOutlineNotifications },
     { name: "shorts", link: "/shorts", icon:MdSlowMotionVideo  },
     { name: "settings", link: "/settings", icon: FiSettings }
-    
-
   ];
   const user= useSelector((state) => state?.user?.user);
  useEffect(()=>{

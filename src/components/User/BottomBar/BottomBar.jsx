@@ -16,7 +16,7 @@ const BottomBar = () => {
     { name: "Home", link: "/", icon: BiHomeAlt },
     { name: "shorts", link: "/shorts", icon:MdSlowMotionVideo  },
     { name: "Messages", link: "/messages", icon: BiMessageSquareDetail },  
-    { name: "settings", link: "/settings", icon:  MdOutlineNotifications},
+    { name: "settings", link: "/notifications", icon:  MdOutlineNotifications},
   ];
   const logOut = (e) => {
     localStorage.clear();

@@ -8,48 +8,69 @@ import {
   emailChangeHandler,
   passwordChangeHandler,
   showPassword,
-  submitHandler
 } from "./functions";
+import { login } from "../../../Api/userApi/userAuthRequest";
+
+import { hideLoading, showLoading } from "../../../redux/loadingBar";
 
 function Login() {
-
-  const navigate = useNavigate()  
+  const navigate = useNavigate();
   const [ErrMessage, setErrMessage] = useState("");
   const dispatch = useDispatch();
   const [passwordShown, setPasswordShown] = useState(false);
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
-  const [response, setResponse] = useState([]);
 
   const loginHandler = async (event) => {
     event.preventDefault();
-    await submitHandler(
-      
-      enteredEmail,
-      enteredPassword,
-      setErrMessage,
-      setResponse
-    );
-    if (response?.Status) {
-      localStorage.setItem("token", response.token);
-      localStorage.setItem("user", true);
 
+    if (enteredEmail.trim().length > 0) {
+      if (enteredPassword.trim().length > 0) {
+        if (enteredEmail.includes("@") && enteredEmail.trim().length > 7) {
+          if (enteredPassword.trim().length > 5) {
+            dispatch(showLoading());
+            const response = await login({
+              email: enteredEmail,
+              password: enteredPassword,
+            });
+            dispatch(hideLoading());
+            if (response?.Status) {
+              localStorage.setItem("token", response.token);
+              localStorage.setItem("user", true);
+              dispatch(
+                userActions.userAddDetails({
+                  user: response.user,
+                  token: response.token,
+                })
+              );
+              navigate("/");
+              dispatch(hideLoading());
+            }
 
-      dispatch(
-        userActions.userAddDetails({
-        user: response.user,
-        token: response.token,
-        })
-      );
-      navigate("/");
+            if (response.message) {
+              setErrMessage(response.message);
+            }
+          } else {
+            console.log("password minimum 5 numbers");
+            setErrMessage("password minimum 5 numbers");
+          }
+        } else {
+          console.log("wrong email");
+          setErrMessage("wrong email");
+        }
+      } else {
+        console.log("fill Password");
+        setErrMessage("fill Password");
+      }
     } else {
-      setErrMessage(response.message);
+      console.log("money2");
+
+      setErrMessage("fill email");
     }
-  
   };
   // const handleGoogleLogin = async () => {
   //   signIn("google", { callbackUrl: "http://localhost:3000/user/loginWait" });
-    
+
   // };
   // const handleGithubLogin = async () => {
   //   signIn("github", { callbackUrl: "http://localhost:3000/user/loginWait" });
@@ -126,32 +147,31 @@ function Login() {
                     </label>
                   </div>
                 </div>
-                {ErrMessage && 
+                {ErrMessage && (
                   <small className=" text-red-600">{ErrMessage}</small>
-                }
-                 <div className="relative ">
+                )}
+                <div className="relative ">
                   <button
                     type="button"
                     className=" text-sm text-slate-900 cursor-pointer"
-                  
                   >
-                   forgot your password?
+                    forgot your password?
                   </button>
-                  <br/>
+                  <br />
                   <button
                     type="button"
                     className=" text-sm text-slate-900 cursor-pointer"
                     onClick={() => {
-                      navigate("/user/signup");
+                      navigate("/signup");
                     }}
                   >
                     Don't have an account? Sign up
                   </button>
                 </div>
-                
+
                 <div className="relative ">
                   <button
-                  onClick={loginHandler} 
+                    onClick={loginHandler}
                     type="button"
                     className="bg-slate-500 text-white rounded-md px-2 py-1"
                   >
@@ -164,44 +184,44 @@ function Login() {
               </div>
             </div>
           </div>
-              <div className=" border-none sm:flex	 md:flex	 lg:flex	2xl:flex xl:flex">
-                <button
-                  type="button"
-                  // onClick={handleGoogleLogin}
-                  className=" group h-12 px-14 border-2 border-gray-300 rounded-full transition duration-300 
+          <div className=" border-none sm:flex	 md:flex	 lg:flex	2xl:flex xl:flex">
+            <button
+              type="button"
+              // onClick={handleGoogleLogin}
+              className=" group h-12 px-14 border-2 border-gray-300 rounded-full transition duration-300 
                         hover:border-slate-700 focus:bg-blue-50 active:bg-blue-100"
-                >
-                  <div className="relative flex items-center space-x-4 justify-center">
-                    <img
-                      src="https://tailus.io/sources/blocks/social/preview/images/google.svg"
-                      className="absolute left-0 w-5"
-                      alt="google logo"
-                    />
-                    <span className="pl-4 block w-max font-semibold tracking-wide text-gray-700 text-sm transition duration-300 group-hover:text-slate-700 sm:text-base">
-                      Google
-                    </span>
-                  </div>
-                </button>
-                <button 
-                // onClick={handleGithubLogin}
-                  className=" mt-5 sm:mt-0	 md:mt-0	ml-8 lg:mt-0	2xl:mt-0 xl:mt-0	  group h-12 px-14 border-2 border-gray-300 rounded-full transition duration-300 
-                                  hover:border-slate-700 focus:bg-blue-50 active:bg-blue-100"
-                >
-                  <div className=" relative flex items-center space-x-4 justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      className="absolute left-0 w-5 text-gray-700"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-                    </svg>
-                    <span className="pl-4 block w-max font-semibold tracking-wide text-gray-700 text-sm transition duration-300 group-hover:text-slate-700 sm:text-base">
-                      Github
-                    </span>
-                  </div>
-                </button>
+            >
+              <div className="relative flex items-center space-x-4 justify-center">
+                <img
+                  src="https://tailus.io/sources/blocks/social/preview/images/google.svg"
+                  className="absolute left-0 w-5"
+                  alt="google logo"
+                />
+                <span className="pl-4 block w-max font-semibold tracking-wide text-gray-700 text-sm transition duration-300 group-hover:text-slate-700 sm:text-base">
+                  Google
+                </span>
               </div>
+            </button>
+            <button
+              // onClick={handleGithubLogin}
+              className=" mt-5 sm:mt-0	 md:mt-0	ml-8 lg:mt-0	2xl:mt-0 xl:mt-0	  group h-12 px-14 border-2 border-gray-300 rounded-full transition duration-300 
+                                  hover:border-slate-700 focus:bg-blue-50 active:bg-blue-100"
+            >
+              <div className=" relative flex items-center space-x-4 justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  className="absolute left-0 w-5 text-gray-700"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+                <span className="pl-4 block w-max font-semibold tracking-wide text-gray-700 text-sm transition duration-300 group-hover:text-slate-700 sm:text-base">
+                  Github
+                </span>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </div>

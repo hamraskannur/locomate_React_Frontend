@@ -1,20 +1,29 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { verifySignUp } from '../../../Api/userApi/userAuthRequest';
+import { hideLoading, showLoading } from "../../../redux/loadingBar";  
 
 function Verify() {
   const navigate = useNavigate()  
-  const location = useLocation()
-  const { userId, Token }  = location.state
+  const [searchParams]=useSearchParams()
+  const dispatch = useDispatch();
+  const userId=searchParams.get('id')
+  const token=searchParams.get('token')
+
     const [ErrMessage, setErrMessage] = useState('');
   const submitVerify = async (event) => {
     console.log(userId);
-    console.log(Token);
+    console.log(token);
     event.preventDefault();
-    const verify = await verifySignUp(userId,Token);
+    dispatch(showLoading());
+
+    const verify = await verifySignUp(userId,token);
+    dispatch(hideLoading());
+
     if (verify.Status) {
-      navigate('/user/login');
+      navigate('/login');
     } else {
       setErrMessage(verify.message);
     }
