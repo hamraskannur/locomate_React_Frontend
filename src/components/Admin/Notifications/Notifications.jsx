@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllNotifications } from "../../../Api/adminApi/adminApi";
+import { viewNotification } from "../../../redux/notification";
 
 const NotificationCard = () => {
   const [notifications, setNotifications] = useState([]);
+  const dispatch=useDispatch()
   const navigate = useNavigate();
   useEffect(() => {
-    const fetchData = async () => {
-      const allNotifications = await getAllNotifications();
-      setNotifications(allNotifications);
+      const fetchData = async () => {
+          const allNotifications = await getAllNotifications();
+          if(allNotifications){
+
+              setNotifications(allNotifications);
+              dispatch(viewNotification())
+          }
     };
     fetchData();
   }, []);
@@ -24,7 +31,7 @@ const NotificationCard = () => {
         {notifications.length > 0 &&
           notifications.map((notification) => (
             <>
-              <div  onClick={() => {
+              <div key={notification._id}  onClick={() => {
                     getAccountPage();
                   }} className="flex items-center gap-3 bottom-b border-b-heavy-metal-600 p-4">
                 <div
@@ -32,7 +39,7 @@ const NotificationCard = () => {
                 >
                   <div className="w-12 rounded-full overflow-hidden shadow-sm shadow-gray-500 cursor-pointer">
                     <img
-                      src="https://i.pinimg.com/originals/31/44/7e/31447e25b7bc3429f83520350ed13c15.jpg"
+                      src={notification.userId.ProfileImg?notification.userId.ProfileImg:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"}
                       alt="avatars"
                     />
                   </div>

@@ -5,8 +5,10 @@ import { BiLogOut } from "react-icons/bi";
 import { MdReport, MdOutlineNotifications } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { checkNewNotification } from "../../../Api/adminApi/adminApi";
+import { useSelector } from "react-redux";
 
 function SideBar() {
+  const notificationSchedule =useSelector((state)=>state.notification.notificationChange)
   const [newNotification,setNewNotification ]=useState(false) 
   const navigate = useNavigate();
   useEffect(()=>{
@@ -19,7 +21,7 @@ function SideBar() {
      }
    }
    fetchData()
-  },[])
+  },[notificationSchedule])
   const menus = [
     { name: "Users", link: "/admin/", icon: ImUsers },
     { name: "report", link: "/admin/reportedPost", icon: MdReport },
