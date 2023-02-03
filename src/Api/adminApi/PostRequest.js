@@ -8,7 +8,13 @@ export const getAllReportPost = async () => {
 
 
 export const blockPost =async (formData) => {
-    const { data } = await adminAPI.put(`/blockPost`,formData, { withCredentials: true });
+  console.log(formData);
+    const { data } = await adminAPI.put(`/blockPost`,formData, { withCredentials: true }, {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
+      },
+    });
     return data;
 }
 

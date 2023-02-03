@@ -8,6 +8,7 @@ import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { useNavigate } from "react-router-dom";
 import { BiBlock } from "react-icons/bi";
 import { FcLikePlaceholder } from "react-icons/fc";
+import { blockPost } from "../../../Api/adminApi/PostRequest";
 
 function Post({ post, onePost }) {
   const navigate = useNavigate();
@@ -15,11 +16,22 @@ function Post({ post, onePost }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [PostLength, setPostLength] = useState(post?.likes?.length);
-
+const [block,setBlock]=useState(post?.status)
   const getAccountPage = async (userId) => {
     navigate("/admin/userProfile", { state: { userId: userId } });
   };
-
+  const submitBlockPost = async (postId) => {
+    console.log("this not implemented");
+    const status = false
+    await blockPost({postId, status});
+    setBlock(false)
+  };
+  const submitUnblockPost = async (postId) => {
+    console.log("this not implemented");
+    const status = true
+    await blockPost({postId, status});
+    setBlock(true)
+  };
   return (
     <>
       <div
@@ -77,7 +89,7 @@ function Post({ post, onePost }) {
               >
                 <div className="relative">
                   {dropdownOpen && (
-                    <div className="cursor-pointer absolute right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
+                    <>{block ?<div onClick={()=>submitBlockPost(post._id)} className="cursor-pointer absolute right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
                       <div className="cursor-pointer">
                         <p
                           href=""
@@ -87,7 +99,17 @@ function Post({ post, onePost }) {
                           Block Post
                         </p>
                       </div>
-                    </div>
+                    </div>:<div onClick={()=>submitUnblockPost(post._id)}   className="cursor-pointer absolute right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
+                        <div className="cursor-pointer">
+                          <p
+                            href=""
+                            className="flex gap-3  py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all  hover:shadow-md shadow-gray-400"
+                          >
+                            {React.createElement(BiBlock, { size: "25" })}
+                            UnBlock 
+                          </p>
+                        </div>
+                      </div>}</>
                   )}
                 </div>
               </OutsideClickHandler>

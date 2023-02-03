@@ -5,13 +5,14 @@ import {  useSelector } from "react-redux";
 import Moment from "react-moment";
 import { FcLikePlaceholder } from "react-icons/fc";
 import { useEffect } from "react";
-
+import { BiBlock} from 'react-icons/bi'
 import Comments from "./Comments";
 import Avatar from "./Avatar";
 
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
   import { useNavigate } from "react-router-dom";
+import { blockPost } from "../../../Api/adminApi/PostRequest";
 
 function Post({ post, onePost }) {
   const user = useSelector((state) => state?.user?.user);
@@ -22,7 +23,7 @@ function Post({ post, onePost }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [PostLength, setPostLength] = useState(post?.likes?.length);
-
+const [block,setBlock]=useState(post?.status)
   useEffect(() => {
     setCurrentUser(userId === post?.userId?._id);
   }, [post,user,userId]);
@@ -31,7 +32,18 @@ function Post({ post, onePost }) {
     navigate('/admin/userProfile', { state: {  userId: user, admin:true } })
     
   };
-
+  const submitBlockPost = async (postId) => {
+    console.log("this not implemented");
+    const status = false
+    await blockPost({postId, status});
+    setBlock(false)
+  };
+  const submitUnblockPost = async (postId) => {
+    console.log("this not implemented");
+    const status = true
+    await blockPost({postId, status});
+    setBlock(true)
+  };
   return (
     <>
      
@@ -92,7 +104,8 @@ function Post({ post, onePost }) {
                 <div className="relative z-50">
                   {dropdownOpen && !currentUser && (
                     <div className="cursor-pointer absolute z-50 right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
-                      <div
+                     { block?<div
+                     onClick={()=>submitBlockPost(post._id)}
                         className="cursor-pointer"
                       >
                          
@@ -100,25 +113,27 @@ function Post({ post, onePost }) {
                             href=""
                             className="flex gap-3  py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all  hover:shadow-md shadow-gray-400"
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-6 h-6"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                              />
-                            </svg>
-                            Save post
+                            {React.createElement(BiBlock, { size: "25" })}
+
+                            Block 
                           </p>
                       
-                      </div>
-                    
+                      </div>:
+                      <div
+                       onClick={()=>submitUnblockPost(post._id)}
+                        className="cursor-pointer"
+                      >
+                         
+                          <p
+                            href=""
+                            className="flex gap-3  py-2 my-2 hover:bg-[#bbc0c7] -mx-2 px-2 rounded-md transition-all  hover:shadow-md shadow-gray-400"
+                          >
+                                                       {React.createElement(BiBlock, { size: "25" })}
+
+                            unBlock 
+                          </p>
+                      
+                      </div>}
                     </div>
 
                   )}
