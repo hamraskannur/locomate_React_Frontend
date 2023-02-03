@@ -26,7 +26,7 @@ const Post = () => {
 
   return (
     <>
-    <div className="bg-[#F3F3F6] h-full">
+    <div className="bg-[#F3F3F6] ">
       
       {posts.map((post) => (
         <>

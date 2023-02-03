@@ -7,9 +7,7 @@ const Login = () => {
   
   return (
     <>
-      <PublicRoute>
         <LoginPage />
-      </PublicRoute>
     </>
   );
 };

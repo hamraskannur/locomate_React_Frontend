@@ -6,7 +6,6 @@ import AdminNavBar from "../../components/Admin/NavBar/AdminNavBar";
 
 function showUsers() {
   return (
-    <AdminProtectRouter>
       <div className="bg-[#F3F3F6]">
         <AdminNavBar />
         <div className="bg-[#F3F3F6] flex ">
@@ -16,7 +15,6 @@ function showUsers() {
           <ShowAllUser />
         </div>
       </div>
-    </AdminProtectRouter>
   );
 }
 

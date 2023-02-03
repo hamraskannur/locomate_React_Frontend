@@ -30,7 +30,6 @@ const Search = () => {
     }
   }, [searchInput]);
   return (
-    <UserProtectRouter>
       <div className="bg-[#F3F3F6]">
         <NavBar />
         <div className="flex ">
@@ -48,7 +47,6 @@ const Search = () => {
           <BottomBar />
         </div>
       </div>
-    </UserProtectRouter>
   );
 };
 

@@ -9,7 +9,6 @@ import BottomBar from "../../components/User/BottomBar/BottomBar";
 function Home() {
 
   return (
-    <UserProtectRouter>
          
           <div className="bg-[#F3F3F6]">
             <NavBar />
@@ -27,7 +26,6 @@ function Home() {
             </div>
           </div>
       
-    </UserProtectRouter>
   );
 }
 

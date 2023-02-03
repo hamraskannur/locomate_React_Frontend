@@ -9,7 +9,6 @@ const MessagesPage = () => {
 
 
   return (
-    <UserProtectRouter>
      
        <div className="bg-[#F3F3F6]">
         <NavBar />
@@ -23,7 +22,6 @@ const MessagesPage = () => {
           <BottomBar />
         </div>
       </div>
-    </UserProtectRouter>
   );
 };
 

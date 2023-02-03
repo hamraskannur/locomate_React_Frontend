@@ -9,7 +9,6 @@ import BottomBar from "../../components/User/BottomBar/BottomBar";
 function shorts() {
 
   return (
-    <UserProtectRouter>
          
           <div className="bg-[#F3F3F6]">
             <NavBar />
@@ -27,7 +26,6 @@ function shorts() {
             </div>
           </div>
       
-    </UserProtectRouter>
   );
 }
 

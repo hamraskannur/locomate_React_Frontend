@@ -8,7 +8,6 @@ import BottomBar from "../../components/User/BottomBar/BottomBar";
 
 const FriendsAccountPage = () => {
   return (
-    <UserProtectRouter>
       <div className="bg-[#F3F3F6]">
         <NavBar />
         <div className="flex ">
@@ -24,7 +23,6 @@ const FriendsAccountPage = () => {
            <BottomBar/>
         </div>
       </div>
-    </UserProtectRouter>
   );
 };
 

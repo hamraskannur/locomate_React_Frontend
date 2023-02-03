@@ -9,7 +9,6 @@ import BottomBar from "../../components/User/BottomBar/BottomBar";
 const MyAccountPage = () => {
 
   return (
-    <UserProtectRouter>
      
         <div className="bg-[#F3F3F6]">
           <NavBar />
@@ -26,7 +25,6 @@ const MyAccountPage = () => {
             <BottomBar />
           </div>
         </div>
-    </UserProtectRouter>
   );
 };
 

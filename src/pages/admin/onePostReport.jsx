@@ -6,7 +6,6 @@ import AdminNavBar from "../../components/Admin/NavBar/AdminNavBar";
 
 function onePostReport() {
   return (
-    <AdminProtectRouter>
       <div className="bg-[#F3F3F6]">
         <AdminNavBar />
         <div className="bg-[#F3F3F6] flex ">
@@ -18,7 +17,6 @@ function onePostReport() {
           </div>
         </div>
       </div>
-    </AdminProtectRouter>
   );
 }
 

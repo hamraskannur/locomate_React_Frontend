@@ -8,7 +8,6 @@ export const getAllReportPost = async () => {
 
 
 export const blockPost =async (formData) => {
-  console.log(formData);
     const { data } = await adminAPI.put(`/blockPost`,formData, { withCredentials: true }, {
       withCredentials: true,
       headers: {

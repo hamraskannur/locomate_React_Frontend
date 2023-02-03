@@ -9,7 +9,6 @@ import Notification from "../../components/User/Notification/Notification";
 function Home() {
 
   return (
-    <UserProtectRouter>
          
           <div className="bg-[#F3F3F6]">
             <NavBar />
@@ -27,7 +26,6 @@ function Home() {
             </div>
           </div>
       
-    </UserProtectRouter>
   );
 }
 

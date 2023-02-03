@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import Avatar from "../Posts/Avatar";
 import React from "react";
-import Advertisement from "../Advertisement/Advertisement";
 import { RiContactsFill } from 'react-icons/ri'
 
 const Suggestion = (props) => {

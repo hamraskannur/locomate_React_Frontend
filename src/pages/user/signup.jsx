@@ -6,9 +6,7 @@ const Signup = () => {
 
   return (
     <>
-      <PublicRoute>
            <SignupPage />
-      </PublicRoute>
     </>
   );
 };
