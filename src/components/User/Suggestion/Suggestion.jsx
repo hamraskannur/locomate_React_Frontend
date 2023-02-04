@@ -1,91 +1,66 @@
 import { useSelector } from "react-redux";
 import Avatar from "../Posts/Avatar";
 import React from "react";
-import { RiContactsFill } from 'react-icons/ri'
+import { BsFillPeopleFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
-const Suggestion = (props) => {
+const Suggestion = ({ user }) => {
   const sideBar = useSelector((state) => state?.sideBar?.sideBar);
+  const userId = useSelector((state) => state?.user?.user._id);
+  const navigate = useNavigate()  
+
+  const getAccountPage = async (user) => {
+ 
+    if (userId === user) {
+
+      navigate("/myAccount");
+    } else {
+      
+      navigate('/FriendsAccount',{ state: { userId: user,  }} );
+    }
+  
+};
   return (
     <>
-      <div className=" p-4 py-1 top-20 z-0    sticky ">
-        <div
-          className=" bg-white  shadow:lg
-        shadow-gray-300 rounded-md p-4 mb-5  w-full mt-6 "
-        >
-          <h2 className="text-gray-400 mb-5">People you may know</h2>
-          <div className="flex items-center gap-2 py-2 px-2 hover:bg-[#bbc0c7] hover:scale-105">
+      <div className="flex items-center gap-2 py-2 m-4 px-2 hover:bg-[#bbc0c7] hover:scale-105">
+        <div>
+          <Avatar
+          onClick={()=>getAccountPage( user._id)}
+            img={
+              user.ProfileImg
+                ? user.ProfileImg
+                : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+            }
+          />
+        </div>
+        <div onClick={()=>getAccountPage( user._id)} className="px-2 font-semibold">
+          <h2> {user.username}</h2>
+          <p className="text-gray-400 text-sm p-0">{user.name}</p>
+        </div>
+        {!sideBar && (
+          <div className="ml-auto flex duration-900 ">
             <div>
-              <Avatar />
-            </div>
-            <div className="px-2 font-semibold">
-              <h2> Messi</h2>
-              <p className="text-gray-400 text-sm p-0">Argentina</p>
-            </div>
-
-            {!sideBar && (
-              <div className="ml-auto flex duration-900">
-                <div>
-                  <h1 className="align-middle ml-8 font-semibold">200</h1>
-                  <div className="text-slate-700 p-1 rounded-md px-2 flex">
-                    <div>
-                      {React.createElement(RiContactsFill, { size: "20" })}
-                    </div>
-                    followers
-                  </div>
-                </div>
-                <div>
-                  <h1 className="align-middle ml-8 font-semibold">200</h1>
-                  <div className="text-slate-700 p-1 rounded-md px-2 flex">
-                    <div>
-                      {React.createElement(RiContactsFill, { size: "20" })}
-                    </div>
-                    following
-                  </div>
-                </div>
+              <h1 className="align-middle ml-8 font-semibold">{user?.Followers?.length?user?.Followers?.length:0}</h1>
+              <div className="text-slate-700 p-1 rounded-md px-2 flex">
+                <div>              {React.createElement(BsFillPeopleFill, { size: "20" })}
+</div>
+                followers
               </div>
-            )}
-            <div className="ml-auto ">
-              <button className="text-white bg-slate-700 p-1 rounded-md px-2 ml-5">
-                Follow
-              </button>
+            </div>
+            <div>
+              <h1 className="align-middle ml-8 font-semibold">{user?.Following?.length ?user?.Following?.length:0}</h1>
+              <div className="text-slate-700 p-1 rounded-md px-2 flex">
+                <div>              {React.createElement(BsFillPeopleFill, { size: "20" })}
+</div>
+                following
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-2 py-2 px-2 hover:bg-[#bbc0c7] hover:scale-105">
-            <div>
-              <Avatar />
-            </div>
-            <div className="px-2 font-semibold">
-              <h2> Messi</h2>
-              <p className="text-gray-400 text-sm p-0">Argentina</p>
-            </div>
-            {!sideBar && (
-              <div className="ml-auto flex duration-900 ">
-                <div>
-                  <h1 className="align-middle ml-8 font-semibold">200</h1>
-                  <div className="text-slate-700 p-1 rounded-md px-2 flex">
-                    <div>
-                      {React.createElement(RiContactsFill, { size: "20" })}
-                    </div>
-                    followers
-                  </div>
-                </div>
-                <div>
-                  <h1 className="align-middle ml-8 font-semibold">200</h1>
-                  <div className="text-slate-700 p-1 rounded-md px-2 flex">
-                    <div>
-                      {React.createElement(RiContactsFill, { size: "20" })}
-                    </div>
-                    following
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="ml-auto ">
-              <button className="text-white bg-slate-700 p-1 rounded-md px-2 ml-5">
-                Follow
-              </button>
-            </div>
-          </div>
+        )}
+        <div className="ml-auto ">
+          <button className="text-white bg-slate-700 p-1 rounded-md px-2 ml-5">
+            Follow
+          </button>
         </div>
       </div>
     </>

@@ -51,6 +51,7 @@ function Comments({ postId, setCount, count }) {
 
         <div className="border-none ml-0  grow rounded-full">
           <InputEmoji
+          className='break-all'
             value={newComment}
             onChange={changeComment}
             cleanOnEnter

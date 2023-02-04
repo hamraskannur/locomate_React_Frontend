@@ -103,3 +103,21 @@ export const getAllNotifications = async () => {
     console.log(error);
   }
 };
+
+export const suggestionUsers = async () => {
+  try {
+    const { data } = await userApi.get(
+      "/suggestionUsers",
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    return data.notFollowedUsers
+
+  }catch (error) {
+
+  }
+}

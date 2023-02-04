@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../../components/User/NavBar/NavBar";
 import UserSideBar from "../../components/User/UserSideBar/UserSideBar";
-import Suggestion from "../../components/User/Suggestion/Suggestion";
+import Suggestions from "../../components/User/Suggestions/Suggestions";
 import FriendsAccount from "../../components/User/ProfilePage/FriendsAccount";
 import UserProtectRouter from "../../components/User/Routes/UserProtectRouter";
 import BottomBar from "../../components/User/BottomBar/BottomBar";
@@ -16,7 +16,7 @@ const FriendsAccountPage = () => {
             <FriendsAccount />
           </div>
           <div className=" max-sm:hidden max-md:hidden max-lg:hidden">
-            <Suggestion />
+            <Suggestions />
           </div>
         </div>
         <div className="md:hidden block sticky bottom-0 z-50 w-full ">

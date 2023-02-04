@@ -1,9 +1,8 @@
 import React from "react";
 import NavBar from "../../components/User/NavBar/NavBar";
 import UserSideBar from "../../components/User/UserSideBar/UserSideBar";
-import Suggestion from "../../components/User/Suggestion/Suggestion";
+import Suggestions from "../../components/User/Suggestions/Suggestions";
 import MyAccount from "../../components/User/ProfilePage/MyAccount";
-import UserProtectRouter from "../../components/User/Routes/UserProtectRouter";
 import BottomBar from "../../components/User/BottomBar/BottomBar";
 
 const MyAccountPage = () => {
@@ -18,7 +17,7 @@ const MyAccountPage = () => {
               <MyAccount />
             </div>
             <div className=" max-sm:hidden max-md:hidden max-lg:hidden">
-              <Suggestion />
+              <Suggestions />
             </div>
           </div>
           <div className="md:hidden block sticky bottom-0 z-50 w-full ">

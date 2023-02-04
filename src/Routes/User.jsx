@@ -15,6 +15,7 @@ import Shorts from '../pages/user/shorts'
 import Settings from '../pages/user/Settings';
 import Notification from '../pages/user/Notification'
 import Search from '../pages/user/Search';
+import Page from '../pages/user/404page';
 
 function User() {
   return (
@@ -22,7 +23,7 @@ function User() {
 
       <Routes>
         <Route  path="/" element={<UserProtectRouter> <Home /> </UserProtectRouter>} />
-        <Route exact path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
+        <Route exact path="/signup" element={<PublicRoute> <Signup /></PublicRoute>} />
         <Route exact path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route exact path="/myAccount" element={<UserProtectRouter><MyAccountPage/> </UserProtectRouter>} />
         <Route exact path="/messages" element={<UserProtectRouter><MessagesPage /></UserProtectRouter>} />

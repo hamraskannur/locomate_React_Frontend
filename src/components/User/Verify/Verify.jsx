@@ -14,11 +14,9 @@ function Verify() {
 
     const [ErrMessage, setErrMessage] = useState('');
   const submitVerify = async (event) => {
-    console.log(userId);
-    console.log(token);
+ 
     event.preventDefault();
     dispatch(showLoading());
-
     const verify = await verifySignUp(userId,token);
     dispatch(hideLoading());
 

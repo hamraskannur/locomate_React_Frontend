@@ -8,19 +8,19 @@ import ReportedPost from '../pages/admin/ReportedPost'
 import OneUser from '../pages/admin/OneUser'
 import OnePostReport from '../pages/admin/OnePostReport'
 import Notifications from '../pages/admin/Notifications'
+import Page from '../pages/admin/404page';
 
 function Admin() {
   return (
     <>
       <Routes>
-        <Route path='/login' element={<AdminPublicRoute><Login /></AdminPublicRoute>} />
         <Route path='/' element={<AdminProtectRouter><ShowUsers /></AdminProtectRouter>} />
+        <Route path='/login' element={<AdminPublicRoute><Login /></AdminPublicRoute>} />
         <Route path='/reportedPost' element={<AdminProtectRouter><ReportedPost /></AdminProtectRouter>} />
         <Route path='/oneUser' element={<AdminProtectRouter><OneUser /></AdminProtectRouter>} />
         <Route path='/OnePostReport' element={<AdminProtectRouter><OnePostReport /></AdminProtectRouter>} />
         <Route path='/userProfile' element={<AdminProtectRouter><OneUser/> </AdminProtectRouter>} />
         <Route path='/notifications' element={<AdminProtectRouter><Notifications/> </AdminProtectRouter>} />
-
       </Routes>
     </>
   );

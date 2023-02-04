@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../../components/User/NavBar/NavBar";
 import Post from "../../components/User/Posts/Post";
-import Suggestion from "../../components/User/Suggestion/Suggestion";
+import Suggestions from "../../components/User/Suggestions/Suggestions";
 import UserSideBar from "../../components/User/UserSideBar/UserSideBar";
 import UserProtectRouter from "../../components/User/Routes/UserProtectRouter";
 import BottomBar from "../../components/User/BottomBar/BottomBar";
@@ -17,8 +17,8 @@ function Home() {
               <div className="w-6/12 max-sm:w-full max-md:w-full max-lg:w-full">
                 <Post />
               </div>
-              <div className=" p-10 max-sm:hidden max-md:hidden max-lg:hidden">
-                <Suggestion />
+              <div className="  max-sm:hidden max-md:hidden max-lg:hidden">
+                <Suggestions />
               </div>
             </div>
             <div className="md:hidden block sticky bottom-0 z-50 w-full ">

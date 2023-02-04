@@ -9,7 +9,7 @@ const AllPost = ({ userId, type, postCount, SavedPost,setOnePostId }) => {
     const getPost = async () => {
       if (SavedPost) {
       const response= await getSavedPost(userId)
-      console.log(response);
+      console.log(response,55555555);
       setPosts(response)
       } else {
         if (userId) {

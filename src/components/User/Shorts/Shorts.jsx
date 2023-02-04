@@ -55,7 +55,6 @@ function Post({ post, onePost }) {
   };
   const handleSavePost = async (postId) => {
     const response = await savePost({ postId });
-    console.log(response);
     if (response.success) {
       setSavedStatus(!savedStatus);
     }

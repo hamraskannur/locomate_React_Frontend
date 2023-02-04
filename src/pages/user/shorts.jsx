@@ -1,9 +1,8 @@
 import React from "react";
 import NavBar from "../../components/User/NavBar/NavBar";
 import Shorts from "../../components/User/Shorts/Short"
-import Suggestion from "../../components/User/Suggestion/Suggestion";
+import Suggestions from "../../components/User/Suggestions/Suggestions";
 import UserSideBar from "../../components/User/UserSideBar/UserSideBar";
-import UserProtectRouter from "../../components/User/Routes/UserProtectRouter";
 import BottomBar from "../../components/User/BottomBar/BottomBar";
 
 function shorts() {
@@ -18,7 +17,7 @@ function shorts() {
                 <Shorts />
               </div>
               <div className=" p-10 max-sm:hidden max-md:hidden max-lg:hidden">
-                <Suggestion />
+                <Suggestions />
               </div>
             </div>
             <div className="md:hidden block sticky bottom-0 z-50 w-full ">
