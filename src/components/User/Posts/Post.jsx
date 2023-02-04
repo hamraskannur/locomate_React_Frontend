@@ -7,7 +7,7 @@ import { hideLoading, showLoading } from "../../../redux/loadingBar";
 const Post = () => {
 
   const [posts, setPosts] = useState([]);
-  const { progress } = useSelector((state) => state.loader);
+  const userId = useSelector((state) => state?.user?.user?._id);
 
   const dispatch = useDispatch()
   let newPost;
@@ -30,7 +30,7 @@ const Post = () => {
       
       {posts.map((post) => (
         <>
-       {post.status && <Posts post={post} key={post?._id} onePost={false} />}
+       {(post?.userId?.public || post?.userId?.Followers.includes(userId)  ) && post.status && <Posts post={post} key={post?._id} onePost={false} />}
        </>
 
         ))}

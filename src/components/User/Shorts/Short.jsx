@@ -7,7 +7,7 @@ import { hideLoading, showLoading } from "../../../redux/loadingBar";
 const GetShorts = () => {
   const [posts, setPosts] = useState([]);
   const dispatch = useDispatch();
-
+  const userId = useSelector((state) => state?.user?.user?._id);
   const update = useSelector((state) => state.addPost.AddPost); 
   useEffect(() => {
     const getPost = async () => {
@@ -22,7 +22,7 @@ const GetShorts = () => {
     <>
       {posts.map((post) => (
         <>
-       {post.status && <Shorts post={post} key={post?._id} onePost={false} />}
+       { (post?.userId?.public || post?.userId?.Followers.includes(userId)  ) && post.status && <Shorts post={post} key={post?._id} onePost={false} />}
        </>
 
         ))}

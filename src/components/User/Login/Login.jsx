@@ -179,13 +179,13 @@ function Login() {
                   </button>
                 </div>
               </div>
-              <div className="flex mb-4 items-center justify-center border-none">
+              {/* <div className="flex mb-4 items-center justify-center border-none">
                 <h1>or continue with</h1>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className=" border-none sm:flex	 md:flex	 lg:flex	2xl:flex xl:flex">
-            <button
+            {/* <button
               type="button"
               // onClick={handleGoogleLogin}
               className=" group h-12 px-14 border-2 border-gray-300 rounded-full transition duration-300 
@@ -220,7 +220,7 @@ function Login() {
                   Github
                 </span>
               </div>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

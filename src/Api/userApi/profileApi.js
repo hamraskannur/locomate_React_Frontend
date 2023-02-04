@@ -1,4 +1,4 @@
-import { userApi,cloudApi } from "../../utils/Apis/Apis";
+import { userApi, cloudApi } from "../../utils/Apis/Apis";
 
 export const getMyProfile = async () => {
   try {
@@ -34,7 +34,7 @@ export const uploadImage = async (image) => {
     const formData = new FormData();
     formData.append("file", image[0]);
     formData.append("upload_preset", "ete0nc34");
-    const { data } = await cloudApi.post(`/upload`,formData);
+    const { data } = await cloudApi.post(`/upload`, formData);
     return data?.secure_url;
   } catch (error) {
     console.log(error);
@@ -55,9 +55,9 @@ export const saveUserData = async (formData) => {
   }
 };
 
-export const changeToPrivate=async (checked)=>{
+export const changeToPrivate = async (checked) => {
   try {
-    const { data } = await userApi.put("/changeToPrivate",checked, {
+    const { data } = await userApi.put("/changeToPrivate", checked, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -67,16 +67,39 @@ export const changeToPrivate=async (checked)=>{
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const searchUserApi = async (searchData) => {
-  console.log(searchData);
-  const { data } = await userApi.post('/searchUser', { searchData },  {
-    withCredentials: true,
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-    },
-  })
-  console.log(data, "searchData");
-  return data
-}
+  try {
+    const { data } = await userApi.post(
+      "/searchUser",
+      { searchData },
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllNotifications = async () => {
+  try {
+    const { data } = await userApi.get(
+      "/getAllNotifications",
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    return data.user
+  } catch (error) {
+    console.log(error);
+  }
+};
