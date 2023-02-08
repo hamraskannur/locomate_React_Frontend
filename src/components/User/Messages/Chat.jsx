@@ -169,7 +169,7 @@ const Chat = ({
                     onChange={changeMessage}
                     cleanOnEnter
                     onEnter={handlePostMessage}
-                    placeholder="Type "
+                    placeholder="Type"
                   />
                 </div>
               </div>

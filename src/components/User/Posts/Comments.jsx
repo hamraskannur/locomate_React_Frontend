@@ -60,7 +60,7 @@ function Comments({ postId, setCount, count }) {
             onChange={changeComment}
             cleanOnEnter
             onEnter={handlePostComment}
-            placeholder="Type "
+            placeholder="Type"
           />
         </div>
         <img

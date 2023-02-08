@@ -146,7 +146,7 @@ const Comment = ({ comment }) => {
                     onChange={changeComment}
                     cleanOnEnter
                     onEnter={handlePostReplayComment}
-                    placeholder="Type "
+                    placeholder="Type"
                   />
                 </div>
                 <img
