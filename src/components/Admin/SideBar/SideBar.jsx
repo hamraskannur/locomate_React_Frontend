@@ -14,12 +14,17 @@ function SideBar() {
   const navigate = useNavigate();
   useEffect(()=>{
    const fetchData = async () => {
-     const notification=await checkNewNotification()
-     if(notification.status){
-      setNewNotification(false)
-     }else{
-      setNewNotification(true)
-     }
+    try{
+      const notification=await checkNewNotification()
+      if(notification.status){
+       setNewNotification(false)
+      }else{
+       setNewNotification(true)
+      }
+
+    }catch(error){
+      navigate('/admin/*');
+    }
    }
    fetchData()
   },[notificationSchedule])

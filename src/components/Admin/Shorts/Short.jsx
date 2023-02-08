@@ -11,11 +11,16 @@ const GetShorts = () => {
   const update = useSelector((state) => state.addPost.AddPost); 
   useEffect(() => {
     const getPost = async () => {
-      dispatch(startLoading())
-      let newPost = await getAllVideo();
-      newPost = newPost?.reverse();
-      setPosts(newPost);
-      dispatch(completedLoading())
+      try{
+        dispatch(startLoading())
+        let newPost = await getAllVideo();
+        newPost = newPost?.reverse();
+        setPosts(newPost);
+        dispatch(completedLoading())
+
+      }catch(error){
+        navigate('/admin/*');
+      }
 
     };
     getPost();

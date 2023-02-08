@@ -4,37 +4,38 @@ import Posts from "./Posts";
 import { useDispatch, useSelector } from "react-redux";
 import { startLoading,completedLoading } from '../../../redux/topLoadingBar'
 import LoadingBar from 'react-top-loading-bar'
+import { useNavigate } from "react-router-dom";
 
 const Post = () => {
   const [posts, setPosts] = useState([]);
-  const { progress } = useSelector((state) => state.loader);
+  const navigate = useNavigate()  
 
   const dispatch = useDispatch()
   let newPost;
   const update = useSelector((state) => state.addPost.AddPost); 
   useEffect(() => {
     const getPost = async () => {
-      dispatch(startLoading())
-      newPost = await getAllPosts();
-      newPost = newPost?.reverse();
-      setPosts(newPost);
-      dispatch(completedLoading())
+      try{
+
+        dispatch(startLoading())
+        newPost = await getAllPosts();
+        newPost = newPost?.reverse();
+        setPosts(newPost);
+        dispatch(completedLoading())
+      }catch(error){
+        navigate('/admin/*');
+      }
     };
     getPost();
   }, [update]);
 
   return (
     <>
-   {progress===100 ? <div>
-      {posts.map((post) => (
+  <div>
+      {posts.length>0 && posts?.map((post) => (
         <Posts post={post} key={post?._id} onePost={false} />
         ))}
-    </div>:<LoadingBar
-        color="#f11946"
-        progress={progress}
-        height={3}
-        loaderSpeed={1000}
-      />}
+    </div>
         </>
   );
 };

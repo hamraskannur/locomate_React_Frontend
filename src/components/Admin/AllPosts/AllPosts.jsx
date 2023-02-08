@@ -1,23 +1,31 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getAllPost, getAllVideo } from '../../../Api/adminApi/PostRequest'
 import Post from '../../Admin/Posts/Posts'
 import Shorts from '../../Admin/Shorts/Shorts'
 const AllPosts = ({selected}) => {
+    const  navigate=useNavigate()
     const [allPosts,setAllPosts] =useState([])
     const [allVideo,setAllVideo] =useState([])
 
     useEffect(()=>{
         const fetchData =async () =>{
             if(selected){
-                console.log("kookok");
+                try{
                 const data=await getAllPost()
                 setAllPosts(data)
+                }catch(err){
+                  navigate('/admin/*');
+                }
             }else{
-                console.log("kookok");
-                const data=await getAllVideo()
-                setAllVideo(data)
+                try{
+                    const data=await getAllVideo()
+                    setAllVideo(data)
+                }catch(err){
+                  navigate('/admin/*');
+                }
             }
             
         }

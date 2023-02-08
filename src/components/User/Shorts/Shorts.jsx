@@ -54,9 +54,14 @@ function Post({ post, onePost }) {
     
   };
   const handleSavePost = async (postId) => {
-    const response = await savePost({ postId });
-    if (response.success) {
-      setSavedStatus(!savedStatus);
+    try{
+      const response = await savePost({ postId });
+      if (response.success) {
+        setSavedStatus(!savedStatus);
+      }
+      
+    }catch(error){
+      navigate('*');
     }
   };
 
@@ -74,9 +79,14 @@ function Post({ post, onePost }) {
     }
   };
   const handleDeletePost = async (postId) => {
-    const response = await deletePost(postId);
-    if (response.success) {
-     await dispatch(AddPostActions.postAdd());
+    try{
+      
+      const response = await deletePost(postId);
+      if (response.success) {
+       await dispatch(AddPostActions.postAdd());
+      }
+    }catch(error){
+      navigate('*');
     }
   };
 

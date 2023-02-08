@@ -1,13 +1,23 @@
 import React, { useState } from 'react'
+import { errorToast, successToast } from '../../Toast/Toast';
 import { reportPost } from '../../../Api/userApi/postRequest';
+import { useNavigate } from 'react-router-dom';
 
 const ReportPost = ({setReport ,postId,video}) => {
     const [newDescription, setNewDescription] = useState("");
-
+     const navigate=useNavigate()
     const submitHandler =async () => {
-      const response=await reportPost({newDescription,postId,video})
-      if(response.success){
-        setReport(false)
+      try{
+
+        const response=await reportPost({newDescription,postId,video})
+        if(response.success){
+          setReport(false)
+           successToast("successfully  reported")
+        }else{
+           errorToast("something went wrong")
+      }
+      }catch(error){
+        navigate('*');
       }
     }
 

@@ -3,32 +3,48 @@ import { getAllRequest , acceptRequest ,deleteRequests } from "../../../Api/user
 import Card from "../card/Card";
 import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../../redux/loadingBar";  
+import { useNavigate } from "react-router-dom";
 
 const Request = () => {
   const dispatch = useDispatch();
+  const navigate=useNavigate()
     const [request,setRequest] = useState([])
     const [loading,setLoading] = useState(0)
     useEffect(()=>{
       dispatch(showLoading());
       const req =async () => {
-        const request=await getAllRequest()
-        setRequest(request)
+        try{
+          const request=await getAllRequest()
+          setRequest(request)
+        }catch(error){
+          navigate('*');
+        }
       }
       req()
       dispatch(hideLoading());
     },[loading===1])
     const acceptReq = async (acceptId) => {
         setLoading(0)
-       const response = await acceptRequest({acceptId})
-       if(response.success){
-        setLoading(1)
-       }
+        try{
+          const response = await acceptRequest({acceptId})
+          if(response.success){
+           setLoading(1)
+          }
+
+        }catch(error){
+          navigate('*');
+        }
     }
     const deleteReq = async (deleteId) =>{
         setLoading(0)
-        const response =await deleteRequests(deleteId)
-        if(response.success){
-            setLoading(1)
+        try{
+          const response =await deleteRequests(deleteId)
+          if(response.success){
+              setLoading(1)
+          }
+
+        }catch(error){
+          navigate('*');
         }
     }
 

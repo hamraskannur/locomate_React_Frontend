@@ -3,7 +3,6 @@ import Verify from "../../components/User/Verify/Verify"
 
 const VerifyPage = () => {
   return (
-    
       <Verify/>
   )
 }

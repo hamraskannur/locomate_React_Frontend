@@ -9,26 +9,40 @@ const Report = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const functionGetAllReportPost = async () => {
-      const response = await getAllReportPost();
-      console.log(response);
-      setPost(response.Posts);
+      try{
+        const response = await getAllReportPost();
+        setPost(response.Posts);
+
+      }catch(error){
+        navigate('/admin/*');
+      }
     };
     functionGetAllReportPost();
   }, [loading]);
 
   const handleBlockPost = async (postId) => {
-    setLoading(false);
-    const response = await blockPost({ postId, status: false });
-    if (response) {
-      setLoading(true);
+    try{
+      setLoading(false);
+      const response = await blockPost({ postId, status: false });
+      if (response) {
+        setLoading(true);
+
+      }
+    }catch(error){
+      navigate('/admin/*');
     }
   };
 
   const handleUnBlockPost = async (postId) => {
-    setLoading(false);
-    const response = await blockPost({ postId, status: true });
-    if (response) {
-      setLoading(true);
+    try{
+
+      setLoading(false);
+      const response = await blockPost({ postId, status: true });
+      if (response) {
+        setLoading(true);
+      }
+    }catch(error){
+      navigate('/admin/*');
     }
   };
 

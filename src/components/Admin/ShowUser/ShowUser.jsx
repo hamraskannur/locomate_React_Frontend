@@ -1,34 +1,37 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getFollowersUser, getFollowingUser } from "../../../Api/adminApi/PostRequest";
+import {
+  getFollowersUser,
+  getFollowingUser,
+} from "../../../Api/adminApi/PostRequest";
 
-const  ShowUser = ({ type, userId }) => {
+const ShowUser = ({ type, userId }) => {
   const user = useSelector((state) => state?.user?.user?._id);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [users, setUsers] = useState();
   useEffect(() => {
     const getUserData = async (type) => {
-      if (type === "Following") {
-        const user = await getFollowingUser(userId);
-        setUsers(user);
-      }
-      if (type === "Followers") {
-        const user = await getFollowersUser(userId);
-        setUsers(user);
+      try {
+        if (type === "Following") {
+          const user = await getFollowingUser(userId);
+          setUsers(user);
+        }
+        if (type === "Followers") {
+          const user = await getFollowersUser(userId);
+          setUsers(user);
+        }
+      } catch (error) {
+        navigate("/admin/*");
       }
     };
     getUserData(type);
   }, [type, userId]);
 
-
-  const goToAccountPage=(userId)=>{
- 
-    navigate('/admin/oneUser', { state: { userId: userId } })
-
-
-  }
+  const goToAccountPage = (userId) => {
+    navigate("/admin/oneUser", { state: { userId: userId } });
+  };
   return (
     <div>
       <div>
@@ -39,7 +42,10 @@ const  ShowUser = ({ type, userId }) => {
           <div>
             <div className="border-b p-4 -mx-4 border-b-heavy-metal-300 hover:bg-snow-drift-100">
               <div className="flex gap-3">
-                <div onClick={()=>goToAccountPage(user?.result?._id)} className="flex gap-3 cursor-pointer">
+                <div
+                  onClick={() => goToAccountPage(user?.result?._id)}
+                  className="flex gap-3 cursor-pointer"
+                >
                   <div className="w-12 h-12 rounded-full overflow-hidden shadow-sm shadow-gray-500">
                     <img src={user?.result?.ProfileImg} alt="avatars" />
                   </div>

@@ -10,24 +10,34 @@ function ShowAllUser() {
   const [loading, setLoading] = useState(0);
 
   const submitBlockUser = async (userId) => {
-    setLoading(0);
-    await blockUser(true, userId);
-    setLoading(1);
+    try{
+      setLoading(0);
+      await blockUser(true, userId);
+      setLoading(1);
+    }catch(error){
+      navigate('/admin/*');
+    }
   };
   const submitUnblockUser = async (userId) => {
-    setLoading(0);
-    await blockUser(false, userId);
-    setLoading(1);
+    try{
+      setLoading(0);
+      await blockUser(false, userId);
+      setLoading(1);
+    }catch(error){
+      navigate('/admin/*');
+    }
   };
   const getUserPage = async (userId) => {
-       
-        navigate('/admin/userProfile', { state: {  userId: userId, admin:true } })
-
+    navigate('/admin/userProfile', { state: {  userId: userId, admin:true } })
   };
   useEffect(() => {
-    getAllUser().then((response) => {
-      setUser(response);
-    });
+    try{
+      getAllUser().then((response) => {
+        setUser(response);
+      });
+    }catch(error){
+      navigate('/admin/*');
+    }
   }, [loading === 1]);
 
   const submit = (userId) => {

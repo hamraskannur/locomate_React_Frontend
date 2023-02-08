@@ -12,9 +12,14 @@ const NotificationCard = () => {
   const navigate=useNavigate()
   useEffect(() => {
     const fetchData = async () => {
-      const notification = await getAllNotifications();
-      setNotification(notification);
-      dispatch(viewNotification())
+      try{
+
+        const notification = await getAllNotifications();
+        setNotification(notification);
+        dispatch(viewNotification())
+      }catch(error){
+        navigate('*');
+      }
 
     };
     fetchData();

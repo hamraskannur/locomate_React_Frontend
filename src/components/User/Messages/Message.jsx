@@ -5,10 +5,12 @@ import AllUser from "./AllUser";
 import Chat from "./Chat";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoading, showLoading } from "../../../redux/loadingBar";
+import { useNavigate } from "react-router-dom";
 
 const Messages = () => {
   const dispatch = useDispatch();
   const [chat, setChat] = useState([]);
+  const navigate = useNavigate();
   const [currentChat, setCurrentChat] = useState(null);
   const sideBar = useSelector((state) => state?.sideBar?.sideBar);
   const user = useSelector((state) => state?.user?.user);

@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getFriendsAccount } from "../../../Api/userApi/postRequest";
 
 const AllUser = ({ data, currentUserId, onlineUsers }) => {
   const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const userId = data.members.find((id) => id != currentUserId);
     const getUserData = async () => {
-      const data = await getFriendsAccount(userId);
-      setUserData(data[0]);
+   try{
+
+     const data = await getFriendsAccount(userId);
+     setUserData(data[0]);
+    }catch(error){
+      navigate('*');
+    }
     };
     getUserData();
   }, []);

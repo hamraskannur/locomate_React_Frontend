@@ -10,7 +10,7 @@ export const getMyProfile = async () => {
     });
     return data.user;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -25,7 +25,7 @@ export const getUserData = async () => {
 
     return data.user;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -37,7 +37,7 @@ export const uploadImage = async (image) => {
     const { data } = await cloudApi.post(`/upload`, formData);
     return data?.secure_url;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -51,7 +51,7 @@ export const saveUserData = async (formData) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -65,7 +65,7 @@ export const changeToPrivate = async (checked) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -83,7 +83,7 @@ export const searchUserApi = async (searchData) => {
     );
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -100,7 +100,7 @@ export const getAllNotifications = async () => {
     );
     return data.user
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -118,6 +118,6 @@ export const suggestionUsers = async () => {
     return data.notFollowedUsers
 
   }catch (error) {
-
+    return error
   }
 }

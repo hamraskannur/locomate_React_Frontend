@@ -2,16 +2,23 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { suggestionUsers } from "../../../Api/userApi/profileApi";
 import Suggestion from "../Suggestion/Suggestion";
 
 const Suggestions = () => {
   const [user, setUsers] = useState([]);
+  const navigate=useNavigate()
   const userId = useSelector((state) => state?.user?.user._id);
   useEffect(() => {
     const fetchData = async () => {
-      const users = await suggestionUsers();
-      setUsers(users);
+      try{
+      
+        const users = await suggestionUsers();
+        setUsers(users);
+      }catch(error){
+        navigate('*');
+      }
     };
     fetchData();
   }, []);

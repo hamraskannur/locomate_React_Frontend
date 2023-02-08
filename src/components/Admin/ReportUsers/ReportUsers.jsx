@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getOnePost } from "../../../Api/adminApi/PostRequest";
 import Post from "../Posts/Posts";
 import Shorts from "../Shorts/Shorts";
 
 const ReportUsers = () => {
   const location = useLocation();
+  const navigate=useNavigate()
   const { item } = location.state;
   console.log(item.PostId._id);
   const [report, setReport] = useState(item);
@@ -14,9 +15,14 @@ const ReportUsers = () => {
   const [post, setPost] = useState();
   useEffect(() => {
     const fetchData = async () => {
-      const PostId = item.PostId._id;
-      const newPost = await getOnePost(PostId);
-      setPost(newPost.Post);
+      try{
+        const PostId = item.PostId._id;
+        const newPost = await getOnePost(PostId);
+        setPost(newPost.Post);
+
+      }catch(error){
+        navigate('/admin/*');
+      }
     };
     fetchData();
   }, [ShowPost]);

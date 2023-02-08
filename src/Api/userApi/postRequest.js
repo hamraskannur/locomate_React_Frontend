@@ -10,7 +10,7 @@ export const addPost = async (formData) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -24,7 +24,7 @@ export const getAllProduct = async () => {
     }); 
     return data.allPost;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -38,7 +38,7 @@ export const getAllPosts = async () => {
     });
     return data.AllPosts;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -52,7 +52,7 @@ export const getOnePost = async (userId, PostId) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -66,7 +66,7 @@ export const getFriendsAccount = async (userId) => {
     });
     return data.FriendsAccount;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -80,7 +80,7 @@ export const likePostReq = async (PostId) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -106,7 +106,7 @@ export const postComment = async (postId, comment) => {
       return newComment;
     }
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 

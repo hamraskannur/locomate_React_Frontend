@@ -7,10 +7,11 @@ import {
 import { TiTick } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../../redux/loadingBar";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
-
+ const navigate = useNavigate()
   const proImageRef = useRef();
   const coverImageRef = useRef();
   const [proImg, setProImg] = useState();
@@ -19,13 +20,18 @@ const EditProfile = () => {
   const [imgErr, setImgErr] = useState("");
   const [success, setSuccess] = useState(false);
   const [noUpdates, setNoUpdates] = useState(false);
-
+ 
   let user;
   useEffect(() => {
     dispatch(showLoading());
     async function getUser() {
-      user = await getUserData();
-      setUserData(user[0]);
+      try{
+        user = await getUserData();
+        setUserData(user[0]);
+
+      }catch(error){
+        navigate('*');
+      }
     }
     getUser();
     dispatch(hideLoading());
@@ -36,6 +42,9 @@ const EditProfile = () => {
   };
 
   const submitHandler = async (e) => {
+    try{
+
+   
     if (userData.username.trim().length > 0) {
       if (userData.name.trim().length > 0) {
         if (coverImg) {
@@ -63,6 +72,9 @@ const EditProfile = () => {
     } else {
       setImgErr("please fill userName");
     }
+  }catch(error){
+    navigate('*');
+  }
   };
 
   const coverImgChangeHandler = (e) => {

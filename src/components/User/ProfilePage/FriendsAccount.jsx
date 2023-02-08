@@ -1,14 +1,14 @@
 import React,{useState ,useEffect } from 'react'
 import ProfilePage from "../ProfilePage/ProfilePage";
 import { getFriendsAccount } from '../../../Api/userApi/postRequest';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { hideLoading, showLoading } from "../../../redux/loadingBar";  
 
 const FriendsAccount = () => {
   const location = useLocation()
   const dispatch = useDispatch();
-
+  const navigate=useNavigate()
     const { userId,admin }  = location.state
 
     const [userData, setUserData] = useState([])
@@ -17,8 +17,13 @@ const FriendsAccount = () => {
       dispatch(showLoading());
       const myProfile = async() =>{
         if(userId){
-          const newUserData = await getFriendsAccount(userId)
-          setUserData(newUserData)
+          try{
+
+            const newUserData = await getFriendsAccount(userId)
+            setUserData(newUserData)
+          }catch(error){
+            navigate('*');
+          }
         }
       }
       myProfile()

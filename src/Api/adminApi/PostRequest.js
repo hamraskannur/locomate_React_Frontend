@@ -2,12 +2,17 @@ import { async } from 'q';
 import { adminAPI, userApi } from '../../utils/Apis/Apis';
 
 export const getAllReportPost = async () => {
+  try{
   const { data } = await adminAPI.get('/getAllReportPost', { withCredentials: true });
   return data;
+}catch(error){
+  return error
+}
 };
 
 
 export const blockPost =async (formData) => {
+  try{
     const { data } = await adminAPI.put(`/blockPost`,formData, { withCredentials: true }, {
       withCredentials: true,
       headers: {
@@ -15,6 +20,9 @@ export const blockPost =async (formData) => {
       },
     });
     return data;
+  }catch(error){
+    return error
+  }
 }
 
 export const getOneUser =async (userId) =>{
@@ -27,7 +35,7 @@ export const getOneUser =async (userId) =>{
     });
     return data.FriendsAccount;
   } catch (error) {
-    console.log(error);
+    return error
   }
 }
 
@@ -41,7 +49,7 @@ export const getUserAllPost = async (userId) => {
     });
     return data.AllPosts;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -57,7 +65,7 @@ export const getComments = async (postId) => {
       return data.comments;
     }
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -71,7 +79,7 @@ export const getReplayComment = async (commentId) => {
     });
     return data.comments;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -85,7 +93,7 @@ export const getOnePost = async (PostId) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -99,7 +107,7 @@ export const getUserAllShorts =async (UserId) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 
 
@@ -116,7 +124,7 @@ export const getFollowingUser = async (usersId) => {
     console.log(data.user);
    return data.user
   } catch (error) {
-    console.log(error);
+    return error
   }
 }
 
@@ -130,7 +138,7 @@ export const getFollowersUser = async (usersId) => {
     })
    return data.user
   } catch (error) {
-    console.log(error);
+    return error
   }
 }
 export const getAllPost = async () => {
@@ -143,7 +151,7 @@ export const getAllPost = async () => {
     })
    return data.AllPosts
   } catch (error) {
-    console.log(error);
+    return error
   }
 }
 export const getAllVideo = async () => {
@@ -156,6 +164,6 @@ export const getAllVideo = async () => {
     })
    return data.AllPosts
   } catch (error) {
-    console.log(error);
+    return error
   }
 }

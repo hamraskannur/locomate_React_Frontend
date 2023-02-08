@@ -53,6 +53,7 @@ const UserSideBar = () => {
     localStorage.clear();
     dispatch(userActions.userLogout());
     navigate("/login");
+    
   };
 
   return (

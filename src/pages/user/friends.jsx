@@ -1,9 +1,7 @@
 import React from "react";
 import NavBar from "../../components/User/NavBar/NavBar";
 import UserSideBar from "../../components/User/UserSideBar/UserSideBar";
-import UserProtectRouter from "../../components/User/Routes/UserProtectRouter";
 import Request from "../../components/User/request/Request";
-import Friends from '../../components/User/Friends/Friends'
 import BottomBar from "../../components/User/BottomBar/BottomBar";
 
 const FriendsPage = () => {

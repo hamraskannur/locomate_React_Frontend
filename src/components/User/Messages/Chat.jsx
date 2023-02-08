@@ -4,9 +4,18 @@ import { getFriendsAccount } from "../../../Api/userApi/postRequest";
 import Moment from "react-moment";
 import { IoMdArrowBack } from "react-icons/io";
 import InputEmoji from "react-input-emoji";
+import { useNavigate } from "react-router-dom";
 
+const Chat = ({
+  chat,
+  currentUser,
+  setSentMessage,
+  receiveMessages,
+  setPhoneSizeUser,
+  setPhoneSizeChat,
+}) => {
+  const navigate = useNavigate();
 
-const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSizeUser ,setPhoneSizeChat}) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessages, setNewMessages] = useState("");
@@ -21,8 +30,13 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
   useEffect(() => {
     const userId = chat?.members?.find((id) => id != currentUser);
     const getUserData = async () => {
-      const data = await getFriendsAccount(userId);
-      setUserData(data[0]);
+      try{
+
+        const data = await getFriendsAccount(userId);
+        setUserData(data[0]);
+      }catch(error){
+        navigate('*');
+      }
     };
     if (chat != null) {
       getUserData();
@@ -35,7 +49,7 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
         const data = await getMessages(chat._id);
         setMessages(data);
       } catch (error) {
-        console.log(error);
+        navigate('*');
       }
     };
     fetchMessage();
@@ -57,7 +71,7 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
         setMessages([...messages, data]);
         setNewMessages("");
       } catch (error) {
-        console.log(error);
+        navigate("*");
       }
 
       const receiverId = chat.members.find((id) => id !== currentUser);
@@ -65,14 +79,17 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
     }
   };
 
+
+
   useEffect(() => {
     scroll?.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const clickUser=()=>{
-    setPhoneSizeUser(" lg:flex")
-    setPhoneSizeChat("hidden lg:flex")
-  }
+  const clickUser = () => {
+    setPhoneSizeUser(" lg:flex");
+    setPhoneSizeChat("hidden lg:flex");
+  };
+
   return (
     <>
       {chat ? (
@@ -82,7 +99,9 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
               <div className="flex flex-col h-full ">
                 <div className="flex flex-col w-full ">
                   <div className=" border-b-2 py-2 px-2 w-full bg-slate-700 h-16 flex items-center">
-                <div onClick={clickUser} className="text-white  lg:hidden">{React.createElement(IoMdArrowBack, { size: "20" })}</div>
+                    <div onClick={clickUser} className="text-white  lg:hidden">
+                      {React.createElement(IoMdArrowBack, { size: "20" })}
+                    </div>
                     <img
                       src={userData?.ProfileImg}
                       className="lg:ml-0 ml-2 object-cover h-10 w-10 rounded-full "
@@ -102,12 +121,18 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
                       >
                         <div className="flex items-center justify-start flex-row-reverse">
                           <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                          A
+                            A
                           </div>
                           <div className="max-w-2xl relative mr-3 text-sm bg-indigo-100 py-2 max-w-10 px-4 shadow rounded-xl">
                             <div className="flex flex-wrap">
-                              <p>{message.text}</p>
+                              <div>{message.text}</div>
                             </div>
+                            <Moment
+                              className=" self-center text-gray-500 text-xs ml-2 items-end"
+                              fromNow
+                            >
+                              {message.createdAt}
+                            </Moment>
                           </div>
                         </div>
                       </div>
@@ -122,6 +147,12 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
                           </div>
                           <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
                             <div>{message.text}</div>
+                            <Moment
+                              className=" self-center text-gray-500 text-xs ml-2 items-end"
+                              fromNow
+                            >
+                              {message.createdAt}
+                            </Moment>
                           </div>
                         </div>
                       </div>
@@ -131,7 +162,6 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
               </div>
             </div>
             <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full lg:px-2">
-                      
               <div className="flex-grow ml-4">
                 <div className="relative w-full">
                   <InputEmoji
@@ -180,5 +210,3 @@ const Chat = ({ chat, currentUser, setSentMessage, receiveMessages ,setPhoneSize
 };
 
 export default Chat;
-
-

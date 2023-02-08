@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { editPost } from "../../../Api/userApi/postRequest";
 import { AddPostActions } from "../../../redux/AddPost";
+import { errorToast, successToast } from "../../Toast/Toast";
 
 const EditPost = ({ setEditPost,shorts, img, description, postId }) => {
   const dispatch = useDispatch();
+  const navigate=useNavigate()
   const [newDescription, setNewDescription] = useState(description);
   const submitHandler = async () => {
-    const response = await editPost({ postId, newDescription });
-    if (response.success) {
-      setEditPost(false);
-      await dispatch(AddPostActions.postAdd());
+    try{
+
+      const response = await editPost({ postId, newDescription });
+      if (response.success) {
+        setEditPost(false);
+        successToast("successfully edit your post");
+        await dispatch(AddPostActions.postAdd());
+      }else{
+        errorToast("something went wrong")
+      }
+    }catch(error){
+      navigate('*');
     }
   };
 

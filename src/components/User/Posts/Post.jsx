@@ -4,21 +4,27 @@ import Posts from "./Posts";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoading, showLoading } from "../../../redux/loadingBar";  
 import { AddPostActions } from '../../../redux/AddPost'
+import { useNavigate } from "react-router-dom";
 
 const Post = () => {
 
   const [posts, setPosts] = useState([]);
   const userId = useSelector((state) => state?.user?.user?._id);
-
+ const navigate=useNavigate()
   const dispatch = useDispatch()
   let newPost;
   const update = useSelector((state) => state.addPost.AddPost); 
   useEffect(() => {
     dispatch(showLoading());
     const getPost = async () => {
-      newPost = await getAllPosts();
-      newPost = newPost?.reverse();
-      setPosts(newPost);
+      try{
+
+        newPost = await getAllPosts();
+        newPost = newPost?.reverse();
+        setPosts(newPost);
+      }catch(error){
+        navigate('*');
+      }
       
     };
     getPost();

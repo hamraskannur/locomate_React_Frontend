@@ -13,13 +13,18 @@ const  ShowUser = ({ type, userId }) => {
   const [users, setUsers] = useState();
   useEffect(() => {
     const getUserData = async (type) => {
-      if (type === "Following") {
-        const user = await getFollowingUser(userId);
-        setUsers(user);
-      }
-      if (type === "Followers") {
-        const user = await getFollowersUser(userId);
-        setUsers(user);
+      try{
+        if (type === "Following") {
+          const user = await getFollowingUser(userId);
+          setUsers(user);
+        }
+        if (type === "Followers") {
+          const user = await getFollowersUser(userId);
+          setUsers(user);
+        }
+      
+      }catch(error){
+        navigate('*');
       }
     };
     getUserData(type);

@@ -10,7 +10,7 @@ export const uploadVideo = async (formData) => {
       });
       return data;
     } catch (error) {
-      console.log(error);
+       return error
     }
   };
   
@@ -24,7 +24,7 @@ export const uploadVideo = async (formData) => {
       });
       return data.AllPosts;
     } catch (error) {
-      console.log(error);
+      return error
     }
   };
   
@@ -38,7 +38,7 @@ export const uploadVideo = async (formData) => {
       });
       return data.AllPosts;
     } catch (error) {
-      console.log(error);
+      return error
     }
   };
 

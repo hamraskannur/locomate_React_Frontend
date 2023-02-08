@@ -6,7 +6,7 @@ const Signup = () => {
 
   return (
     <>
-           <SignupPage />
+     <SignupPage />
     </>
   );
 };

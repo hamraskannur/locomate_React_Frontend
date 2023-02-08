@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getSavedPost, getUserAllPost } from "../../../Api/userApi/postRequest";
 
 const AllPost = ({ userId, type, postCount, SavedPost,setOnePostId }) => {
   const [posts, setPosts] = useState([]);
+  const navigate=useNavigate()
   let newPost;
   useEffect(() => {
+    try{
     const getPost = async () => {
       if (SavedPost) {
-      const response= await getSavedPost(userId)
-      console.log(response,55555555);
-      setPosts(response)
-      } else {
-        if (userId) {
-          newPost = await getUserAllPost(userId);
-          setPosts(newPost);
-          postCount(newPost.length);
+          const response= await getSavedPost(userId)
+          console.log(response,55555555);
+          setPosts(response)
+
+        } else {
+          if (userId) {
+            newPost = await getUserAllPost(userId);
+            setPosts(newPost);
+            postCount(newPost.length);
+          }
         }
-      }
-    };
-    getPost();
+      };
+      getPost();
+    }catch(error){
+      navigate('*');
+    }
   }, [userId]);
   
   const getSavedOnePost =(post,postUser)=>{

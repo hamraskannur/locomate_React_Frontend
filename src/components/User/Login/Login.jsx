@@ -24,7 +24,7 @@ function Login() {
 
   const loginHandler = async (event) => {
     event.preventDefault();
-
+    try{
     if (enteredEmail.trim().length > 0) {
       if (enteredPassword.trim().length > 0) {
         if (enteredEmail.includes("@") && enteredEmail.trim().length > 7) {
@@ -69,6 +69,9 @@ function Login() {
 
       setErrMessage("fill email");
     }
+  }catch(error){
+    navigate('*');
+  }
   };
   // const handleGoogleLogin = async () => {
   //   signIn("google", { callbackUrl: "http://localhost:3000/user/loginWait" });

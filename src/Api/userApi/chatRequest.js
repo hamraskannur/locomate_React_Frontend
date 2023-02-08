@@ -11,7 +11,7 @@ export const userChat = async (userId) => {
    
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -25,7 +25,7 @@ export const getMessages = async (chatId) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -39,7 +39,7 @@ export const AddMessage = async (formData) => {
     });
     return data;
   } catch (error) {
-        console.log(error);
+    return error
   }
 };
 
@@ -53,6 +53,6 @@ export const createChat = async (formData) => {
     });
     return data;
   } catch (error) {   
-     console.log(error);
+    return error
   }
 };

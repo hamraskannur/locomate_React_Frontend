@@ -6,7 +6,7 @@ export const signUp = async (formData) => {
     return data.userSignup;
     
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 export const verifySignUp = async (id, token) => {
@@ -14,7 +14,7 @@ export const verifySignUp = async (id, token) => {
     const { data } = await userApi.get(`/verifySignUp/${id}/${token}`);
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -25,7 +25,7 @@ export const login = async (formData) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -36,6 +36,6 @@ export const GoogleLogin = async (formData) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };

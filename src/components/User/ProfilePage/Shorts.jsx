@@ -1,17 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getUserAllShorts } from "../../../Api/userApi/videoRequest";
 import Shorts from "../Shorts/Shorts";
 
 const MyShorts = ({ userId }) => {
   const [shorts, setShorts] = useState([]);
-
+  const navigate=useNavigate()
   useEffect(() => {
     let getAllShorts = async () => {
-      const shorts = await getUserAllShorts(userId);
-      console.log(shorts);
-      setShorts(shorts);
+      try{
+        const shorts = await getUserAllShorts(userId);
+        setShorts(shorts);
+
+      }catch(error){
+        navigate('*');
+      }
     };
     getAllShorts();
   }, []);

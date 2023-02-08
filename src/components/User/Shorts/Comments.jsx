@@ -4,6 +4,7 @@ import { postComment, getComments } from "../../../Api/userApi/postRequest";
 import InputEmoji from "react-input-emoji";
 import Comment from "./Comment";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Comments({ postId, setCount, count }) {
   const user=useSelector((state) => state?.user?.user);
@@ -12,13 +13,18 @@ function Comments({ postId, setCount, count }) {
   const [newComment, setNewComment] = useState("");
   const [img, setImg] = useState("");
   const [comment, setComment] = useState([]);
+  const navigate=useNavigate()
   
   useEffect(() => {
     const getCommentAll = async () => {
-      const response = await getComments(postId);
-      console.log(response);
-      setComment(response);
-      setCount(response.length);
+      try{
+        const response = await getComments(postId);
+        console.log(response);
+        setComment(response);
+        setCount(response.length);
+      }catch(error){
+        navigate('*');
+      }
     };
     getCommentAll();
   }, []);
@@ -38,7 +44,11 @@ function Comments({ postId, setCount, count }) {
       setComment([response, ...comment]);
       setCount(count + 1);
       setNewComment("");
-    } catch (error) {}
+    } catch (error) {
+      
+        navigate('*');
+      
+    }
   };
   return (
     <div className="comment bg-white border-slate-300 p-2 rounded-md border-2  ">
@@ -67,9 +77,7 @@ function Comments({ postId, setCount, count }) {
       </div>
       <div
         className={
-          comment.length > 0
-            ? "h-96	overflow-y-scroll scrollbar-hide"
-            : "h-0 overflow-y-scroll scrollbar-hide"
+             "max-h-96	overflow-y-scroll scrollbar-hide"
         }
       >
         {comment?.map((comment) => (

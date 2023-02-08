@@ -4,10 +4,12 @@ import { postComment, getComments } from "../../../Api/userApi/postRequest";
 import InputEmoji from "react-input-emoji";
 import Comment from "./Comment";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Comments({ postId, setCount, count }) {
   const user=useSelector((state) => state?.user?.user);
   const ProfileImg = user.ProfileImg
+  const navigate = useNavigate
 
   const [newComment, setNewComment] = useState("");
   const [img, setImg] = useState("");
@@ -16,7 +18,6 @@ function Comments({ postId, setCount, count }) {
   useEffect(() => {
     const getCommentAll = async () => {
       const response = await getComments(postId);
-      console.log(response);
       setComment(response);
       setCount(response.length);
     };
@@ -29,16 +30,20 @@ function Comments({ postId, setCount, count }) {
 
   const handlePostComment = async () => {
     if (newComment.trim().length === 0) return;
-    try {
+    try{
+
       const response = await postComment(postId, newComment);
-      response.username=user.username
-      response.ProfileImg=user.ProfileImg
-      response.likes=[]
-      response._id=response._id
-      setComment([response, ...comment]);
-      setCount(count + 1);
-      setNewComment("");
-    } catch (error) {}
+        response.username=user.username
+        response.ProfileImg=user.ProfileImg
+        response.likes=[]
+        response._id=response._id
+        setComment([response, ...comment]);
+        setCount(count + 1);
+        setNewComment("");
+    }catch(error){
+      navigate('*');
+    }
+    
   };
   return (
     <div className="comment bg-white border-slate-300 p-2 rounded-md border-2  ">
@@ -65,11 +70,8 @@ function Comments({ postId, setCount, count }) {
         />
       </div>
       <div
-        className={
-          comment.length > 0
-            ? "h-96	overflow-y-scroll scrollbar-hide"
-            : "h-0 overflow-y-scroll scrollbar-hide"
-        }
+        className="max-h-96	overflow-y-scroll"
+        
       >
         {comment?.map((comment) => (
          <Comment comment={comment} key={comment?._id} />

@@ -17,13 +17,18 @@ function Verify() {
  
     event.preventDefault();
     dispatch(showLoading());
-    const verify = await verifySignUp(userId,token);
-    dispatch(hideLoading());
-
-    if (verify.Status) {
-      navigate('/login');
-    } else {
-      setErrMessage(verify.message);
+    try{
+      
+      const verify = await verifySignUp(userId,token);
+      dispatch(hideLoading());
+  
+      if (verify.Status) {
+        navigate('/login');
+      } else {
+        setErrMessage(verify.message);
+      }
+    }catch(error){
+      navigate('*');
     }
   };
   return (

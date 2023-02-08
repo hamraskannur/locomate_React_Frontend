@@ -26,15 +26,21 @@ function AdminLogin() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const response = await adminLogin({ email: enteredEmail, password: enteredPassword });
-    if (response.Status) {
-      localStorage.setItem('adminToken', response.token);
-      dispatch(adminActions.AddAdmin({ token: response.token }));
-      navigate('/admin');
-    } else {
-      setErrMessage(response.message);
-    }
+     try{
+      const response = await adminLogin({ email: enteredEmail, password: enteredPassword });
+      if (response.Status) {
+        localStorage.setItem('adminToken', response.token);
+        dispatch(adminActions.AddAdmin({ token: response.token }));
+        navigate('/admin');
+      } else {
+        setErrMessage(response.message);
+      }
+      
+      }catch(err){
+        navigate('/admin/*');
+      }
   };
+
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">

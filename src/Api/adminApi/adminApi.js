@@ -1,31 +1,46 @@
 import { adminAPI } from '../../utils/Apis/Apis';
 
 export const getAllUser = async () => {
-  const response = await adminAPI.get('/getAllUser');
-  return response.data.Users;
+  try{
+    const response = await adminAPI.get('/getAllUser');
+    return response.data.Users;
+  }catch( error){
+    return error
+  }
 };
 
 export const blockUser = async (Status, userId) => {
-  const response = await adminAPI.get(`/changeStatus/${Status}/${userId}`);
-  return response.data;
+  try{
+    const response = await adminAPI.get(`/changeStatus/${Status}/${userId}`);
+    return response.data;
+  }catch(error){
+    return error
+  }
 };
 export const getAllNotifications = async () => {
-  const { data } = await adminAPI.get("/getAllNotifications",  {
-    withCredentials: true,
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("adminToken"),
-    },
-  });
-  return data.admin
-
+  try{
+    const { data } = await adminAPI.get("/getAllNotifications",  {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
+      },
+    });
+    return data.admin
+  }catch(error){
+    return error
+  }
 }
 
 export const checkNewNotification = async () => {
-  const { data } = await adminAPI.get("/checkNewNotification",  {
-    withCredentials: true,
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("adminToken"),
-    },
-  });
-  return data
+  try{
+    const { data } = await adminAPI.get("/checkNewNotification",  {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
+      },
+    });
+    return data
+  }catch(error){
+    return error
+  }
 }

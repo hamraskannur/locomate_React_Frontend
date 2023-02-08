@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { changeToPrivate } from "../../../Api/userApi/profileApi";
 import { userActions } from "../../../redux/userAuth";
+import { successToast } from "../../Toast/Toast";
 
 const Settings = () => {
     const userPublic=useSelector((state)=>state.user.user.public)
@@ -19,11 +20,16 @@ const Settings = () => {
     const fetchData=async () =>{
         console.log(state.target.checked);
        const checked = state.target.checked
-        const response= await changeToPrivate({checked:!checked})
-        if(response.success){
-            console.log(switchChecked);
-            setStateChecked(!switchChecked);
-        }
+       try{
+      
+         const response= await changeToPrivate({checked:!checked})
+         if(response.success){
+           successToast(`your account changed ${switchChecked?"public":"private"} `)
+             setStateChecked(!switchChecked);
+         }
+       }catch(error){
+         navigate('*');
+       }
     }
     fetchData()
   }

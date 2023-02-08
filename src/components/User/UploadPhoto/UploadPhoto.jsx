@@ -6,6 +6,7 @@ import { AddPostActions } from '../../../redux/AddPost'
 import S3 from "aws-sdk/clients/s3";
 import { errorToast, successToast } from '../../Toast/Toast';
 import { hideLoading, showLoading } from "../../../redux/loadingBar";
+import { useNavigate } from 'react-router-dom';
 
 export default function UploadPhoto({ AddPost, setAddPost }) {
   const [files, setFile] = useState([]);
@@ -13,7 +14,7 @@ export default function UploadPhoto({ AddPost, setAddPost }) {
   const [message, setMessage] = useState();
   const [description, setDescription] = useState("");
   const dispatch= useDispatch()
-
+  const navigate=useNavigate()
   const S3_BUCKET = process.env.REACT_APP_NAME;
   const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID;
   const region = process.env.REACT_APP_REGION;
@@ -49,53 +50,55 @@ export default function UploadPhoto({ AddPost, setAddPost }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    
-    if (files.length > 0) {
-      dispatch(showLoading());
-      files.forEach((file) => {
-        const reader = new FileReader();
-        reader.readAsArrayBuffer(file);
-        reader.onload = async (e) => {
-          const result = e.target.result;
-          const uploadParams = {
-            Bucket: S3_BUCKET,
-            Key: Date.now() + file.name,
-            Body: result,
+    try{
+      
+      if (files.length > 0) {
+        files.forEach((file) => {
+          const reader = new FileReader();
+          reader.readAsArrayBuffer(file);
+          reader.onload = async (e) => {
+            const result = e.target.result;
+            const uploadParams = {
+              Bucket: S3_BUCKET,
+              Key: Date.now() + file.name,
+              Body: result,
+            };
+            await s3
+              .upload(uploadParams)
+              .promise()
+              .then((res) => {
+                setImageLinks((imageLinks) => [...imageLinks, res.Location]);
+              });
           };
-          await s3
-            .upload(uploadParams)
-            .promise()
-            .then((res) => {
-              setImageLinks((imageLinks) => [...imageLinks, res.Location]);
-            });
+        });
+  
+        let object =await {
+          imageLinks: ImageLinks,
+          description: description,
         };
-      });
-
-      let object = {
-        imageLinks: ImageLinks,
-        description: description,
-      };
-      if (object.imageLinks.length > 0) {
-      const  data= await addPost(object);
-      if(data.status){
-        setImageLinks([])
-        object.imageLinks=null
-        object.description=null
-        dispatch(hideLoading());
-       await  dispatch(AddPostActions.postAdd())
-       successToast('successfully uploaded post ')
-        setAddPost(false)
-      }else{
-        dispatch(hideLoading());
-        errorToast("upload video failed")
-        setMessage("err");
+        if (object.imageLinks.length > 0) {
+        const  data = await addPost(object);
+        if(data.status){
+          setImageLinks([])
+          object.imageLinks=null
+          object.description=null
+         await  dispatch(AddPostActions.postAdd())
+         successToast('successfully uploaded post ')
+          setAddPost(false)
+        }else{
+          // errorToast("upload images failed")
+        }
+        }else{
+          // errorToast("upload images failed")
+  
+        }
+      } else {
+        setMessage("select your images");
+        // errorToast("select your images")
+  
       }
-      }else{
-        dispatch(hideLoading());
-
-      }
-    } else {
-      setMessage("select your images");
+    }catch(error){
+      navigate('*');
     }
   };
 

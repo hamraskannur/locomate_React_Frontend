@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 const Comment = ({ comment }) => {
   const navigate = useNavigate()  
 
-  const user = useSelector((state) => state?.user?.user);
+    const user = useSelector((state) => state?.user?.user);
   const userId = user._id;
   const [AllReplayComment, setAllReplayComment] = useState();
   const [Reply, setReply] = useState(false);
@@ -24,33 +24,43 @@ const Comment = ({ comment }) => {
   const [replayCommentCount, setReplayCommentCount] = useState(0);
 
 
-  const getUserAccount = () =>{
+  const getUserAccount = (user) =>{
     if (userId === user) {
-      navigate("/user/myAccount");
+      navigate("/myAccount");
     } else {
-      navigate(`/user/getAccount/${user}`);
+      navigate("/FriendsAccount", { state: { userId: user } });
     }
   }
 
   useEffect(() => {
     const getReplayCommentReq = async () => {
-      const response = await getReplayComment(comment._id);
-      setAllReplayComment(response);
-      setReplayCommentCount(response.length);
+      try{
+        const response = await getReplayComment(comment._id);
+        setAllReplayComment(response);
+        setReplayCommentCount(response.length);
+
+      }catch(error){
+        navigate('*');
+      }
     };
     getReplayCommentReq();
   }, []);
 
   const likeMainLike = async (commentId) => {
-    const response = await likeMainComment({ commentId });
-    if (response.success) {
-      if (like) {
-        setLikeCount(likeCount - 1);
-        setLike(false);
-      } else {
-        setLikeCount(likeCount + 1);
-        setLike(true);
+    try{
+
+      const response = await likeMainComment({ commentId });
+      if (response.success) {
+        if (like) {
+          setLikeCount(likeCount - 1);
+          setLike(false);
+        } else {
+          setLikeCount(likeCount + 1);
+          setLike(true);
+        }
       }
+    }catch(error){
+      navigate('*');
     }
   };
 
@@ -70,14 +80,15 @@ const Comment = ({ comment }) => {
       setReplayCommentCount(replayCommentCount + 1);
       setNewComment("");
     } catch (error) {
-      console.log(error);
+       navigate('*');
     }
   };
   return (
     <>
       <div className="flex comment mt-0 p-2 border-slate-300 rounded-full ">
-        <div className="rounded-full h-9 w-9 overflow-hidden border-slate-700 cursor-pointer">
+        <div className="cursor-pointer rounded-full h-9 w-9 overflow-hidden border-slate-700 cursor-pointer">
           <img
+          onClick={()=>getUserAccount(comment.userId)}
             src={
               comment?.ProfileImg
                 ? comment?.ProfileImg
@@ -86,8 +97,8 @@ const Comment = ({ comment }) => {
             alt=""
           />
         </div>
-        <div className="ml-3 bg-gray-100 w-full rounded-md ">
-          <span onClick={()=>getUserAccount()} className="mt-3 ml-1 italic text-sm cursor-pointer font-semibold">
+        <div className="ml-3 bg-gray-100 w-full cursor-pointer rounded-md ">
+          <span onClick={()=>getUserAccount(comment.userId)} className="mt-3 ml-1 italic text-sm cursor-pointer font-semibold">
             {comment.username}
           </span>
 

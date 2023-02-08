@@ -20,6 +20,7 @@ import {
 import EditPost from "../editPost/EditPost";
 import ReportPost from "../ReportPost/ReportPost";
 import { useNavigate } from "react-router-dom";
+import { errorToast, successToast } from "../../Toast/Toast";
 
 function Post({ post, onePost }) {
   const user = useSelector((state) => state?.user?.user);
@@ -53,30 +54,49 @@ function Post({ post, onePost }) {
     
   };
   const handleSavePost = async (postId) => {
-    const response = await savePost({ postId });
-    console.log(response);
-    if (response.success) {
-      setSavedStatus(!savedStatus);
+    try{
+
+      const response = await savePost({ postId });
+      console.log(response);
+      if (response.success) {
+        setSavedStatus(!savedStatus);
+      }
+    }catch(error){
+      navigate('*');
     }
   };
 
   const likePost = async (PostId) => {
-    const data = await likePostReq(PostId);
-    if (data.success) {
-      if (like) {
-        setPostLength(PostLength - 1);
-        setLike(false);
+    try{
+
+      const data = await likePostReq(PostId);
+      if (data.success) {
+        if (like) {
+          setPostLength(PostLength - 1);
+          setLike(false);
+        } else {
+          setLike(true);
+          setPostLength(PostLength + 1);
+        }
       } else {
-        setLike(true);
-        setPostLength(PostLength + 1);
       }
-    } else {
+    }catch(error){
+      navigate('*');
     }
   };
   const handleDeletePost = async (postId) => {
-    const response = await deletePost(postId);
-    if (response.success) {
-     await dispatch(AddPostActions.postAdd());
+    try{
+
+      const response = await deletePost(postId);
+      if (response.success) {
+        successToast("successfully deleted post")
+       await dispatch(AddPostActions.postAdd());
+      }else{
+        errorToast("something went wrong")
+  
+      }
+    }catch(error){
+      navigate('*');
     }
   };
 

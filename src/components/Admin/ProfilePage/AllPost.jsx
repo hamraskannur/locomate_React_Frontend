@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {  getUserAllPost } from "../../../Api/adminApi/PostRequest";
 
 const AllPost = ({ userId, type, postCount,setOnePostId }) => {
   const [posts, setPosts] = useState([]);
+  const navigate=useNavigate()
   let newPost;
   useEffect(() => {
     const getPost = async () => {
-    
         if (userId) {
-          newPost = await getUserAllPost(userId);
-          setPosts(newPost);
-          postCount(newPost.length);
+          try{
+            newPost = await getUserAllPost(userId);
+            setPosts(newPost);
+            postCount(newPost.length);
+          }catch(error){
+            navigate('/admin/*');
+          }
         }
-      
     };
     getPost();
   }, [userId]);

@@ -7,12 +7,18 @@ const EditPost = ({  setEditPost, img, description, postId }) => {
   const dispatch = useDispatch();
   const [newDescription, setNewDescription] = useState(description);
   const submitHandler = async () => {
-    const response = await editShorts({ postId, newDescription });
-    if (response.success) {
-      setEditPost(false)
-      await dispatch(AddPostActions.postAdd());
+    try{
+      const response = await editShorts({ postId, newDescription });
+      if (response.success) {
+        setEditPost(false)
+        await dispatch(AddPostActions.postAdd());
+      }
+        
+    }catch(error){
+      navigate('*');
     }
   };
+ 
 
   return (
     <>

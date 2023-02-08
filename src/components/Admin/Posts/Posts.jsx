@@ -21,16 +21,24 @@ const [block,setBlock]=useState(post?.status)
     navigate("/admin/userProfile", { state: { userId: userId } });
   };
   const submitBlockPost = async (postId) => {
-    console.log("this not implemented");
-    const status = false
-    await blockPost({postId, status});
-    setBlock(false)
+    try{
+      const status = false
+      await blockPost({postId, status});
+      setBlock(false)
+
+    }catch(error){
+      navigate('/admin/*');
+    }
   };
   const submitUnblockPost = async (postId) => {
-    console.log("this not implemented");
-    const status = true
-    await blockPost({postId, status});
-    setBlock(true)
+    try{
+
+      const status = true
+      await blockPost({postId, status});
+      setBlock(true)
+    }catch(error){
+      navigate('/admin/*');
+    }
   };
   return (
     <>

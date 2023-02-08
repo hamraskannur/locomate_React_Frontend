@@ -3,19 +3,25 @@ import Avatar from "./Avatar";
 import Comment from "./Comment";
 import { useSelector } from "react-redux";
 import { getComments } from "../../../Api/adminApi/PostRequest";
+import { useNavigate } from "react-router-dom";
 
 function Comments({ postId, setCount, count }) {
-
+const navigate=useNavigate()
 
   const [newComment, setNewComment] = useState("");
   const [comment, setComment] = useState([]);
   
   useEffect(() => {
     const getCommentAll = async () => {
-      const response = await getComments(postId);
-      console.log(response);
-      setComment(response);
-      setCount(response.length);
+      try{
+        const response = await getComments(postId);
+        console.log(response);
+        setComment(response);
+        setCount(response.length);
+
+      }catch(error){
+        navigate('/admin/*');
+      }
     };
     
     getCommentAll();

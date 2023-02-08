@@ -26,35 +26,45 @@ const ProfilePage = ({ userData, type }) => {
     navigate("/editProfile");
   };
   const followUserHandler = async (followId) => {
-    const response = await followUser({ followId });
-    if (response.success) {
-      if (!userData?.public) {
-        if (follow) {
-          setFollowersCount(followersCount-1)
-          setFollow(false);
-        } else {
-          if (Requested) {
-            setRequested(false);
+    try{
+
+      const response = await followUser({ followId });
+      if (response.success) {
+        if (!userData?.public) {
+          if (follow) {
+            setFollowersCount(followersCount-1)
+            setFollow(false);
           } else {
-            setRequested(true);
+            if (Requested) {
+              setRequested(false);
+            } else {
+              setRequested(true);
+            }
+          }
+        } else {
+          if (follow) {
+            setFollowersCount(followersCount-1)
+            setFollow(false);
+          } else {
+            setFollowersCount(followersCount+1)
+            setFollow(true);
           }
         }
       } else {
-        if (follow) {
-          setFollowersCount(followersCount-1)
-          setFollow(false);
-        } else {
-          setFollowersCount(followersCount+1)
-          setFollow(true);
-        }
       }
-    } else {
+    }catch(error){
+      navigate('*');
     }
   };
 
   const createMessage = async (senderId) => {
-    const response = await createChat({ senderId, receiverId: userId });
-    navigate("/Messages");
+    try{
+
+      const response = await createChat({ senderId, receiverId: userId });
+      navigate("/Messages");
+    }catch(error){
+      navigate('*');
+    }
   };
   const openPost=()=>{
     setOnePostId(null)

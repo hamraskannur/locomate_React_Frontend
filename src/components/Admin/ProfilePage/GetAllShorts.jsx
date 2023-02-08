@@ -1,17 +1,22 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getUserAllShorts } from "../../../Api/adminApi/PostRequest";
 import Shorts from "../Shorts/Shorts";
 
 const GetAllShorts = ({userId}) => {
   const [posts, setPosts] = useState();
+  const navigate=useNavigate()
   useEffect(() => {
     const getPost = async () => {
       if (userId) {
-       const {AllPosts} = await getUserAllShorts(userId);
-       
-        setPosts(AllPosts);
+        try{
+          const {AllPosts} = await getUserAllShorts(userId);
+           setPosts(AllPosts);
+        }catch(error){
+          navigate('/admin/*');
+        }
       }
     };
     getPost();

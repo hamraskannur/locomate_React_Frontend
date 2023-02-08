@@ -10,7 +10,7 @@ export const followUser = async (formData) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -25,7 +25,7 @@ export const getAllRequest = async () => {
 
     return data.Request;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -40,7 +40,7 @@ export const acceptRequest = async (formData) => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -55,7 +55,7 @@ export const deleteRequests = async (deleteId) => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    return error
   }
 };
 
@@ -70,7 +70,7 @@ export const getFollowingUser = async (usersId) => {
     })
    return data.user
   } catch (error) {
-    console.log(error);
+    return error
   }
 }
 
@@ -85,7 +85,7 @@ export const getFollowersUser = async (usersId) => {
     })
    return data.user
   } catch (error) {
-    console.log(error);
+    return error
   }
 }
 

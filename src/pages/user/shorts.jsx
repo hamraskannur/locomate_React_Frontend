@@ -8,7 +8,6 @@ import BottomBar from "../../components/User/BottomBar/BottomBar";
 function shorts() {
 
   return (
-         
           <div className="bg-[#F3F3F6]">
             <NavBar />
             <div className="flex ">
@@ -24,7 +23,6 @@ function shorts() {
               <BottomBar />
             </div>
           </div>
-      
   );
 }
 
