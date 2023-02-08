@@ -122,13 +122,39 @@ export const getFollowingUser = async (usersId) => {
 
 export const getFollowersUser = async (usersId) => {
   try {
-     const { data } =await userApi.get(`/getFollowersUser/${usersId}`, {
+     const { data } =await adminAPI.get(`/getFollowersUser/${usersId}`, {
       withCredentials: true,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("adminToken"),
       },
     })
    return data.user
+  } catch (error) {
+    console.log(error);
+  }
+}
+export const getAllPost = async () => {
+  try {
+     const { data } =await adminAPI.get("/getAllPost", {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
+      },
+    })
+   return data.AllPosts
+  } catch (error) {
+    console.log(error);
+  }
+}
+export const getAllVideo = async () => {
+  try {
+     const { data } =await adminAPI.get("/getAllVideo", {
+      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("adminToken"),
+      },
+    })
+   return data.AllPosts
   } catch (error) {
     console.log(error);
   }

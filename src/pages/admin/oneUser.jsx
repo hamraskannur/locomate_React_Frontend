@@ -1,6 +1,5 @@
 import React from "react";
 import SideBar from "../../components/Admin/SideBar/SideBar";
-import AdminProtectRouter from "../../components/Admin/Routes/AdminProtectRouter";
 import OneUser from "../../components/Admin/oneUser/OneUser";
 import AdminNavBar from "../../components/Admin/NavBar/AdminNavBar";
 

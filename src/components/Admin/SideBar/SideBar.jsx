@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { ImUsers } from "react-icons/im";
 import { BiLogOut } from "react-icons/bi";
+import { BsFillSignpostSplitFill } from "react-icons/bs";
 import { MdReport, MdOutlineNotifications } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { checkNewNotification } from "../../../Api/adminApi/adminApi";
@@ -25,7 +26,8 @@ function SideBar() {
   const menus = [
     { name: "Users", link: "/admin/", icon: ImUsers },
     { name: "report", link: "/admin/reportedPost", icon: MdReport },
- 
+    { name: "posts", link: "/admin/allPost", icon: BsFillSignpostSplitFill },
+
   ];
 
   const logOut = (e) => {

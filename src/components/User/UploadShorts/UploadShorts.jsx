@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-
+import { hideLoading, showLoading } from "../../../redux/loadingBar";
 import S3 from "aws-sdk/clients/s3";
 import { uploadImage } from "../../../Api/userApi/profileApi";
 import { uploadVideo } from "../../../Api/userApi/videoRequest";
+import { AddPostActions } from '../../../redux/AddPost'
+import { useDispatch } from "react-redux";
+import { errorToast, successToast } from "../../Toast/Toast";
 
 export default function UploadShorts({ setShortsModal }) {
   const [files, setFile] = useState(null);
   const [message, setMessage] = useState();
   const [description, setDescription] = useState("");
   const [uploadVideoData,setUploadVideoData]=useState()
+  const dispatch= useDispatch()
 
   const S3_BUCKET = process.env.REACT_APP_NAME;
   const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID;
@@ -47,6 +51,7 @@ export default function UploadShorts({ setShortsModal }) {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (files) {
+      dispatch(showLoading());
         const reader = new FileReader();
         reader.readAsArrayBuffer(files);
         reader.onload = async (e) => {
@@ -70,10 +75,21 @@ export default function UploadShorts({ setShortsModal }) {
             };
             if(uploadVideoData){
              const response=await uploadVideo(uploadVideoData)
+             await  dispatch(AddPostActions.postAdd())
+
              if(response.status){
+               dispatch(hideLoading());
+               successToast('successfully uploaded shorts ')
                 setShortsModal(false)
+             }else{
+              dispatch(hideLoading());
+
+              errorToast("upload video failed")
              }
              
+            }else{
+              dispatch(hideLoading());
+
             }
       
     } else {
@@ -82,9 +98,10 @@ export default function UploadShorts({ setShortsModal }) {
   };
 
   return (
-    <>
       <>
-        <div className=" justify-center w-full items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+   
+
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
           <div className="relative w-auto my-6 mx-auto max-w-3xl">
             {/*content*/}
             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -96,7 +113,7 @@ export default function UploadShorts({ setShortsModal }) {
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                   onClick={() => setShortsModal(false)}
-                >
+                  >
                   <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
                     {React.createElement(AiOutlineCloseCircle, {
                       size: "20",
@@ -105,7 +122,7 @@ export default function UploadShorts({ setShortsModal }) {
                 </button>
               </div>
               {/*body*/}
-              <div className="flex  mt-5 max-sm:w-full max-md:w-full max-lg:w-full z-50  w-[60vh]  px-3 ">
+              <div className=" flex  mt-5 max-sm:w-full max-md:w-full max-lg:w-full  w-[60vh]  px-3 ">
                 <div className="rounded-lg shadow-xl bg-gray-50 w-full ">
                   {!files && (
                     <div className="m-4">
@@ -137,7 +154,7 @@ export default function UploadShorts({ setShortsModal }) {
                             className="opacity-0"
                             multiple="multiple"
                             name="files[]"
-                          />
+                            />
                         </label>
                       </div>
                     </div>
@@ -150,7 +167,7 @@ export default function UploadShorts({ setShortsModal }) {
                  {files &&  <button
                   onClick={()=>{setFile(null)}}
                     className="w-full items-end mt-4 my-2 inline-block px-6 py-2.5 bg-slate-700 text-white font-medium text-xs leading-tight uppercase rounded-md  shadow-md hover:bg-slate-600 hover:shadow-lg focus:bg-slate-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-700 active:shadow-lg transition duration-150 ease-in-out"
-                  >
+                    >
                     remove video
                   </button>}
                   <label className="ml-2  ">Description </label>
@@ -160,7 +177,7 @@ export default function UploadShorts({ setShortsModal }) {
                       onChange={descriptionHandler}
                       value={description}
                       placeholder="Description"
-                    />
+                      />
                   </div>
                 </div>
               </div>
@@ -170,7 +187,7 @@ export default function UploadShorts({ setShortsModal }) {
                   className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="button"
                   onClick={() => setShortsModal(false)}
-                >
+                  >
                   Close
                 </button>
                 <button
@@ -184,8 +201,9 @@ export default function UploadShorts({ setShortsModal }) {
             </div>
           </div>
         </div>
+
         <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-      </>
+          
     </>
   );
 }

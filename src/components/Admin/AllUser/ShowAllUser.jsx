@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllUser, blockUser } from "../../../Api/adminApi/adminApi";
-
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 function ShowAllUser() {
   const navigate = useNavigate()  
   const [users, setUser] = useState([]);
@@ -28,6 +29,22 @@ function ShowAllUser() {
       setUser(response);
     });
   }, [loading === 1]);
+
+  const submit = (userId) => {
+    confirmAlert({
+      title: 'Confirm to ',
+      message: 'Are you block your user.',
+      buttons: [
+        { 
+          label: 'Yes',
+          onClick: () => { submitBlockUser(userId)}
+        },
+        {
+          label: 'No',
+        }
+      ]
+    });
+  };
   return (
       <div className="container mx-auto bg-[#FFFFFF] max-md:pl-16 ">
         <div className="p-5 h-screen min-w-full bg-[#FFFFFF]">
@@ -83,9 +100,7 @@ function ShowAllUser() {
                   ) : (
                     <button
                       type="button"
-                      onClick={() => {
-                        submitBlockUser(item._id);
-                      }}
+                      onClick={()=>submit(item._id)}
                       className="mt-4 inline-block px-6 py-2.5 bg-slate-700 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-slate-500 hover:shadow-lg focus:bg-slate-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-500 active:shadow-lg transition duration-150 ease-in-out"
                     >
                       Block

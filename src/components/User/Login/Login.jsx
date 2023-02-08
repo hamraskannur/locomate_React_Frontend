@@ -12,6 +12,7 @@ import {
 import { login } from "../../../Api/userApi/userAuthRequest";
 
 import { hideLoading, showLoading } from "../../../redux/loadingBar";
+import { successToast } from "../../Toast/Toast";
 
 function Login() {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ function Login() {
                   token: response.token,
                 })
               );
+              successToast('susses fully logged')
               navigate("/");
               dispatch(hideLoading());
             }

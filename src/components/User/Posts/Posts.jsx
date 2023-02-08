@@ -105,7 +105,7 @@ function Post({ post, onePost }) {
       <div
         className={`${
           onePost ? "shadow-md" : "shadow-lg"
-        } bg-white    shadow-gray-400 rounded-md p-3 mx-5 mb-5 mt-5 max-w-max md:mt-6  `}
+        } bg-white    shadow-gray-400 rounded-md p-3 mx-5 mb-5 mt-5  md:mt-6  `}
       >
         <div className="flex gap-3 ">
           <div>
@@ -126,7 +126,7 @@ function Post({ post, onePost }) {
             </div>
             <p className="text-gray-500 text-sm">
               <Moment fromNow>{post?.createdAt}</Moment>
-          {post?.edit && <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">edited</span>}
+          {post?.edit && <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">edited</span>}
             </p>
           </div>
             <div className="">
@@ -369,7 +369,7 @@ function Post({ post, onePost }) {
               <Comments postId={post?._id} setCount={setCount} count={count} />
             )}
           </div>
-       {editPost && <EditPost img={post?.img[0]} description={post?.description} postId={post?._id} setEditPost={setEditPost}/>}
+       {editPost && <EditPost img={post?.img[0]} shorts={false}  description={post?.description} postId={post?._id} setEditPost={setEditPost}/>}
       {report && <ReportPost video={false} setReport={setReport} postId={post?._id}/>}
       </div>
     </>

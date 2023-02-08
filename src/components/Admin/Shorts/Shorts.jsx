@@ -50,8 +50,8 @@ const [block,setBlock]=useState(post?.status)
 
       <div
         className={`${
-          onePost ? "shadow-md" : "shadow-lg"
-        } bg-[#F3F3F6]    shadow-gray-400 rounded-md p-3 mx-5 mb-5 mt-5 max-w-max md:mt-6  `}
+          onePost ? "shadow-md" : "shadow-lg" 
+        } bg-[#F3F3F6]    shadow-gray-400 rounded-md p-3 mb-5 mt-5 max-w-max  w-10/12 mx-auto md:mt-6  `}
       >
         <div className="flex gap-3 ">
           <div>
@@ -142,10 +142,10 @@ const [block,setBlock]=useState(post?.status)
               </OutsideClickHandler>
             </div>
         </div>
-        <div>
-          <p className="my-1 max-w-6xl text-sm">{post?.description} </p>
+        <div className="w-full">
+          <p className="my-1 text-sm break-all">{post?.description} </p>
           <div className="rounded-md overflow-hidden w-full">
-          <video className="w-full " controls>
+          <video className="w-full object-cover max-h-96 mb-5" width="400" controls>
                  <source src={post?.shorts} />
             </video>
           </div>

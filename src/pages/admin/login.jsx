@@ -1,6 +1,5 @@
 import React from 'react';
 import AdminLogin from '../../components/Admin/AdminLogin/AdminLogin';
-import AdminPublicRoute from "../../components/Admin/Routes/AdminPublicRoute"
 
 function AdminLoginPage() {
   return (

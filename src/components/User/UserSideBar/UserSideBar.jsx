@@ -309,9 +309,9 @@ const UserSideBar = () => {
             </div>
           </div>
         </div>
+      </div>
         {showModal && <AddPost setAddPost={setShowModal} />}
         {shortsModal && <UploadShorts setShortsModal={setShortsModal} />}
-      </div>
     </>
   );
 };

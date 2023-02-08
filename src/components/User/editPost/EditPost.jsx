@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { editPost } from "../../../Api/userApi/postRequest";
 import { AddPostActions } from "../../../redux/AddPost";
 
-const EditPost = ({ setEditPost, img, description, postId }) => {
+const EditPost = ({ setEditPost,shorts, img, description, postId }) => {
   const dispatch = useDispatch();
   const [newDescription, setNewDescription] = useState(description);
   const submitHandler = async () => {
@@ -32,9 +32,10 @@ const EditPost = ({ setEditPost, img, description, postId }) => {
                     {/* {message} */}
                   </span>
                   <div className="rounded-md overflow-hidden w-full">
-                    <video className="w-full" controls>
+                    {shorts?<video className="w-full" controls>
                       <source src={img} />
-                    </video>
+                    </video>:<img src={img} alt="" />}
+                    
                   </div>
                 </div>
                 <label className="ml-2">Description</label>

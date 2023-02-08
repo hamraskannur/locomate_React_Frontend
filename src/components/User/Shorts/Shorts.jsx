@@ -313,7 +313,7 @@ function Post({ post, onePost }) {
         <div>
           <p className="my-1 break-all text-sm">{post?.description} </p>
           <div className="rounded-md overflow-hidden w-full">
-          <video className="w-full" controls>
+          <video  className="w-full object-cover max-h-96 mb-5" width="400" controls>
                  <source src={post?.shorts} />
             </video>
           </div>
@@ -366,7 +366,7 @@ function Post({ post, onePost }) {
               <Comments postId={post?._id} setCount={setCount} count={count} />
             )}
           </div>
-       {editPost && <EditPost img={post?.shorts} description={post?.description} postId={post?._id} setEditPost={setEditPost}/>}
+       {editPost && <EditPost img={post?.shorts} shorts={true} description={post?.description} postId={post?._id} setEditPost={setEditPost}/>}
       {report && <ReportPost video={false} setReport={setReport} postId={post?._id}/>}
       </div>
     </>

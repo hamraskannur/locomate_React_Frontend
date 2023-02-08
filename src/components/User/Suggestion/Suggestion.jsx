@@ -22,10 +22,10 @@ const Suggestion = ({ user }) => {
 };
   return (
     <>
-      <div className="flex items-center gap-2 py-2 m-4 px-2 hover:bg-[#bbc0c7] hover:scale-105">
-        <div>
+      <div onClick={()=>getAccountPage( user._id)} className="flex items-center gap-2 py-2 m-4 px-2 hover:bg-[#bbc0c7] hover:scale-105">
+        <div className='cursor-pointer'>
           <Avatar
-          onClick={()=>getAccountPage( user._id)}
+          
             img={
               user.ProfileImg
                 ? user.ProfileImg
@@ -33,7 +33,7 @@ const Suggestion = ({ user }) => {
             }
           />
         </div>
-        <div onClick={()=>getAccountPage( user._id)} className="px-2 font-semibold">
+        <div  className="px-2 font-semibold cursor-pointer">
           <h2> {user.username}</h2>
           <p className="text-gray-400 text-sm p-0">{user.name}</p>
         </div>
@@ -59,7 +59,7 @@ const Suggestion = ({ user }) => {
         )}
         <div className="ml-auto ">
           <button className="text-white bg-slate-700 p-1 rounded-md px-2 ml-5">
-            Follow
+            Go To profile
           </button>
         </div>
       </div>

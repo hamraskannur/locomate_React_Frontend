@@ -4,6 +4,8 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { addPost } from '../../../Api/userApi/postRequest';
 import { AddPostActions } from '../../../redux/AddPost'
 import S3 from "aws-sdk/clients/s3";
+import { errorToast, successToast } from '../../Toast/Toast';
+import { hideLoading, showLoading } from "../../../redux/loadingBar";
 
 export default function UploadPhoto({ AddPost, setAddPost }) {
   const [files, setFile] = useState([]);
@@ -47,7 +49,9 @@ export default function UploadPhoto({ AddPost, setAddPost }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    
     if (files.length > 0) {
+      dispatch(showLoading());
       files.forEach((file) => {
         const reader = new FileReader();
         reader.readAsArrayBuffer(file);
@@ -66,6 +70,7 @@ export default function UploadPhoto({ AddPost, setAddPost }) {
             });
         };
       });
+
       let object = {
         imageLinks: ImageLinks,
         description: description,
@@ -76,11 +81,18 @@ export default function UploadPhoto({ AddPost, setAddPost }) {
         setImageLinks([])
         object.imageLinks=null
         object.description=null
+        dispatch(hideLoading());
        await  dispatch(AddPostActions.postAdd())
+       successToast('successfully uploaded post ')
         setAddPost(false)
       }else{
+        dispatch(hideLoading());
+        errorToast("upload video failed")
         setMessage("err");
       }
+      }else{
+        dispatch(hideLoading());
+
       }
     } else {
       setMessage("select your images");

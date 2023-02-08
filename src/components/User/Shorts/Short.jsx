@@ -3,6 +3,7 @@ import Shorts from "./Shorts";
 import {  useDispatch, useSelector } from "react-redux";
 import { getAllVideo } from "../../../Api/userApi/videoRequest";
 import { hideLoading, showLoading } from "../../../redux/loadingBar";  
+import { AddPostActions } from '../../../redux/AddPost'
 
 const GetShorts = () => {
   const [posts, setPosts] = useState([]);
@@ -16,6 +17,8 @@ const GetShorts = () => {
       setPosts(newPost);
     };
     getPost();
+    dispatch(AddPostActions.Update())
+
   }, [update===true]);
 
   return (

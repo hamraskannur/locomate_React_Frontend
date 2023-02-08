@@ -14,7 +14,10 @@ function AdminProtectRouter(props) {
   if (admin) {
     return props.children;
   }
+  if (!localStorage.getItem("adminToken")) {
+
   return <Navigate to="/admin/login" />;
+  }
 }
 
 export default AdminProtectRouter;

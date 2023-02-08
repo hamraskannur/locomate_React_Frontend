@@ -3,6 +3,7 @@ import { getAllPosts } from "../../../Api/userApi/postRequest";
 import Posts from "./Posts";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoading, showLoading } from "../../../redux/loadingBar";  
+import { AddPostActions } from '../../../redux/AddPost'
 
 const Post = () => {
 
@@ -22,7 +23,8 @@ const Post = () => {
     };
     getPost();
     dispatch(hideLoading());
-  }, [update]);
+      dispatch(AddPostActions.Update())
+  }, [update===true]);
 
   return (
     <>

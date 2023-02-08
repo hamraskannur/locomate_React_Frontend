@@ -5,6 +5,7 @@ import User from "./Routes/User";
 import Admin from "./Routes/Admin";
 import { useSelector } from "react-redux";
 import Spinner from "./components/User/Spinner/Spinner";
+import ToastContainer from "./components/Toast/ToastContainer";
 
 function App() {
   const { loading } = useSelector((state) => state.loader);
@@ -12,9 +13,14 @@ function App() {
   return (
     <div>
       <Router>
-        {loading && <div className=" h-screen "><Spinner /></div>}
+        {loading && (
+          <div className=" h-screen ">
+            <Spinner />
+          </div>
+        )}
         {!loading && (
           <>
+          <ToastContainer/>
             <Routes>
               <Route path="/*" element={<User />} />
             </Routes>
