@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import User from "./Routes/User";
 import Admin from "./Routes/Admin";
-import ErrorPage from './Routes/ErrorPage'
 import { useSelector } from "react-redux";
 import Spinner from "./components/User/Spinner/Spinner";
 import ToastContainer from "./components/Toast/ToastContainer";
@@ -28,7 +27,7 @@ function App() {
             <Routes>
               <Route path="/admin/*" element={<Admin />} />
             </Routes>
-          
+            
           </>
         )}
       </Router>

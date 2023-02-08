@@ -9,13 +9,10 @@ const AllUser = ({ data, currentUserId, onlineUsers }) => {
   useEffect(() => {
     const userId = data.members.find((id) => id != currentUserId);
     const getUserData = async () => {
-   try{
 
      const data = await getFriendsAccount(userId);
      setUserData(data[0]);
-    }catch(error){
-      navigate('*');
-    }
+   
     };
     getUserData();
   }, []);

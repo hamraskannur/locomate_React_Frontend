@@ -46,7 +46,7 @@ const Chat = ({
   useEffect(() => {
     const fetchMessage = async () => {
       try {
-        const data = await getMessages(chat._id);
+        const data = await getMessages(chat?._id);
         setMessages(data);
       } catch (error) {
         navigate('*');

@@ -2,14 +2,12 @@ import React from "react";
 import NavBar from "../../components/User/NavBar/NavBar";
 import Message from "../../components/User/Messages/Message";
 import UserSideBar from "../../components/User/UserSideBar/UserSideBar";
-import UserProtectRouter from "../../components/User/Routes/UserProtectRouter";
 import BottomBar from "../../components/User/BottomBar/BottomBar";
 
 const MessagesPage = () => {
 
 
   return (
-     
        <div className="bg-[#F3F3F6]">
         <NavBar />
         <div className="flex ">
