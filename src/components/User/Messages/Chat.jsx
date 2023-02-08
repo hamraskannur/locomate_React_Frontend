@@ -3,7 +3,7 @@ import { AddMessage, getMessages } from "../../../Api/userApi/chatRequest";
 import { getFriendsAccount } from "../../../Api/userApi/postRequest";
 import Moment from "react-moment";
 import { IoMdArrowBack } from "react-icons/io";
-import InputEmoji from "react-input-emoji";
+// import InputEmoji from "react-input-emoji";
 import { useNavigate } from "react-router-dom";
 
 const Chat = ({
@@ -164,13 +164,13 @@ const Chat = ({
             <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full lg:px-2">
               <div className="flex-grow ml-4">
                 <div className="relative w-full">
-                  <InputEmoji
+                  {/* <InputEmoji
                     value={newMessages}
                     onChange={changeMessage}
                     cleanOnEnter
                     onEnter={handlePostMessage}
                     placeholder="Type"
-                  />
+                  /> */}
                 </div>
               </div>
               <div className="ml-4">

@@ -8,7 +8,7 @@ import {
 } from "../../../Api/userApi/postRequest";
 import { useSelector } from "react-redux";
 import ReplayComment from "./ReplayComment";
-import InputEmoji from "react-input-emoji";
+// import InputEmoji from "react-input-emoji";
 import { useNavigate } from "react-router-dom";
 
 const Comment = ({ comment }) => {
@@ -83,6 +83,7 @@ const Comment = ({ comment }) => {
        navigate('*');
     }
   };
+  // "react-input-emoji": "^4.3.0",
   return (
     <>
       <div className="flex comment mt-0 p-2 border-slate-300 rounded-full ">
@@ -141,13 +142,13 @@ const Comment = ({ comment }) => {
             <>
               <div className="flex mt-2 gap-3 ">
                 <div className="border-none ml-0 z-50 grow rounded-full">
-                  <InputEmoji
+                  {/* <InputEmoji
                     value={newComment}
                     onChange={changeComment}
                     cleanOnEnter
                     onEnter={handlePostReplayComment}
                     placeholder="Type"
-                  />
+                  /> */}
                 </div>
                 <img
                   onClick={handlePostReplayComment}
