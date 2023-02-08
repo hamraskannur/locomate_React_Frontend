@@ -59,7 +59,7 @@ const Suggestion = ({ user }) => {
         )}
         <div className="ml-auto ">
           <button className="text-white bg-slate-700 p-1 rounded-md px-2 ml-5">
-            Go To profile
+            GoToprofile
           </button>
         </div>
       </div>
