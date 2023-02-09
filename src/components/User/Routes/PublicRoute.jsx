@@ -20,11 +20,7 @@ function PublicRoute(props) {
                 user: userData[0],
               })
             );
-          } else {
-            localStorage.clear();
-            dispatch(userActions.userLogout());
-            navigate("/login");
-          }
+          } 
         } catch (error) {
           navigate("*");
         }

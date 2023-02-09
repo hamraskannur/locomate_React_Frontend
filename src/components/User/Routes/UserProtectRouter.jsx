@@ -19,10 +19,6 @@ function UserProtectRouter(props) {
             })
           );
 
-        }else{
-          localStorage.clear();
-          dispatch(userActions.userLogout());
-          navigate("/login");
         }
         }
     }
