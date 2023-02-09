@@ -4,7 +4,7 @@ import { AiFillLike } from "react-icons/ai";
 
 import { useSelector } from "react-redux";
 import ReplayComment from "./ReplayComment";
-import InputEmoji from "react-input-emoji";
+// import InputEmoji from "react-input-emoji";
 import { useNavigate } from "react-router-dom";
 import { getReplayComment } from "../../../Api/adminApi/PostRequest";
 
