@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Avatar from "./Avatar";
 import { postComment, getComments } from "../../../Api/userApi/postRequest";
-// import InputEmoji from "react-input-emoji";
+import InputEmoji from "react-input-emoji";
 import Comment from "./Comment";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -55,13 +55,13 @@ function Comments({ postId, setCount, count }) {
         </div>
 
         <div className="border-none ml-0  grow rounded-full">
-          {/* <InputEmoji
+          <InputEmoji
             value={newComment}
             onChange={changeComment}
             cleanOnEnter
             onEnter={handlePostComment}
             placeholder="Type"
-          /> */}
+          />
         </div>
         <img
           onClick={handlePostComment}

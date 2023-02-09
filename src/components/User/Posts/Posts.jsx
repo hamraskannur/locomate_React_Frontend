@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-// import OutsideClickHandler from "react-outside-click-handler";
+import OutsideClickHandler from "react-outside-click-handler";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
@@ -170,11 +170,11 @@ function Post({ post, onePost }) {
                   />
                 </svg>
               </button>
-              {/* <OutsideClickHandler
+              <OutsideClickHandler
                 onOutsideClick={() => {
                   setDropdownOpen(false);
                 }}
-              > */}
+              >
                 <div className="relative">
                   {dropdownOpen && !currentUser && (
                     <div className="cursor-pointer absolute right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
@@ -327,7 +327,7 @@ function Post({ post, onePost }) {
                     </div>
                   )}
                 </div>
-              {/* </OutsideClickHandler> */}
+              </OutsideClickHandler>
             </div>
         </div>
         <div>
