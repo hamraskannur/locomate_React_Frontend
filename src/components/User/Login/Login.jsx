@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/no-unescaped-entities */
+
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../../redux/userAuth";

@@ -3,7 +3,6 @@ import NavBar from "../../components/User/NavBar/NavBar";
 import Post from "../../components/User/Posts/Post";
 import Suggestions from "../../components/User/Suggestions/Suggestions";
 import UserSideBar from "../../components/User/UserSideBar/UserSideBar";
-import UserProtectRouter from "../../components/User/Routes/UserProtectRouter";
 import BottomBar from "../../components/User/BottomBar/BottomBar";
 
 function Home() {

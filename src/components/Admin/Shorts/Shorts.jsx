@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 // import OutsideClickHandler from "react-outside-click-handler";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
