@@ -35,7 +35,7 @@ function User() {
         <Route exact path='/settings' element={<UserProtectRouter><Settings/> </UserProtectRouter>} />
         <Route exact path='/notifications' element={<UserProtectRouter><Notification/> </UserProtectRouter>} />
         <Route exact path='/search' element={<UserProtectRouter><Search/> </UserProtectRouter>} />
-        <Route path="/*" element={<Page />} />
+        {/* <Route path="/*" element={<Page />} /> */}
       </Routes>
     </>
   );
