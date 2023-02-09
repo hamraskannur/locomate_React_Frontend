@@ -11,7 +11,7 @@ import EditProfilePage from '../pages/user/EditProfile';
 import VerifyPage from '../pages/user/VerifyPage';
 import UserProtectRouter from '../components/User/Routes/UserProtectRouter'
 import PublicRoute from '../components/User/Routes/PublicRoute'
-import Shorts from '../pages/user/shorts'
+import Shorts from '../pages/user/Shorts'
 import Settings from '../pages/user/Settings';
 import Notification from '../pages/user/Notification'
 import Search from '../pages/user/Search';
