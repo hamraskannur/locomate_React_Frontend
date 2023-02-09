@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import React from 'react';
 import Home from '../pages/user/Home'
-import Signup from '../pages/user/Signup';
+// import Signup from '../pages/user/Signup';
 import MyAccountPage from '../pages/user/MyAccount';
 import MessagesPage from '../pages/user/Messages';
 import Login from '../pages/user/Login';
@@ -23,7 +23,7 @@ function User() {
 
       <Routes>
         <Route  path="/" element={<UserProtectRouter> <Home /> </UserProtectRouter>} />
-        <Route exact path="/signup" element={<PublicRoute> <Signup /></PublicRoute>} />
+        {/* <Route exact path="/signup" element={<PublicRoute> <Signup /></PublicRoute>} /> */}
         <Route exact path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route exact path="/myAccount" element={<UserProtectRouter><MyAccountPage/> </UserProtectRouter>} />
         <Route exact path="/messages" element={<UserProtectRouter><MessagesPage /></UserProtectRouter>} />
