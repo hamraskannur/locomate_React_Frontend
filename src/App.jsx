@@ -40,3 +40,7 @@ export default App;
 
 
 
+
+// # "react-outside-click-handler": "^1.3.0",
+
+// # "react-input-emoji": "^4.3.0",

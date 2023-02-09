@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import OutsideClickHandler from "react-outside-click-handler";
+// import OutsideClickHandler from "react-outside-click-handler";
 import React, { useState } from "react";
 import Moment from "react-moment";
 import Comments from "./Comments";
@@ -90,11 +90,11 @@ const [block,setBlock]=useState(post?.status)
                   />
                 </svg>
               </button>
-              <OutsideClickHandler
+              {/* <OutsideClickHandler
                 onOutsideClick={() => {
                   setDropdownOpen(false);
                 }}
-              >
+              > */}
                 <div className="relative">
                   {dropdownOpen && (
                     <>{block ?<div onClick={()=>submitBlockPost(post._id)} className="cursor-pointer absolute right-6 border border-gray-300 bg-white shadow-md shadow-gray-100 p-3 rounded-md w-36">
@@ -120,7 +120,7 @@ const [block,setBlock]=useState(post?.status)
                       </div>}</>
                   )}
                 </div>
-              </OutsideClickHandler>
+              {/* </OutsideClickHandler> */}
             </div>
           }
         </div>
