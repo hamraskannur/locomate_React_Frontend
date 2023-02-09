@@ -19,7 +19,7 @@ function NavBar() {
     <div className="z-50 flex justify-between bg-heavy-metal-800 shadow-md w-full bg-slate-700 h-16 shadow-heavy-metal-400 p-4 top-0 sticky">
       <Link to="/">
         <h2 className="ml-5 font-bold text-white text-2xl max-sm:text-xl cursor-pointer">
-          GatherUnite
+        Locomate
         </h2>
       </Link>
       <div className=" flex gap-3  items-center">
