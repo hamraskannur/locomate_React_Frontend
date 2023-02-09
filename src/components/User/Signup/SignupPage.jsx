@@ -13,7 +13,7 @@ import {
   submitHandler,
 } from "./functions";
 
-const SignupPage =async ()=> {
+const SignupPage = ()=> {
   const navigate = useNavigate()  
   const [passwordShown, setPasswordShown] = useState(false);
   const [repeatPasswordShown, setRepeatPasswordShown] = useState(false);
