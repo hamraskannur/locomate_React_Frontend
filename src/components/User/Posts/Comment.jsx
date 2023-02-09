@@ -83,11 +83,10 @@ const Comment = ({ comment }) => {
        navigate('*');
     }
   };
-  // "react-input-emoji": "^4.3.0",
   return (
     <>
       <div className="flex comment mt-0 p-2 border-slate-300 rounded-full ">
-        <div className="cursor-pointer rounded-full h-9 w-9 overflow-hidden border-slate-700 cursor-pointer">
+        <div className="cursor-pointer rounded-full h-9 w-9 overflow-hidden border-slate-700 cur">
           <img
           onClick={()=>getUserAccount(comment.userId)}
             src={
