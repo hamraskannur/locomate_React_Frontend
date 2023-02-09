@@ -15,7 +15,7 @@ import Shorts from '../pages/user/Shorts'
 import Settings from '../pages/user/Settings';
 import Notification from '../pages/user/Notification'
 import Search from '../pages/user/Search';
-import Page from '../pages/user/404page';
+// import Page from '../pages/user/404page';
 
 function User() {
   return (
