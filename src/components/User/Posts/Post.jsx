@@ -36,7 +36,7 @@ const Post = () => {
     <>
     <div className="bg-[#F3F3F6] ">
       
-      {posts.map((post) => (
+      {posts.length>0 &&  posts.map((post) => (
         <>
        {(post?.userId?.public || post?.userId?.Followers.includes(userId)  ) && post.status && <Posts post={post} key={post?._id} onePost={false} />}
        </>
