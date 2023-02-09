@@ -48,7 +48,7 @@
 
     "react-router-dom": "^6.6.1",
 
-    "react-scripts": "^2.1.3",
+    "react-scripts": "^5.0.1",
 
     "react-toastify": "^9.1.1",
 
@@ -69,8 +69,6 @@
     "build": "react-scripts build"
 
   },
-
- 
 
   "browserslist": {
 
