@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React,{ useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   showPassword,
@@ -13,7 +13,7 @@ import {
   submitHandler,
 } from "./functions";
 
-function Signup() {
+const SignupPage =async ()=> {
   const navigate = useNavigate()  
   const [passwordShown, setPasswordShown] = useState(false);
   const [repeatPasswordShown, setRepeatPasswordShown] = useState(false);
@@ -30,6 +30,8 @@ function Signup() {
   const [verify, setVerify] = useState("");
 
   const signupHandler = (event) => {
+    try{
+
     submitHandler(
       event,
       enteredName,
@@ -49,6 +51,10 @@ function Signup() {
       setVerify,
       setErrMessage
     );
+    
+  }catch(error){
+    navigate('*')
+  }
   };
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 p-3">
@@ -285,4 +291,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignupPage;
