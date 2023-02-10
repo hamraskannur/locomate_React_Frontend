@@ -106,7 +106,7 @@ export default function UploadPhoto({ AddPost, setAddPost }) {
     <>
       
         <>
-          <div className="m-5 md:m-0 justify-center w-full items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="mx-5 md:m-0 justify-center w-full items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
                 {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -125,7 +125,7 @@ export default function UploadPhoto({ AddPost, setAddPost }) {
                   </button>
                 </div>
                 {/*body*/}
-                <div className="flex  mt-5 max-sm:w-full max-md:w-full max-lg:w-full  w-[55vh]  px-3 ">
+                <div className="flex  mt-5 max-sm:w-full max-md:w-full max-lg:w-full  w-[60vh]  px-3 ">
                   <div className="rounded-lg shadow-xl bg-gray-50 w-full ">
                     <div className="m-4">
                       <span className="flex justify-center items-center text-[12px] mb-1 text-red-500">
