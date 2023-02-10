@@ -23,6 +23,7 @@ function Admin() {
         <Route path='/userProfile' element={<AdminProtectRouter><OneUser /> </AdminProtectRouter>} />
         <Route path='/notifications' element={<AdminProtectRouter><Notifications /> </AdminProtectRouter>} />
         <Route path='/allPost' element={<AdminProtectRouter><AllPost /> </AdminProtectRouter>} />
+        
       </Routes>
     </>
   );

@@ -6,6 +6,7 @@ import Admin from "./Routes/Admin";
 import { useSelector } from "react-redux";
 import Spinner from "./components/User/Spinner/Spinner";
 import ToastContainer from "./components/Toast/ToastContainer";
+import ErrorPage from './pages/user/404page'
 
 function App() {
   const { loading } = useSelector((state) => state.loader);
@@ -20,15 +21,17 @@ function App() {
         )}
         {!loading && (
           <>
-          <ToastContainer/>
+            <ToastContainer />
             <Routes>
               <Route path="/*" element={<User />} />
             </Routes>
             <Routes>
               <Route path="/admin/*" element={<Admin />} />
             </Routes>
+            {/* <Routes>
+              <Route path="*" element={<ErrorPage />} />
+            </Routes> */}
           </>
-
         )}
       </Router>
     </div>
@@ -36,7 +39,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
