@@ -125,7 +125,7 @@ export default function UploadPhoto({ AddPost, setAddPost }) {
                   </button>
                 </div>
                 {/*body*/}
-                <div className="flex  mt-5 max-sm:w-full max-md:w-full max-lg:w-full   w-[60vh]  px-3 ">
+                <div className="flex  mt-5 max-sm:w-full max-md:w-full max-lg:w-full  w-[55vh]  px-3 ">
                   <div className="rounded-lg shadow-xl bg-gray-50 w-full ">
                     <div className="m-4">
                       <span className="flex justify-center items-center text-[12px] mb-1 text-red-500">
