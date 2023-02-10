@@ -16,7 +16,7 @@ const Suggestion = ({ user }) => {
       navigate("/myAccount");
     } else {
       
-      navigate('/FriendsAccount',{ state: { userId: user,  }} );
+      navigate('/friendsAccount',{ state: { userId: user,  }} );
     }
   
 };

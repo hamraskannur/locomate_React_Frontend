@@ -11,7 +11,7 @@ const Card = ({ data, functionName, button, request, deleteReq }) => {
     if (userId === user) {
       navigate("/myAccount");
     } else {
-      navigate("/FriendsAccount", { state: { userId: user } });
+      navigate("/friendsAccount", { state: { userId: user } });
     }
   };
  

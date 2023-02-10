@@ -18,11 +18,7 @@ const BottomBar = () => {
     { name: "Messages", link: "/messages", icon: BiMessageSquareDetail },  
     { name: "settings", link: "/notifications", icon:  MdOutlineNotifications},
   ];
-  const logOut = (e) => {
-    localStorage.clear();
-    dispatch(userActions.userLogout());
-    navigate("/user/login");
-  };
+ 
   return (
     <>
     <div className="border-t-2 flex px-4 py-2 justify-between border-slate-700 bg-white bottom-0 h-14 fixed w-full">

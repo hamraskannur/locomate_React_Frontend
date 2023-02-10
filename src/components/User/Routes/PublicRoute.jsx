@@ -10,9 +10,9 @@ function PublicRoute(props) {
   useEffect(() => {
     const routerFunction = async () => {
       if (localStorage.getItem("token")) {
-        try {
+        try { 
           let userData = await getMyProfile();
-          console.log(userData);
+          console.log(userData,"this is my profile");
           if (userData.length > 0) {
             dispatch(
               userActions.userAddDetails({

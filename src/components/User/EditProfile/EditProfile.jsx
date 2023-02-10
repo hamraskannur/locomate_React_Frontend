@@ -28,7 +28,6 @@ const EditProfile = () => {
       try{
         user = await getUserData();
         setUserData(user[0]);
-
       }catch(error){
         navigate('*');
       }

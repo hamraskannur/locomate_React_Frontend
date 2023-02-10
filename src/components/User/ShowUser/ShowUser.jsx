@@ -30,10 +30,11 @@ const ShowUser = ({ type, userId }) => {
   }, [type, userId]);
 
   const goToAccountPage = (userId) => {
+    console.log(userId+" === "+user);
     if (userId === user) {
       navigate("/myAccount");
     } else {
-      navigate("/FriendsAccount", { state: { userId: user } });
+      navigate("/friendsAccount", { state: { userId: userId } });
     }
   };
   return (
@@ -43,7 +44,7 @@ const ShowUser = ({ type, userId }) => {
           <h2 className="font-bold text-xl mb-4">{type}</h2>
         </div>
         {users?.map((user) => (
-          <div>
+          <div key={user?.result?._id}>
             <div className="border-b p-4 -mx-4 border-b-heavy-metal-300 hover:bg-snow-drift-100">
               <div className="flex gap-3">
                 <div

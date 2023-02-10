@@ -18,7 +18,6 @@ function UserProtectRouter(props) {
               user: userData[0],
             })
           );
-
         }
         }
     }

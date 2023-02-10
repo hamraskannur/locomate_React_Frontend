@@ -27,7 +27,7 @@ function User() {
         <Route exact path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route exact path="/myAccount" element={<UserProtectRouter><MyAccountPage/> </UserProtectRouter>} />
         <Route exact path="/messages" element={<UserProtectRouter><MessagesPage /></UserProtectRouter>} />
-        <Route exact path='/FriendsAccount' element={<UserProtectRouter><FriendsAccountPage /> </UserProtectRouter>} />
+        <Route exact path='/friendsAccount' element={<UserProtectRouter><FriendsAccountPage /> </UserProtectRouter>} />
         <Route exact path="/friends" element={<UserProtectRouter> <FriendsPage /> </UserProtectRouter>} />
         <Route exact path="/editProfile" element={<UserProtectRouter> <EditProfilePage /> </UserProtectRouter>} />
         <Route exact path="/verify" element={<PublicRoute><VerifyPage /></PublicRoute>} />

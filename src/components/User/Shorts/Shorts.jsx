@@ -49,7 +49,7 @@ function Post({ post, onePost }) {
         navigate("/myAccount");
       } else {
         
-        navigate('/FriendsAccount',{ state: { userId: user,  }} );
+        navigate('/friendsAccount',{ state: { userId: user,  }} );
       }
     
   };
