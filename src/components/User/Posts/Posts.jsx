@@ -124,7 +124,7 @@ function Post({ post, onePost }) {
       <div
         className={`${
           onePost ? "shadow-md" : "shadow-lg"
-        } bg-white    shadow-gray-400 rounded-md p-3 mx-5 mb-5 mt-5  md:mt-6  `}
+        } bg-white    shadow-gray-400 rounded-md md:p-3 mx-5 mb-5 mt-5  md:mt-6  `}
       >
         <div className="flex gap-3 ">
           <div>
