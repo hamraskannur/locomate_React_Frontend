@@ -42,10 +42,10 @@ const AllPost = ({ userId, type, postCount, SavedPost,setOnePostId }) => {
       <hr />
       <div className="grid grid-cols-3 gap-3 mt-5 ">
         {posts?.map((post) => (
-          <div key={post._id}  onClick={SavedPost?() => getSavedOnePost(post.post,post.userId):() => getOnePost(post)}>
+          <div key={post._id}  onClick={() => {SavedPost?getSavedOnePost(post?.post,post?.userId): getOnePost(post)}}>
             <img
               className="rounded-md overflow-hidden h-48 flex items-center object-cover"
-              src={SavedPost?post.post.img[0]:post?.img[0]}
+              src={SavedPost?post?.post?.img[0]:post?.img[0]}
               alt="posts"
             />
           </div>
