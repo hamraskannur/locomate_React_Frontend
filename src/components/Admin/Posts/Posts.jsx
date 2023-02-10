@@ -19,7 +19,7 @@ const [block,setBlock]=useState(post?.status)
   const getAccountPage = async (userId) => {
     navigate("/admin/userProfile", { state: { userId: userId } });
   };
-  const submitBlockPost = async (postId) => {
+  const submitBlockPostApi = async (postId) => {
     try{
       const status = false
       await blockPost({postId, status});
@@ -29,7 +29,7 @@ const [block,setBlock]=useState(post?.status)
       navigate('/admin/*');
     }
   };
-  const submitUnblockPost = async (postId) => {
+  const submitUnblockPostApi = async (postId) => {
     try{
 
       const status = true
@@ -39,12 +39,43 @@ const [block,setBlock]=useState(post?.status)
       navigate('/admin/*');
     }
   };
+  const submitUnblockPost = (postId) => {
+    confirmAlert({
+      title: 'Confirm to ',
+      message: 'Are you delete your post.',
+      buttons: [
+        { 
+          label: 'Yes',
+          onClick: () => {submitUnblockPostApi(postId)}
+        },
+        {
+          label: 'No',
+        }
+      ]
+    });
+  };
+  
+ const submitBlockPost = (postId) => {
+  confirmAlert({
+    title: 'Confirm to ',
+    message: 'Are you delete your post.',
+    buttons: [
+      { 
+        label: 'Yes',
+        onClick: () => {submitBlockPostApi(postId)}
+      },
+      {
+        label: 'No',
+      }
+    ]
+  });
+};
   return (
     <>
       <div
         className={`${
           onePost ? "shadow-sm" : "shadow-lg"
-        } bg-white    shadow-gray-400 rounded-md p-4 mb-5  w-7/12 mx-auto  `}
+        } bg-white  shadow-gray-400 rounded-md p-4 mb-5  w-7/12 mx-auto  `}
       >
         <div className="flex gap-3">
           <div>

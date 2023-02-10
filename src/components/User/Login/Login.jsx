@@ -155,12 +155,12 @@ function Login() {
                   <small className=" text-red-600">{ErrMessage}</small>
                 )}
                 <div className="relative ">
-                  <button
+                  {/* <button
                     type="button"
                     className=" text-sm text-slate-900 cursor-pointer"
                   >
                     forgot your password?
-                  </button>
+                  </button> */}
                   <br />
                   <button
                     type="button"
