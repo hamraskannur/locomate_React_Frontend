@@ -11,12 +11,9 @@ const SearchResults = ({ searchResults }) => {
       navigate("/FriendsAccount", { state: { userId: user } });
     }
   };
-  const Active =
-    "font-bold border-b-2 border-heavy-metal-900 border-opacity-30 bg-snow-drift-400 py-1 px-2 rounded-t-lg cursor-pointer";
-  const inActive =
-    "font-bold border-b-2 border-heavy-metal-900 border-opacity-30 hover:bg-snow-drift-200 py-1 px-2 hover:border-none rounded-t-lg cursor-pointer";
+
   return (
-    <div className="bg-white mx-auto">
+    <div className="bg-white ml-5">
       
       <div className="px-5">
         {searchResults.length !== 0 ? (

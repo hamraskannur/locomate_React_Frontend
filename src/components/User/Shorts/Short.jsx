@@ -29,7 +29,7 @@ const GetShorts = () => {
   }, [update===true]);
 
   return (
-    <div className="mb-5">
+    <div className="mb-10">
 
       {posts.map((post) => (
         <>
