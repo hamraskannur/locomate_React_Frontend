@@ -88,7 +88,7 @@ const Comment = ({ comment }) => {
   return (
     <>
       <div className="flex comment mt-0 p-2 border-slate-300 rounded-full ">
-        <div onClick={()=>getUserAccount(comment?.userId)}  className="cursor-pointer rounded-full h-9 w-9 overflow-hidden border-slate-700 cursor-pointer">
+        <div onClick={()=>getUserAccount(comment?.userId)}  className=" rounded-full h-9 w-9 overflow-hidden border-slate-700 cursor-pointer">
           <img
             src={
               comment?.ProfileImg
