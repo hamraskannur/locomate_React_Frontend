@@ -34,7 +34,7 @@ const Post = () => {
 
   return (
     <>
-    <div className="bg-[#F3F3F6] ">
+    <div className="bg-[#F3F3F6] mb-5 ">
       
       {posts.length>0 &&  posts.map((post) => (
         <>

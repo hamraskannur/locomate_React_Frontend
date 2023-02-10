@@ -29,14 +29,15 @@ const GetShorts = () => {
   }, [update===true]);
 
   return (
-    <>
+    <div className="mb-5">
+
       {posts.map((post) => (
         <>
        { (post?.userId?.public || post?.userId?.Followers.includes(userId)  ) && post.status && <Shorts post={post} key={post?._id} onePost={false} />}
        </>
 
-        ))}
-        </>
+))}
+</div>
   );
 };
 
