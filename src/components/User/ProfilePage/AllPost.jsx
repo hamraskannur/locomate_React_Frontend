@@ -12,7 +12,6 @@ const AllPost = ({ userId, type, postCount, SavedPost,setOnePostId }) => {
     const getPost = async () => {
       if (SavedPost) {
           const response= await getSavedPost(userId)
-          console.log(response,55555555);
           setPosts(response)
 
         } else {
@@ -46,8 +45,7 @@ const AllPost = ({ userId, type, postCount, SavedPost,setOnePostId }) => {
           <div key={post._id}  onClick={SavedPost?() => getSavedOnePost(post.post,post.userId):() => getOnePost(post)}>
             <img
               className="rounded-md overflow-hidden h-48 flex items-center object-cover"
-              // src={SavedPost?post.post.img[0]:post?.img[0]}
-              src="https://freepngimg.com/thumb/photography/59850-and-instagram-photography-black-logo-white.png  "
+              src={SavedPost?post.post.img[0]:post?.img[0]}
               alt="posts"
             />
           </div>
