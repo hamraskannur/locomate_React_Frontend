@@ -16,7 +16,7 @@ const SearchResults = ({ searchResults }) => {
   const inActive =
     "font-bold border-b-2 border-heavy-metal-900 border-opacity-30 hover:bg-snow-drift-200 py-1 px-2 hover:border-none rounded-t-lg cursor-pointer";
   return (
-    <div className="bg-white">
+    <div className="bg-white mx-auto">
       
       <div className="px-5">
         {searchResults.length !== 0 ? (
