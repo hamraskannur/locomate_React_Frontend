@@ -103,7 +103,7 @@ const Chat = ({
                       {React.createElement(IoMdArrowBack, { size: "20" })}
                     </div>
                     <img
-                      src={userData?.ProfileImg}
+                      src={userData?.ProfileImg?userData.ProfileImg:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"}
                       className="lg:ml-0 ml-2 object-cover h-10 w-10 rounded-full "
                       alt=""
                     />
