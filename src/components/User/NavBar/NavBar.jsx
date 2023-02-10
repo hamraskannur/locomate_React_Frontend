@@ -7,6 +7,7 @@ import { FaBars } from "react-icons/fa";
 import AddPost from "../UploadPhoto/UploadPhoto";
 import { useSelector } from "react-redux";
 import UploadShorts from "../UploadShorts/UploadShorts";
+import OutsideClickHandler from "react-outside-click-handler";
 
 function NavBar() {
   const [showModal, setShowModal] = useState(false);
@@ -19,7 +20,7 @@ function NavBar() {
     <div className="z-50 flex justify-between bg-heavy-metal-800 shadow-md w-full bg-slate-700 h-16 shadow-heavy-metal-400 p-4 top-0 sticky">
       <Link to="/">
         <h2 className="ml-5 font-bold text-white text-2xl max-sm:text-xl cursor-pointer">
-        Locomate
+          Locomate
         </h2>
       </Link>
       <div className=" flex gap-3  items-center">
@@ -42,21 +43,25 @@ function NavBar() {
             </div>
           </div>
         </Link>
-          <div
-            onClick={() => {
-              setAddPost(!addPost);
-            }}
-          >
-            <h1 className="hidden max-sm:inline-block   text-white ml-0">
-              {React.createElement(BsFillPlusSquareFill, { size: "25" })}
-            </h1>
-          </div>
-          <div onClick={() => setShowToggle(!showToggle)}>
-            <h1 className="hidden max-sm:inline-block   text-white ml-0">
-              {React.createElement(FaBars, { size: "25" })}
-            </h1>
-          </div>
-
+        <div
+          onClick={() => {
+            setAddPost(!addPost);
+          }}
+        >
+          <h1 className="hidden max-sm:inline-block   text-white ml-0">
+            {React.createElement(BsFillPlusSquareFill, { size: "25" })}
+          </h1>
+        </div>
+        <div onClick={() => setShowToggle(!showToggle)}>
+          <h1 className="hidden max-sm:inline-block   text-white ml-0">
+            {React.createElement(FaBars, { size: "25" })}
+          </h1>
+        </div>
+        <OutsideClickHandler
+          onOutsideClick={() => {
+            setShowToggle(false);
+          }}
+        >
           {showToggle && (
             <div className=" w-40 mr-2 rounded-md  ml-auto mt-14 border-2 h-24 bg-white fixed overflow-x-hidden overflow-y-auto  inset-0 z-50 outline-none focus:outline-none">
               <Link
@@ -79,27 +84,31 @@ function NavBar() {
               </Link>
             </div>
           )}
-
-          {addPost && (
-            <div className=" w-40 mr-2  ml-auto mt-14 border-2 h-20 bg-white fixed overflow-x-hidden overflow-y-auto  inset-0 z-50 outline-none focus:outline-none">
-              <div
-                onClick={() => setShowModal(!showModal)}
-                className="group flex items-center justify-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
-              >
-                <h1>Upload Photo</h1>
-              </div>
-              <div
-                onClick={() => setShortsModal(!shortsModal)}
-                className="group flex items-center justify-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
-              >
-                <h1>Upload Shorts</h1>
-              </div>
+        </OutsideClickHandler>
+        <OutsideClickHandler
+          onOutsideClick={() => {
+            setAddPost(false);
+          }}
+        >
+        {addPost && (
+          <div className=" w-40 mr-2  ml-auto mt-14 border-2 h-20 bg-white fixed overflow-x-hidden overflow-y-auto  inset-0 z-50 outline-none focus:outline-none">
+            <div
+              onClick={() => setShowModal(!showModal)}
+              className="group flex items-center justify-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
+            >
+              <h1>Upload Photo</h1>
             </div>
-          )}
-          {showModal && (
-            <AddPost AddPost={showModal} setAddPost={setShowModal} />
-          )}
-          {shortsModal && <UploadShorts setShortsModal={setShortsModal} />}
+            <div
+              onClick={() => setShortsModal(!shortsModal)}
+              className="group flex items-center justify-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
+            >
+              <h1>Upload Shorts</h1>
+            </div>
+          </div>
+        )}
+        </OutsideClickHandler>
+        {showModal && <AddPost AddPost={showModal} setAddPost={setShowModal} />}
+        {shortsModal && <UploadShorts setShortsModal={setShortsModal} />}
       </div>
     </div>
   );
