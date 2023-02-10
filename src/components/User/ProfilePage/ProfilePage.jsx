@@ -89,7 +89,7 @@ const ProfilePage = ({ userData, type }) => {
   return (
     <div
       className=" bg-white  shadow:lg
-   shadow-gray-300 rounded-md md:p-4 mb-5  m-4 mt-6 "
+   shadow-gray-300 rounded-md p-4 mb-5  md:m-4 mt-6 "
     >
       <div className=" ">
         <div className="relative ">
