@@ -66,7 +66,7 @@ const Messages = () => {
         <div className="container mx-auto  rounded-lg px-10  max-sm:px-2 p-2 h-full  ">
           <div className="flex flex-row bg-white  w-full ">
             <div
-              className={`${phoneSizeUser} lg:my-7 flex flex-col  border-r-2 overflow-y-auto bg-white w-full lg:w-4/12`}
+              className={`${phoneSizeUser}  flex flex-col  border-r-2 overflow-y-auto bg-white w-full lg:w-4/12`}
             >
               <div className="border-b-2 py-4 px-2 bg-slate-700 ">
                 <input
@@ -75,7 +75,7 @@ const Messages = () => {
                   className="py-2 px-2 border-2 border-gray-200 rounded-2xl w-full"
                 />
               </div>
-              <div className="h-[65vh]  ">
+              <div className="h-[75vh]  ">
                 {chat?.map((chat) => (
                   <div onClick={() => clickUser(chat)}>
                     <AllUser
