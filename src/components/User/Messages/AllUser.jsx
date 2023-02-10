@@ -22,7 +22,7 @@ const AllUser = ({ data, currentUserId, onlineUsers }) => {
       <div className=" flex flex-row py-4 px-2 h-full w2/6 justify-center items-center border-b-2 hover:bg-[#bbc0c7]">
         <div className="">
           <img
-            src={userData?.ProfileImg}
+            src={userData?.ProfileImg?userData.ProfileImg:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"}
             className="object-cover h-12 w-12 rounded-full"
             alt=""
           />
