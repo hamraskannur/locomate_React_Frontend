@@ -44,7 +44,7 @@ const [block,setBlock]=useState(post?.status)
       <div
         className={`${
           onePost ? "shadow-sm" : "shadow-lg"
-        } bg-white    shadow-gray-400 rounded-md p-4 mb-5 max-w-max  w-10/12 mx-auto  `}
+        } bg-white    shadow-gray-400 rounded-md p-4 mb-5  w-7/12 mx-auto  `}
       >
         <div className="flex gap-3">
           <div>

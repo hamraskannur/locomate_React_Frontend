@@ -20,10 +20,9 @@ function Admin() {
         <Route path='/reportedPost' element={<AdminProtectRouter><ReportedPost /></AdminProtectRouter>} />
         <Route path='/oneUser' element={<AdminProtectRouter><OneUser /></AdminProtectRouter>} />
         <Route path='/OnePostReport' element={<AdminProtectRouter><OnePostReport /></AdminProtectRouter>} />
-        <Route path='/userProfile' element={<AdminProtectRouter><OneUser/> </AdminProtectRouter>} />
-        <Route path='/notifications' element={<AdminProtectRouter><Notifications/> </AdminProtectRouter>} />
-        <Route path='/allPost' element={<AdminProtectRouter><AllPost/> </AdminProtectRouter>} />
-
+        <Route path='/userProfile' element={<AdminProtectRouter><OneUser /> </AdminProtectRouter>} />
+        <Route path='/notifications' element={<AdminProtectRouter><Notifications /> </AdminProtectRouter>} />
+        <Route path='/allPost' element={<AdminProtectRouter><AllPost /> </AdminProtectRouter>} />
       </Routes>
     </>
   );
