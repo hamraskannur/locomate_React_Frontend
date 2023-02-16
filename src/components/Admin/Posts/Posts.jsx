@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import Moment from "react-moment";
 import Comments from "./Comments";
 import Avatar from "./Avatar";
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { useNavigate } from "react-router-dom";
 import { BiBlock } from "react-icons/bi";
 import { FcLikePlaceholder } from "react-icons/fc";
 import { blockPost } from "../../../Api/adminApi/PostRequest";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 function Post({ post, onePost }) {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const [block,setBlock]=useState(post?.status)
   const submitUnblockPost = (postId) => {
     confirmAlert({
       title: 'Confirm to ',
-      message: 'Are you delete your post.',
+      message: 'Are you sure unblock post.',
       buttons: [
         { 
           label: 'Yes',
@@ -58,7 +59,7 @@ const [block,setBlock]=useState(post?.status)
  const submitBlockPost = (postId) => {
   confirmAlert({
     title: 'Confirm to ',
-    message: 'Are you delete your post.',
+    message: 'Are you sure block post .',
     buttons: [
       { 
         label: 'Yes',

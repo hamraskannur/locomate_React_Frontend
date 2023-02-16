@@ -16,7 +16,7 @@ function AdminProtectRouter(props) {
   }
   if (!localStorage.getItem("adminToken")) {
 
-  return <Navigate to="/admin/login" />;
+  return <Navigate to="/admin/login" />
   }
 }
 

@@ -57,6 +57,7 @@ const EditProfile = () => {
           setProImg(null);
         }
         const response = await saveUserData(userData);
+        
         if (response?.success === true) {
           setSuccess(true);
         } else if (response?.success === "noUpdates") {

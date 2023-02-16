@@ -2,30 +2,19 @@ import { userApi, cloudApi } from "../../utils/Apis/Apis";
 
 export const getMyProfile = async () => {
   try {
-    const { data } = await userApi.get("/getMyProfile", {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
+    const { data } = await userApi.get("/getMyProfile");
     return data.user;
   } catch (error) {
-    return error
+    return error;
   }
 };
 
 export const getUserData = async () => {
   try {
-    const { data } = await userApi.get("/getUserData", {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-
+    const { data } = await userApi.get("/getUserData");
     return data.user;
   } catch (error) {
-    return error
+    return error;
   }
 };
 
@@ -37,87 +26,51 @@ export const uploadImage = async (image) => {
     const { data } = await cloudApi.post(`/upload`, formData);
     return data?.secure_url;
   } catch (error) {
-    return error
+    return error;
   }
 };
 
 export const saveUserData = async (formData) => {
   try {
-    const { data } = await userApi.put("/updateUserData", formData, {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
+    const { data } = await userApi.put("/updateUserData", formData);
     return data;
   } catch (error) {
-    return error
+    return error;
   }
 };
 
 export const changeToPrivate = async (checked) => {
   try {
-    const { data } = await userApi.put("/changeToPrivate", checked, {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
+    const { data } = await userApi.put("/changeToPrivate", checked);
     return data;
   } catch (error) {
-    return error
+    return error;
   }
 };
 
 export const searchUserApi = async (searchData) => {
   try {
-    const { data } = await userApi.post(
-      "/searchUser",
-      { searchData },
-      {
-        withCredentials: true,
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
+    const { data } = await userApi.post("/searchUser", { searchData });
     return data;
   } catch (error) {
-    return error
+    return error;
   }
 };
 
 export const getAllNotifications = async () => {
   try {
-    const { data } = await userApi.get(
-      "/getAllNotifications",
-      {
-        withCredentials: true,
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
-    return data.user
+    const { data } = await userApi.get("/getAllNotifications");
+    return data.user;
   } catch (error) {
-    return error
+    return error;
   }
 };
 
 export const suggestionUsers = async () => {
   try {
-    const { data } = await userApi.get(
-      "/suggestionUsers",
-      {
-        withCredentials: true,
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
-    return data.notFollowedUsers
-
-  }catch (error) {
-    return error
+    const { data } = await userApi.get("/suggestionUsers");
+    return data.notFollowedUsers;
+  } catch (error) {
+    return error;
   }
-}
+};

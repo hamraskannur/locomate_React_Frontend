@@ -3,10 +3,7 @@ import { userApi } from "../../utils/Apis/Apis";
 export const followUser = async (formData) => {
   try {
     const { data } = await userApi.put("/followUser", formData, {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
+      withCredentials: true
     });
     return data;
   } catch (error) {
@@ -17,10 +14,7 @@ export const followUser = async (formData) => {
 export const getAllRequest = async () => {
   try {
     const { data } = await userApi.get("/getAllRequest", {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
+      withCredentials: true
     });
 
     return data.Request;
@@ -32,10 +26,7 @@ export const getAllRequest = async () => {
 export const acceptRequest = async (formData) => {
   try {
     const { data } = await userApi.put("/acceptRequest", formData, {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
+      withCredentials: true
     });
 
     return data;
@@ -47,10 +38,7 @@ export const acceptRequest = async (formData) => {
 export const deleteRequests = async (deleteId) => {
   try {
     const { data } = await userApi.delete(`/deleteRequests/${deleteId}`, {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
+      withCredentials: true
     });
 
     return data;
@@ -63,10 +51,7 @@ export const deleteRequests = async (deleteId) => {
 export const getFollowingUser = async (usersId) => {
   try {
      const { data } =await userApi.get(`/getFollowingUser/${usersId}`, {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
+      withCredentials: true
     })
    return data.user
   } catch (error) {
@@ -78,10 +63,7 @@ export const getFollowingUser = async (usersId) => {
 export const getFollowersUser = async (usersId) => {
   try {
      const { data } =await userApi.get(`/getFollowersUser/${usersId}`, {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
+      withCredentials: true
     })
    return data.user
   } catch (error) {

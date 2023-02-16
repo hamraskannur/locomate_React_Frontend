@@ -19,12 +19,7 @@ export const blockUser = async (Status, userId) => {
 };
 export const getAllNotifications = async () => {
   try{
-    const { data } = await adminAPI.get("/getAllNotifications",  {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("adminToken"),
-      },
-    });
+    const { data } = await adminAPI.get("/getAllNotifications");
     return data.admin
   }catch(error){
     return error
@@ -33,12 +28,7 @@ export const getAllNotifications = async () => {
 
 export const checkNewNotification = async () => {
   try{
-    const { data } = await adminAPI.get("/checkNewNotification",  {
-      withCredentials: true,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("adminToken"),
-      },
-    });
+    const { data } = await adminAPI.get("/checkNewNotification");
     return data
   }catch(error){
     return error

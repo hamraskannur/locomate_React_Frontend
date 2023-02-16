@@ -18,6 +18,10 @@ function UserProtectRouter(props) {
               user: userData[0],
             })
           );
+        }else{
+          localStorage.clear();
+          dispatch(userActions.userLogout());
+          navigate("/login");
         }
         }
     }

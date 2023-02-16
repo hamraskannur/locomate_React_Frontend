@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import { BiBlock } from "react-icons/bi";
 import Comments from "./Comments";
 import Avatar from "./Avatar";
-
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 import { useNavigate } from "react-router-dom";
 import { blockPost } from "../../../Api/adminApi/PostRequest";
@@ -30,7 +30,7 @@ function Post({ post, onePost }) {
   const getAccountPage = async (user) => {
     navigate("/admin/userProfile", { state: { userId: user, admin: true } });
   };
-  const submitBlockPost = async (postId) => {
+  const submitBlockPostApi = async (postId) => {
     try {
       const status = false;
       await blockPost({ postId, status });
@@ -39,7 +39,7 @@ function Post({ post, onePost }) {
       navigate("/admin/*");
     }
   };
-  const submitUnblockPost = async (postId) => {
+  const submitUnblockPostApi = async (postId) => {
     try {
       const status = true;
       await blockPost({ postId, status });
@@ -48,6 +48,37 @@ function Post({ post, onePost }) {
       navigate("/admin/*");
     }
   };
+  const submitUnblockPost = (postId) => {
+    confirmAlert({
+      title: 'Confirm to ',
+      message: 'Are you sure unblock shorts.',
+      buttons: [
+        { 
+          label: 'Yes',
+          onClick: () => {submitUnblockPostApi(postId)}
+        },
+        {
+          label: 'No',
+        }
+      ]
+    });
+  };
+  
+ const submitBlockPost = (postId) => {
+  confirmAlert({
+    title: 'Confirm to ',
+    message: 'Are you sure block shorts .',
+    buttons: [
+      { 
+        label: 'Yes',
+        onClick: () => {submitBlockPostApi(postId)}
+      },
+      {
+        label: 'No',
+      }
+    ]
+  });
+};
   return (
     <>
       <div
