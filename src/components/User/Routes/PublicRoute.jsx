@@ -12,12 +12,11 @@ function PublicRoute(props) {
       if (localStorage.getItem("token")) {
         try { 
           let userData = await getMyProfile();
-          console.log(userData,"this is my profile");
-          if (userData.length > 0) {
+          if (userData) {
             dispatch(
               userActions.userAddDetails({
                 token: localStorage.getItem("token"),
-                user: userData[0],
+                user: userData,
               })
             );
           } else{

@@ -23,8 +23,8 @@ const UserSideBar = () => {
   const [showModal, setShowModal] = useState(false);
   const [shortsModal, setShortsModal] = useState(false);
   const [userPublic, setUserPublic] = useState(false);
-  const [addPost, setAddPost] = useState(false);
   const [count, setCount] = useState(0);
+  const [addPost, setAddPost] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const newNotification = useSelector((state) => state?.user?.user.read);

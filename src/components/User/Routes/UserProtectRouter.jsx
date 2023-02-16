@@ -11,11 +11,11 @@ function UserProtectRouter(props) {
    const routerFunction=async()=>{
       if (localStorage.getItem("token")) {
         let  userData = await getMyProfile();
-        if(userData?.length >0){
+        if(userData){
           dispatch(
             userActions.userAddDetails({
               token: localStorage.getItem("token"),
-              user: userData[0],
+              user: userData,
             })
           );
         }else{
