@@ -1,9 +1,10 @@
-import React,{ useState } from "react";
+import React,{ useState,useEffect } from "react";
 import { BiHomeAlt, BiMessageSquareDetail } from "react-icons/bi";
 import { DiGitPullRequest } from "react-icons/di";
 import { Link } from "react-router-dom";
 import { MdOutlineNotifications, MdSlowMotionVideo } from "react-icons/md";
 import { useSelector } from "react-redux";
+import {  } from "react";
 
 const BottomBar = () => {
   const [userPublic, setUserPublic] = useState(false);
