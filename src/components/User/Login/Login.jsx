@@ -11,7 +11,7 @@ import {
 import { login } from "../../../Api/userApi/userAuthRequest";
 
 import { hideLoading, showLoading } from "../../../redux/loadingBar";
-import { successToast } from "../../Toast/Toast";
+import { errorToast, successToast } from "../../Toast/Toast";
 
 function Login() {
   const navigate = useNavigate();
@@ -49,6 +49,7 @@ function Login() {
             }
 
             if (response.message) {
+              errorToast(response.message)
               setErrMessage(response.message);
             }
           } else {
