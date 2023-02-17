@@ -1,10 +1,9 @@
-
-
 import React from "react";
 import SideBar from "../../components/Admin/SideBar/SideBar";
 import AdminProtectRouter from "../../components/Admin/Routes/AdminProtectRouter";
 import AdminNavBar from "../../components/Admin/NavBar/AdminNavBar";
-import Dashboard from "../../components/Admin/Dashboard/Dashboard";
+import PostDetailChart from "../../components/Admin/PostDetailChart/PostDetailChart";
+import UserDetailChart from "../../components/Admin/UserDetailChart/UserDetailChart";
 
 function DashboardPage() {
   return (
@@ -13,10 +12,11 @@ function DashboardPage() {
         <AdminNavBar />
         <div className="flex ">
           <div className="sticky ">
-          <SideBar />
+            <SideBar />
           </div>
           <div className="w-full max-sm:w-full max-md:w-full max-lg:w-full scroll">
-            <Dashboard/>
+            <UserDetailChart />
+              <PostDetailChart />            
           </div>
         </div>
       </div>
