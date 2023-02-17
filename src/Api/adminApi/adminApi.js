@@ -34,3 +34,12 @@ export const checkNewNotification = async () => {
     return error
   }
 }
+
+export const getChartData =async () =>{
+  try {
+    const { data } = await adminAPI.get("/getChart");
+    return data
+  } catch (error) {
+    
+  }
+}
