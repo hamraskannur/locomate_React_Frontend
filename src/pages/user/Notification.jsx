@@ -1,7 +1,7 @@
 import React from "react";
 import Suggestions from "../../components/User/Suggestions/Suggestions";
 import Notification from "../../components/User/Notification/Notification";
-import Layout from "./Layout";
+import Layout from "../../components/User/Layout/Layout";
 
 function Home() {
   return (

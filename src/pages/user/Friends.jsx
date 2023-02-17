@@ -1,6 +1,6 @@
 import React from "react";
 import Request from "../../components/User/request/Request";
-import Layout from "./Layout";
+import Layout from "../../components/User/Layout/Layout";
 
 const FriendsPage = () => {
   return (

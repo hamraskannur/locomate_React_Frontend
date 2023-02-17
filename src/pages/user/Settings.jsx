@@ -1,7 +1,7 @@
 import React from "react";
 import Suggestions from "../../components/User/Suggestions/Suggestions";
 import Settings from "../../components/User/Settings/Settings";
-import Layout from "./Layout";
+import Layout from "../../components/User/Layout/Layout";
 
 function SettingsPage() {
   return (

@@ -4,7 +4,7 @@ import SearchBar from "../../components/User/Search/SearchBar";
 import SearchResults from "../../components/User/Search/SearchResults";
 import { searchUserApi } from "../../Api/userApi/profileApi";
 import { useNavigate } from "react-router-dom";
-import Layout from "./Layout";
+import Layout from "../../components/User/Layout/Layout";
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState("");

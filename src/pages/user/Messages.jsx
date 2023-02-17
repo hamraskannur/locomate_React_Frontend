@@ -1,6 +1,6 @@
 import React from "react";
 import Message from "../../components/User/Messages/Message";
-import Layout from "./Layout";
+import Layout from "../../components/User/Layout/Layout";
 
 const MessagesPage = () => {
   return (

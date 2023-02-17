@@ -1,7 +1,7 @@
 import React from "react";
 import Post from "../../components/User/Posts/Post";
 import Suggestions from "../../components/User/Suggestions/Suggestions";
-import Layout from "./Layout";
+import Layout from "../../components/User/Layout/Layout";
 
 function Home() {
   return (

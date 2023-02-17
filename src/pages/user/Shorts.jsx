@@ -1,7 +1,7 @@
 import React from "react";
 import Shorts from "../../components/User/Shorts/Short";
 import Suggestions from "../../components/User/Suggestions/Suggestions";
-import Layout from "./Layout";
+import Layout from "../../components/User/Layout/Layout";
 
 function shorts() {
   return (

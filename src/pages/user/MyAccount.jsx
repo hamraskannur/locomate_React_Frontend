@@ -1,7 +1,7 @@
 import React from "react";
 import Suggestions from "../../components/User/Suggestions/Suggestions";
 import MyAccount from "../../components/User/ProfilePage/MyAccount";
-import Layout from "./Layout";
+import Layout from "../../components/User/Layout/Layout";
 
 const MyAccountPage = () => {
   return (

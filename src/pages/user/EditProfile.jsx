@@ -1,6 +1,6 @@
 import React from "react";
 import EditProfile from "../../components/User/EditProfile/EditProfile";
-import Layout from "./Layout";
+import Layout from "../../components/User/Layout/Layout";
 
 const EditProfilePage = () => {
   return (
