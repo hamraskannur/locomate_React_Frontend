@@ -22,7 +22,7 @@ const UserDetailChart = ({userGraphCategories,userGraphData}) => {
   });
   return (
     <div className="flex flex-col w-full  content-center justify-center p-5 gap-y-5 ">
-      <h1 className="text-center text-2xl font-bold">User Details </h1>
+      <h1 className="text-center text-2xl font-bold">User chart </h1>
       <div className="mx-auto">
         <Chart
           options={state.options}
