@@ -33,4 +33,8 @@ const PostDetailChart = ({postGraphCategories,postGraphData}) => {
       );
 }
 
+
+
+
+
 export default PostDetailChart
