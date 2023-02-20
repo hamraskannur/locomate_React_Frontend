@@ -15,7 +15,7 @@ function App() {
     <div>
       <Router>
         {loading && (
-          <div className=" h-screen ">
+          <div className="h-screen">
             <Spinner />
           </div>
         )}

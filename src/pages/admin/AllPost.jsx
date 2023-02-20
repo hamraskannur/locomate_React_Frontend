@@ -1,7 +1,7 @@
 import React from "react";
 import AllPosts from "../../components/Admin/AllPosts/AllPosts";
 import { useState } from "react";
-import Layout from "./Layout";
+import Layout from "../../components/Admin/Layout/Layout";
 
 function AllPost() {
   const [selected, setSelected] = useState(true);

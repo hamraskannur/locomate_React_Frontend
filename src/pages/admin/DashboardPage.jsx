@@ -3,7 +3,7 @@ import { getChartData } from "../../Api/adminApi/adminApi";
 import Count from "../../components/Admin/Count/Count";
 import PostDetailChart from "../../components/Admin/PostDetailChart/PostDetailChart";
 import UserDetailChart from "../../components/Admin/UserDetailChart/UserDetailChart";
-import Layout from "./Layout";
+import Layout from "../../components/Admin/Layout/Layout";
 
 function DashboardPage() {
 

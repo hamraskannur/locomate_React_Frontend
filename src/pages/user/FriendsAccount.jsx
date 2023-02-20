@@ -1,8 +1,7 @@
 import React from "react";
 import Suggestions from "../../components/User/Suggestions/Suggestions";
 import FriendsAccount from "../../components/User/ProfilePage/FriendsAccount";
-import Layout from "../admin/Layout";
-
+import Layout from "../../components/User/Layout/Layout";
 
 const FriendsAccountPage = () => {
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import SideBar from "../../components/Admin/SideBar/SideBar";
 import OneUser from "../../components/Admin/oneUser/OneUser";
 import AdminNavBar from "../../components/Admin/NavBar/AdminNavBar";
-import Layout from "./Layout";
+import Layout from "../../components/Admin/Layout/Layout";
 
 function AllUser() {
   return (

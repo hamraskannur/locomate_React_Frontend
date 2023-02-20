@@ -1,6 +1,6 @@
 import React from "react";
-import SideBar from "../../components/Admin/SideBar/SideBar";
-import AdminNavBar from "../../components/Admin/NavBar/AdminNavBar";
+import SideBar from "../SideBar/SideBar";
+import AdminNavBar from "../NavBar/AdminNavBar";
 
 function Layout(props) {
   return (

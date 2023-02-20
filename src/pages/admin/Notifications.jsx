@@ -1,6 +1,6 @@
 import React from "react";
 import Notifications from "../../components/Admin/Notifications/Notifications";
-import Layout from "./Layout";
+import Layout from "../../components/Admin/Layout/Layout";
 
 function Notification() {
   return (
