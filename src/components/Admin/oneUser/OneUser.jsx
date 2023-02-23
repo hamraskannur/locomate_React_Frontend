@@ -14,7 +14,6 @@ const OneUser = () => {
 
   useEffect(() => {
     const myProfile = async () => {
-      console.log(userId);
       if (userId) {
         try {
           const newUserData = await getOneUser(userId);

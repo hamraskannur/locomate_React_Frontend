@@ -1,5 +1,5 @@
 import { async } from "q";
-import { adminAPI, userApi } from "../../utils/Apis/Apis";
+import { adminAPI } from "../../utils/Apis/Apis";
 
 export const getAllReportPost = async () => {
   try {
@@ -23,7 +23,7 @@ export const blockPost = async (formData) => {
 
 export const getOneUser = async (userId) => {
   try {
-    const { data } = await userApi.get(`/getFriendsAccount/${userId}`);
+    const { data } = await adminAPI.get(`/getFriendsAccount/${userId}`);
     return data.FriendsAccount;
   } catch (error) {
     return error;

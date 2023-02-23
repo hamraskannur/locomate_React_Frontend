@@ -27,7 +27,7 @@ const UserDetailChart = ({userGraphCategories,userGraphData}) => {
         <Chart
           options={state.options}
           series={state.series}
-          type="line"
+          type="bar"
           width="600"
         />
       </div>
