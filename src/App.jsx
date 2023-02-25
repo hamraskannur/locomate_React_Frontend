@@ -24,13 +24,8 @@ function App() {
             <ToastContainer />
             <Routes>
               <Route path="/*" element={<User />} />
-            </Routes>
-            <Routes>
               <Route path="/admin/*" element={<Admin />} />
             </Routes>
-            {/* <Routes>
-              <Route path="*" element={<ErrorPage />} />
-            </Routes> */}
           </>
         )}
       </Router>

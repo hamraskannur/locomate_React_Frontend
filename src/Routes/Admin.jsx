@@ -11,6 +11,7 @@ import Notifications from '../pages/admin/Notifications'
 import Page from '../pages/admin/404page';
 import AllPost from '../pages/admin/AllPost';
 import Dashboard from '../pages/admin/DashboardPage';
+import ErrorPage from "../pages/admin/404page"
 
 function Admin() {
   return (
@@ -25,6 +26,8 @@ function Admin() {
         <Route path='/userProfile' element={<AdminProtectRouter><OneUser /> </AdminProtectRouter>} />
         <Route path='/notifications' element={<AdminProtectRouter><Notifications /> </AdminProtectRouter>} />
         <Route path='/allPost' element={<AdminProtectRouter><AllPost /> </AdminProtectRouter>} />
+        <Route path="/*" element={<ErrorPage />} />
+
       </Routes>
     </>
   );
