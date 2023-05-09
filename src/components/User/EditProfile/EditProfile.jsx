@@ -27,7 +27,8 @@ const EditProfile = () => {
     async function getUser() {
       try{
         user = await getUserData();
-        setUserData(user[0]);
+        console.log(user,"000");
+        setUserData(user);
       }catch(error){
         navigate('*');
       }

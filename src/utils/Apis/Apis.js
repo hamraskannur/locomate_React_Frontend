@@ -25,3 +25,8 @@ adminAPI.interceptors.request.use((req) => {
 export const cloudApi = axios.create({
   baseURL: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_API}/image`,
 });
+
+
+export const cloudApiVideo = axios.create({
+  baseURL: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_API}/video`,
+});

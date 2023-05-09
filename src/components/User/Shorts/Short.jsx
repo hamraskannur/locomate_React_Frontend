@@ -25,7 +25,6 @@ const GetShorts = () => {
     };
     getPost();
     dispatch(AddPostActions.Update())
-
   }, [update===true]);
 
   return (
@@ -33,6 +32,7 @@ const GetShorts = () => {
 
       {posts.map((post) => (
         <>
+
        { (post?.userId?.public || post?.userId?.Followers.includes(userId)  ) && post.status && <Shorts post={post} key={post?._id} onePost={false} />}
        </>
 

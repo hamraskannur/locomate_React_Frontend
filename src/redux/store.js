@@ -11,4 +11,5 @@ const Store = configureStore(
   { reducer: { user: userAuth.reducer, admin: adminAuth.reducer ,sideBar:sideBar.reducer ,addPost:addPost.reducer,loader: alertSlice.reducer ,notification:notification.reducer } },
 );
 
+
 export default Store;

@@ -19,7 +19,6 @@ function App() {
             <Spinner />
           </div>
         )}
-        {!loading && (
           <>
             <ToastContainer />
             <Routes>
@@ -27,7 +26,6 @@ function App() {
               <Route path="/admin/*" element={<Admin />} />
             </Routes>
           </>
-        )}
       </Router>
     </div>
   );

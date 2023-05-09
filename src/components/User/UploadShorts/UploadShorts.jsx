@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { hideLoading, showLoading } from "../../../redux/loadingBar";
 import S3 from "aws-sdk/clients/s3";
-import { uploadImage } from "../../../Api/userApi/profileApi";
+import { uploadvideoPost } from "../../../Api/userApi/profileApi";
 import { uploadVideo } from "../../../Api/userApi/videoRequest";
 import { AddPostActions } from "../../../redux/AddPost";
 import { useDispatch } from "react-redux";
@@ -15,7 +15,7 @@ export default function UploadShorts({ setShortsModal }) {
   const [description, setDescription] = useState("");
   const [uploadVideoData, setUploadVideoData] = useState();
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const S3_BUCKET = process.env.REACT_APP_NAME;
   const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID;
   const region = process.env.REACT_APP_REGION;
@@ -51,50 +51,58 @@ export default function UploadShorts({ setShortsModal }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try{
+    try {
       if (files) {
-        const reader = new FileReader();
-        reader.readAsArrayBuffer(files);
-      reader.onload = async (e) => {
-        const result = e.target.result;
-        const uploadParams = {
-          Bucket: S3_BUCKET,
-          Key: `video/${Date.now() + files.name}`,
-          Body: result,
-        };
-        await s3
-          .upload(uploadParams)
-          .promise()
-          .then((res) => {
-            console.log(res.Location);
-            const object = {
-              imageLinks: res.Location,
-              description: description,
-            };
-            setUploadVideoData(object);
-          });
-        };
-      if (uploadVideoData) {
-        const response = await uploadVideo(uploadVideoData);
-        await dispatch(AddPostActions.postAdd());
-        
-        if (response.status) {
-          successToast("successfully uploaded shorts ");
-          setShortsModal(false);
+        console.log(files, 5454);
+        uploadvideoPost(files).then((data) => {
+          console.log(data,"this is a video");
+          const object = {
+            imageLinks: data,
+            description: description,
+          };
+          setUploadVideoData(object);
+        });
+        //   const reader = new FileReader();
+        //   reader.readAsArrayBuffer(files);
+        // reader.onload = async (e) => {
+        //   const result = e.target.result;
+        //   const uploadParams = {
+        //     Bucket: S3_BUCKET,
+        //     Key: `video/${Date.now() + files.name}`,
+        //     Body: result,
+        //   };
+        //   await s3
+        //     .upload(uploadParams)
+        //     .promise()
+        //     .then((res) => {
+        //       console.log(res.Location);
+        //       const object = {
+        //         imageLinks: res.Location,
+        //         description: description,
+        //       };
+        //       setUploadVideoData(object);
+        //     });
+        //   };
+        if (uploadVideoData) {
+          const response = await uploadVideo(uploadVideoData);
+          await dispatch(AddPostActions.postAdd());
+
+          if (response.status) {
+            successToast("successfully uploaded shorts ");
+            setShortsModal(false);
+          } else {
+            errorToast("upload video failed");
+          }
         } else {
           errorToast("upload video failed");
         }
       } else {
-        errorToast("upload video failed");
+        errorToast("select your video file");
+        setMessage("select your video file");
       }
-    } else {
-      errorToast("select your video file");
-      setMessage("select your video file");
+    } catch (error) {
+      navigate("*");
     }
-    
-  }catch(error){
-    navigate('*');
-  }
   };
 
   return (

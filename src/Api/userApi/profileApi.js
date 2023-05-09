@@ -1,4 +1,4 @@
-import { userApi, cloudApi } from "../../utils/Apis/Apis";
+import { userApi, cloudApi, cloudApiVideo } from "../../utils/Apis/Apis";
 
 export const getMyProfile = async () => {
   try {
@@ -24,6 +24,30 @@ export const uploadImage = async (image) => {
     formData.append("file", image[0]);
     formData.append("upload_preset", "ete0nc34");
     const { data } = await cloudApi.post(`/upload`, formData);
+    return data?.secure_url;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const uploadPost = async (image) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "ete0nc34");
+    const { data } = await cloudApi.post(`/upload`, formData);
+    return data?.secure_url;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const uploadvideoPost= async (videoFile) => {
+  try {
+    const formData = new FormData();
+    formData.append('file', videoFile);
+    formData.append("upload_preset", "ete0nc34");
+    const { data } = await cloudApiVideo.post(`/upload`, formData);
     return data?.secure_url;
   } catch (error) {
     return error;

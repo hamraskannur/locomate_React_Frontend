@@ -5,8 +5,8 @@ import { addPost } from '../../../Api/userApi/postRequest';
 import { AddPostActions } from '../../../redux/AddPost'
 import S3 from "aws-sdk/clients/s3";
 import { errorToast, successToast } from '../../Toast/Toast';
-import { hideLoading, showLoading } from "../../../redux/loadingBar";
 import { useNavigate } from 'react-router-dom';
+import { uploadPost } from '../../../Api/userApi/profileApi';
 
 export default function UploadPhoto({ AddPost, setAddPost }) {
   const [files, setFile] = useState([]);
@@ -54,22 +54,28 @@ export default function UploadPhoto({ AddPost, setAddPost }) {
       
       if (files.length > 0) {
         files.forEach((file) => {
-          const reader = new FileReader();
-          reader.readAsArrayBuffer(file);
-          reader.onload = async (e) => {
-            const result = e.target.result;
-            const uploadParams = {
-              Bucket: S3_BUCKET,
-              Key: Date.now() + file.name,
-              Body: result,
-            };
-            await s3
-              .upload(uploadParams)
-              .promise()
-              .then((res) => {
-                setImageLinks((imageLinks) => [...imageLinks, res.Location]);
-              });
-          };
+          uploadPost(file) .then((res) => {
+                  setImageLinks((imageLinks) => [...imageLinks, res]);
+                });
+              
+          // const reader = new FileReader();
+          // reader.readAsArrayBuffer(file);
+          // reader.onload = async (e) => {
+          //   const result = e.target.result;
+          //   const uploadParams = {
+          //     Bucket: S3_BUCKET,
+          //     Key: Date.now() + file.name,
+          //     Body: result,
+          //   };
+          //   await s3
+          //     .upload(uploadParams)
+          //     .promise()
+          //     .then((res) => {
+          //       setImageLinks((imageLinks) => [...imageLinks, res.Location]);
+          //     });
+          // };
+
+
         });
   
         let object =await {

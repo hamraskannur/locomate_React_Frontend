@@ -15,7 +15,7 @@ const NotificationCard = () => {
       try{
 
         const notification = await getAllNotifications();
-        setNotification(notification);
+        setNotification(notification.reverse());
         dispatch(viewNotification())
       }catch(error){
         navigate('*');

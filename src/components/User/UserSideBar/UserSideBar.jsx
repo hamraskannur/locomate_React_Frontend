@@ -87,7 +87,7 @@ const UserSideBar = () => {
                   <h2
                     style={{ transitionDelay: `${i + 3}00ms` }}
                     className={`whitespace-pre duration-500 ${
-                      !sideBar && "opacity-0 translate-x-28 overflow-hidden"
+                      !sideBar && "opacity-0 translate-x-6  overflow-hidden"
                     }`}
                   >
                     {menu?.name}
