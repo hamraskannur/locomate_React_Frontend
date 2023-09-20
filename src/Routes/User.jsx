@@ -1,6 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import Spinner from "../components/User/Spinner/Spinner";
+import UserProtectRouter from '../components/User/Routes/UserProtectRouter';
+import PublicRoute from '../components/User/Routes/PublicRoute';
+
 
 // Lazy-loaded route components
 const Home = lazy(() => import('../pages/user/Home'));
