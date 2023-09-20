@@ -18,7 +18,6 @@ const Settings = () => {
   };
   const changeHandler=(state)=>{
     const fetchData=async () =>{
-        console.log(state.target.checked);
        const checked = state.target.checked
        try{
       

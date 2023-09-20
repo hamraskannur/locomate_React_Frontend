@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Chart from "react-apexcharts";
 
 const UserDetailChart = ({userGraphCategories,userGraphData}) => {
-     console.log(userGraphCategories,userGraphData);
 
   const [state, setState] = useState({
     options: {

@@ -40,7 +40,7 @@ const EditPost = ({ setEditPost,shorts, img, description, postId }) => {
               <div className="rounded-lg shadow-xl bg-gray-50 w-full ">
                 <div className="m-4">
                   <span className="flex justify-center items-center text-[12px] mb-1 text-red-500">
-                    {/* {message} */}
+                    {message}
                   </span>
                   <div className="rounded-md overflow-hidden w-full">
                     {shorts?<video className="w-full" controls>

@@ -40,6 +40,7 @@ function Comments({ postId, setCount, count }) {
         setComment([response, ...comment]);
         setCount(count + 1);
         setNewComment("");
+        
     }catch(error){
       navigate('*');
     }

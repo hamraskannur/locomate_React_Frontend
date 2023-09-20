@@ -286,7 +286,7 @@ const UserSideBar = () => {
             >
               <button
                 type="button"
-                className="group flex items-center text-sm gap-3.5  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
+                className="group flex items-center text-sm  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
               >
                 <div>{React.createElement(BiLogOut, { size: "20" })}</div>
                 <h2

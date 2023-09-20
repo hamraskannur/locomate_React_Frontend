@@ -10,7 +10,7 @@ const AllPost = ({ userId, type, postCount, SavedPost,setOnePostId }) => {
   useEffect(() => {
     try{
     const getPost = async () => {
-      if (SavedPost) {
+      if (SavedPost) {  
           const response= await getSavedPost(userId)
           setPosts(response)
 
@@ -29,8 +29,9 @@ const AllPost = ({ userId, type, postCount, SavedPost,setOnePostId }) => {
   }, [userId]);
   
   const getSavedOnePost =(post,postUser)=>{
-    post.userId=postUser
-    setOnePostId(post )
+    
+      post.userId=postUser
+      setOnePostId(post )
 
   }
   const getOnePost = (post) => {

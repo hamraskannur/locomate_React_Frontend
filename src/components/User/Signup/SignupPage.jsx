@@ -15,6 +15,7 @@ import {
 
 const SignupPage = ()=> {
   const navigate = useNavigate()  
+  
   const [passwordShown, setPasswordShown] = useState(false);
   const [repeatPasswordShown, setRepeatPasswordShown] = useState(false);
 

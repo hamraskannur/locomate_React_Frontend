@@ -44,7 +44,7 @@ export const getFriendsAccount = async (userId) => {
     return error
   }
 };
-
+  
 export const likePostReq = async (PostId) => {
   try {
     const { data } = await userApi.get(`/post/likePostReq/${PostId}`);

@@ -1,34 +1,33 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { getMyProfile } from '../../../Api/userApi/profileApi';
-import { userActions } from '../../../redux/userAuth';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+import { getMyProfile } from "../../../Api/userApi/profileApi";
+import { userActions } from "../../../redux/userAuth";
 
 function UserProtectRouter(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-   const routerFunction=async()=>{
+    const routerFunction = async () => {
       if (localStorage.getItem("token")) {
-        let  userData = await getMyProfile();
-        if(userData){
+        let userData = await getMyProfile();
+        if (userData) {
           dispatch(
             userActions.userAddDetails({
               token: localStorage.getItem("token"),
               user: userData,
             })
           );
-        }else{
+        } else {
           localStorage.clear();
           dispatch(userActions.userLogout());
           navigate("/login");
         }
-        }
-    }
-    routerFunction()
-  
+      }
+    };
+    routerFunction();
   }, []);
-  
+
   const user = useSelector((state) => state?.user?.userToken);
   if (user) {
     return props.children;
@@ -36,9 +35,6 @@ function UserProtectRouter(props) {
   if (!localStorage.getItem("token")) {
     return <Navigate to="/login" />;
   }
-
-  
-  
 }
 
 export default UserProtectRouter;

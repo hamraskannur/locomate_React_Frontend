@@ -46,6 +46,7 @@ function DashboardPage() {
       <div className="mx-auto">
 
       <Count userCount={userCount} postCount={postCount} shortsCount={shortsCount}/>    
+      
       <div className="w-full max-sm:w-full max-md:w-full max-lg:w-full scroll">
        {userGraphCategories?.length>0 && <UserDetailChart userGraphCategories={userGraphCategories} userGraphData={userGraphData}/>}
         {postGraphCategories?.length>0 && <PostDetailChart  postGraphCategories={postGraphCategories} postGraphData={postGraphData}/>}
