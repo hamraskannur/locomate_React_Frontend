@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { verifySignUp } from '../../../Api/userApi/userAuthRequest';
 import { hideLoading, showLoading } from "../../../redux/loadingBar";  
-import { successToast } from '../../Toast/Toast';
+import { errorToast, successToast } from '../../Toast/Toast';
 
 function Verify() {
   const navigate = useNavigate()  
@@ -25,6 +25,7 @@ function Verify() {
         successToast('susses fully verifyed')
       } else {
         setErrMessage(verify.message);
+        errorToast(verify.message)
       }
     }catch(error){
       navigate('*');
