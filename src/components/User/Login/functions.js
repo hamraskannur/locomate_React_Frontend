@@ -1,51 +1,14 @@
-import { login } from "../../../Api/userApi/userAuthRequest";
-
-export const emailChangeHandler = (event, setEnteredEmail) => {
-  setEnteredEmail(event.target.value);
-};
-
-export const passwordChangeHandler = (event, setEnteredPassword) => {
-  setEnteredPassword(event.target.value);
-};
-
-export const showPassword = (passwordShown, setPasswordShown) => {
-  if (passwordShown) {
-    setPasswordShown(false);
-  } else {
-    setPasswordShown(true);
+export const valid = (setErrors,formData) => {
+  const newErrors = {};
+  if (
+    !formData.email ||
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
+  ) {
+    newErrors.email = "Invalid email address";
   }
-};
-
-export const submitHandler = async (
-  enteredEmail,
-  enteredPassword,
-  setErrMessage,
-  setResponse
-) => {
-  if (enteredEmail.trim().length > 0) {
-    if (enteredPassword.trim().length > 0) {
-      if (enteredEmail.includes("@") && enteredEmail.trim().length > 7) {
-        if (enteredPassword.trim().length > 5) {
-          const response = await login({
-            email: enteredEmail,
-            password: enteredPassword,
-          });
-          setResponse(response);
-        } else {
-          console.log("password minimum 5 numbers");
-          setErrMessage("password minimum 5 numbers");
-        }
-      } else {
-        console.log("wrong email");
-        setErrMessage("wrong email");
-      }
-    } else {
-      console.log("fill Password");
-      setErrMessage("fill Password");
-    }
-  } else {
-    console.log("money2");
-
-    setErrMessage("fill email");
+  if (!formData.password || formData.password.length < 8) {
+    newErrors.password = "Password must be at least 8 characters long";
   }
+  setErrors(newErrors);
+  return newErrors;
 };

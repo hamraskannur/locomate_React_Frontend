@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../../redux/userAuth";
 import { useNavigate } from "react-router-dom";
-import {
-  emailChangeHandler,
-  passwordChangeHandler,
-  showPassword,
-} from "./functions";
+import { valid } from "./functions";
 import { login } from "../../../Api/userApi/userAuthRequest";
 
 import { hideLoading, showLoading } from "../../../redux/loadingBar";
@@ -14,62 +10,56 @@ import { errorToast, successToast } from "../../Toast/Toast";
 
 function Login() {
   const navigate = useNavigate();
-  const [ErrMessage, setErrMessage] = useState("");
   const dispatch = useDispatch();
+  const [submit, setSubmit] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
+  const [ErrMessage, setErrMessage] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
 
-  const loginHandler = async (event) => {
-    event.preventDefault();
-    try {
-      if (enteredEmail.trim().length > 0) {
-        if (enteredPassword.trim().length > 0) {
-          if (enteredEmail.includes("@") && enteredEmail.trim().length > 7) {
-            if (enteredPassword.trim().length > 5) {
-              dispatch(showLoading());
-              const response = await login({
-                email: enteredEmail,
-                password: enteredPassword,
-              });
-              dispatch(hideLoading());
-              if (response?.Status) {
-                localStorage.setItem("token", response.token);
-                localStorage.setItem("user", true);
-                dispatch(
-                  userActions.userAddDetails({
-                    user: response.user,
-                    token: response.token,
-                  })
-                );
-                successToast("Successfully logged");
-                navigate("/");
-                dispatch(hideLoading());
-              }
+  const handleInputChange = async (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    valid(setErrors, formData);
+  };
 
-              if (response.message) {
-                errorToast(response.message);
-                setErrMessage(response.message);
-              }
-            } else {
-              console.log("password minimum 5 numbers");
-              setErrMessage("password minimum 5 numbers");
-            }
-          } else {
-            console.log("wrong email");
-            setErrMessage("wrong email");
-          }
-        } else {
-          console.log("fill Password");
-          setErrMessage("fill Password");
-        }
-      } else {
-        console.log("money2");
-
-        setErrMessage("fill email");
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    setSubmit(true);
+    const newErrors = await valid(setErrors, formData);
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      dispatch(showLoading());
+      const response = await login(formData);
+      dispatch(hideLoading());
+      if (response?.Status) {
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("user", true);
+        dispatch(
+          userActions.userAddDetails({
+            user: response.user,
+            token: response.token,
+          })
+        );
+        successToast("Successfully logged");
+        navigate("/");
+        dispatch(hideLoading());
       }
-    } catch (error) {
-      navigate("*");
+
+      if (response.message) {
+        errorToast(response.message);
+        setErrMessage(response.message);
+      }
     }
   };
 
@@ -90,10 +80,8 @@ function Login() {
                   <input
                     autoComplete="off"
                     id="email"
-                    value={enteredEmail}
-                    onChange={(e) => {
-                      emailChangeHandler(e, setEnteredEmail);
-                    }}
+                    value={formData.email}
+                    onChange={handleInputChange}
                     name="email"
                     type="text"
                     className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
@@ -107,14 +95,17 @@ function Login() {
                     Email Address
                   </label>
                 </div>
+                {submit && (
+                  <small className="invalid-feedback text-red-600">
+                    {errors.email}
+                  </small>
+                )}
                 <div className="relative ">
                   <div className="flex">
                     <input
                       autoComplete="off"
-                      onChange={(e) => {
-                        passwordChangeHandler(e, setEnteredPassword);
-                      }}
-                      value={enteredPassword}
+                      value={formData.password}
+                      onChange={handleInputChange}
                       id="password"
                       name="password"
                       type={passwordShown ? "text" : "password"}
@@ -124,7 +115,7 @@ function Login() {
                     <img
                       role="presentation"
                       onClick={() => {
-                        showPassword(passwordShown, setPasswordShown);
+                        setPasswordShown(!passwordShown);
                       }}
                       src={
                         passwordShown
@@ -145,6 +136,11 @@ function Login() {
                       Password
                     </label>
                   </div>
+                  {submit && (
+                    <small className="invalid-feedback text-red-600">
+                      {errors.password}
+                    </small>
+                  )}
                 </div>
                 {ErrMessage && (
                   <small className=" text-red-600">{ErrMessage}</small>
