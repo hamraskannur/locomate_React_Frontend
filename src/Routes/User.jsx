@@ -4,8 +4,6 @@ import Spinner from "../components/User/Spinner/Spinner";
 import UserProtectRouter from '../components/User/Routes/UserProtectRouter';
 import PublicRoute from '../components/User/Routes/PublicRoute';
 
-
-// Lazy-loaded route components
 const Home = lazy(() => import('../pages/user/Home'));
 const Signup = lazy(() => import('../pages/user/Signup'));
 const MyAccountPage = lazy(() => import('../pages/user/MyAccount'));
