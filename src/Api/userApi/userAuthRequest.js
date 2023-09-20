@@ -3,7 +3,7 @@ import { userApi } from "../../utils/Apis/Apis";
 export const signUp = async (formData) => {
   try {
     const { data } = await userApi.post("/register", formData);
-    return data.userSignup;
+    return data;
     
   } catch (error) {
     return error

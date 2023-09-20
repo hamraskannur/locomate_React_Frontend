@@ -1,61 +1,55 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  showPassword,
-  showRepeatPassword,
-  nameChangeHandler,
-  emailChangeHandler,
-  dobChangeHandler,
-  phoneNoChangeHandler,
-  passwordChangeHandler,
-  repeatPasswordHandler,
-  usernameChangeHandler,
-  submitHandler,
-} from "./functions";
 
-const SignupPage = ()=> {
-  const navigate = useNavigate()  
-  
+import {valid} from "./functions"
+import { signUp } from "../../../Api/userApi/userAuthRequest";
+
+const SignupPage = () => {
+  const navigate = useNavigate();
+  const [submit, setSubmit] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
-  const [repeatPasswordShown, setRepeatPasswordShown] = useState(false);
-
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [username, setUserName] = useState("");
-  const [enteredDob, setEnteredDob] = useState("");
-  const [enteredPhoneNo, setEnteredPhoneNo] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const [enteredRepeatPassword, setEnteredRepeatPassword] = useState("");
-
-  const [ErrMessage, setErrMessage] = useState("");
   const [verify, setVerify] = useState("");
+  const [ErrMessage, setErrMessage] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    username: "",
+  });
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    username: "",
+  });
 
-  const signupHandler = (event) => {
-    try{
+  const handleInputChange = async (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    valid(setErrors,formData);
+  };
 
-    submitHandler(
-      event,
-      enteredName,
-      username,
-      enteredEmail,
-      enteredPhoneNo,
-      enteredDob,
-      enteredPassword,
-      enteredRepeatPassword,
-      setEnteredName,
-      setEnteredEmail,
-      setUserName,
-      setEnteredDob,
-      setEnteredPhoneNo,
-      setEnteredPassword,
-      setEnteredRepeatPassword,
-      setVerify,
-      setErrMessage
-    );
-    
-  }catch(error){
-    navigate('*')
-  }
+  
+
+  const signupHandler = async (e) => {
+    e.preventDefault();
+    setSubmit(true);
+    const newErrors = await valid(setErrors,formData);
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log("Registration data:", formData);
+      const response = await signUp(formData);
+      if (response.status) {
+        setVerify(response.message);
+      } else {
+        setErrMessage(response.message);
+      }
+    }
   };
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 p-3">
@@ -71,7 +65,7 @@ const SignupPage = ()=> {
           </div>
           <div className="max-w-md mx-auto ">
             <div>
-              <h1 className="text-2xl font-semibold">
+              <h1 className="text-2xl text-center font-semibold font-mono">
                 Sign up to see photos and
                 <br />
                 videos from your friends.
@@ -82,14 +76,12 @@ const SignupPage = ()=> {
                 <div className="relative">
                   <input
                     autoComplete="off"
-                    onChange={(e) => {
-                      nameChangeHandler(e, setEnteredName);
-                    }}
                     id="name"
-                    value={enteredName}
+                    value={formData.name}
+                    onChange={handleInputChange}
                     name="name"
                     type="text"
-                    className="border-gray-700 peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none focus:borer-rose-600"
+                    className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                     placeholder="name"
                   />
                   <label
@@ -99,17 +91,20 @@ const SignupPage = ()=> {
                     Name
                   </label>
                 </div>
+                {submit && (
+                  <small className="invalid-feedback text-red-600">
+                    {errors.name}
+                  </small>
+                )}
                 <div className="relative">
                   <input
                     autoComplete="off"
-                    onChange={(e) => {
-                      usernameChangeHandler(e, setUserName);
-                    }}
+                    value={formData.username}
+                    onChange={handleInputChange}
                     id="name"
-                    value={username}
-                    name="name"
+                    name="username"
                     type="text"
-                    className="border-gray-700 peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none focus:borer-rose-600"
+                    className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                     placeholder="name"
                   />
                   <label
@@ -119,17 +114,21 @@ const SignupPage = ()=> {
                     UserName
                   </label>
                 </div>
+                {submit && (
+                  <small className="invalid-feedback text-red-600">
+                    {errors.username}
+                  </small>
+                )}
+
                 <div className="relative">
                   <input
                     autoComplete="off"
                     id="email"
-                    value={enteredEmail}
-                    onChange={(e) => {
-                      emailChangeHandler(e, setEnteredEmail);
-                    }}
+                    value={formData.email}
+                    onChange={handleInputChange}
                     name="email"
                     type="email"
-                    className="border-gray-700 peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none focus:borer-rose-600"
+                    className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                     placeholder="Email address"
                   />
                   <label
@@ -139,64 +138,28 @@ const SignupPage = ()=> {
                     Email Address
                   </label>
                 </div>
-                <div className="relative">
-                  <input
-                    value={enteredDob}
-                    onChange={(e) => {
-                      dobChangeHandler(e, setEnteredDob);
-                    }}
-                    autoComplete="off"
-                    id="Username"
-                    name="Username"
-                    type="date"
-                    className="border-gray-700 peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none focus:borer-rose-600"
-                    placeholder="Email address"
-                  />
-                  <label
-                    htmlFor="name"
-                    className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                  >
-                    Date of birth
-                  </label>
-                </div>
-                <div className="relative">
-                  <input
-                    autoComplete="off"
-                    onChange={(e) => {
-                      phoneNoChangeHandler(e, setEnteredPhoneNo);
-                    }}
-                    id="PhoneNo"
-                    name="PhoneNo"
-                    type="number"
-                    value={enteredPhoneNo}
-                    className="border-gray-700 peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none focus:borer-rose-600"
-                    placeholder="Email address"
-                  />
-                  <label
-                    htmlFor="name"
-                    className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                  >
-                    Phone No
-                  </label>
-                </div>
+                {submit && (
+                  <small className="invalid-feedback text-red-600">
+                    {errors.email}
+                  </small>
+                )}
+
                 <div className="relative">
                   <div className="flex">
                     <input
                       autoComplete="off"
-                      onChange={(e) => {
-                        passwordChangeHandler(e, setEnteredPassword);
-                      }}
-                      value={enteredPassword}
+                      value={formData.password}
+                      onChange={handleInputChange}
                       id="password"
                       name="password"
                       type={passwordShown ? "text" : "password"}
-                      className="border-gray-700 peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none focus:borer-rose-600"
+                      className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                       placeholder="Password"
                     />
                     <img
                       role="presentation"
                       onClick={() => {
-                        showPassword(passwordShown, setPasswordShown);
+                        setPasswordShown(!passwordShown);
                       }}
                       src={
                         passwordShown
@@ -218,78 +181,46 @@ const SignupPage = ()=> {
                     </label>
                   </div>
                 </div>
-                <div className="relative">
-                  <div className="flex">
-                    <input
-                      autoComplete="off"
-                      onChange={(e) => {
-                        repeatPasswordHandler(e, setEnteredRepeatPassword);
-                      }}
-                      id="password"
-                      value={enteredRepeatPassword}
-                      name="password"
-                      type={repeatPasswordShown ? "text" : "password"}
-                      className="border-gray-700 peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none focus:borer-rose-600"
-                      placeholder="Password"
-                    />
-                    <img
-                      role="presentation"
-                      onClick={() => {
-                        showRepeatPassword(
-                          repeatPasswordShown,
-                          setRepeatPasswordShown
-                        );
-                      }}
-                      src={
-                        repeatPasswordShown
-                          ? "https://cdn-icons-png.flaticon.com/512/565/565655.png"
-                          : "https://cdn-icons-png.flaticon.com/512/6684/6684701.png"
-                      }
-                      className={
-                        repeatPasswordShown ? "w-8 h-8 p-1" : "w-8 h-8"
-                      }
-                      alt=""
-                    />
-                    <label
-                      htmlFor="password"
-                      className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >
-                      Repeat Password
-                    </label>
-                  </div>
-                </div>
-                <small
-                  role="presentation"
-                  className="text-slate-900 cursor-pointer"
-                  onClick={() => navigate("/login")}
-                >
-                  Have an account? Login
-                </small>
-             
-               
+                {submit && (
+                  <small className="invalid-feedback text-red-600">
+                    {errors.password}
+                  </small>
+                )}
               </div>
-                <div className="flex items-center justify-center border-none" >
+              <div className="flex items-center justify-center border-none">
                 {ErrMessage && (
                   <small className="text-red-600">{ErrMessage}</small>
                 )}
-                </div>
+              </div>
 
-                <div className="relative border-none">
-                  <button
-                    onClick={signupHandler}
-                    type="button"
-                    className="bg-slate-500 text-white rounded-md px-2 py-1"
-                  >
-                    sign up
-                  </button>
-                </div>
-             
+              <div className="relative border-none">
+                <button
+                  onClick={signupHandler}
+                  type="button"
+                  className="ml-2 inline-block rounded bg-slate-500 px-6 pb-2.5 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                >
+                  sign up
+                </button>
+              </div>
             </div>
+          </div>
+          <div className="my-2 mb-3 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+            <p className="mx-4 mb-0 text-center font-semibold dark:text-dark">
+              Or
+            </p>
+          </div>
+          <div className="text-center mb-4">
+            <a
+              className="inline-block text-sm text-slate-500 hover:text-slate-900"
+              onClick={() => navigate("/login")}
+            >
+              Have an account? Login
+            </a>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default SignupPage;
