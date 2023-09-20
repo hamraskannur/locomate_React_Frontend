@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Moment from "react-moment";
-import Avatar from "./Avatar";
 import { AiFillLike } from "react-icons/ai";
 import { likeReplayComment } from "../../../Api/userApi/postRequest";
 import { useNavigate } from "react-router-dom";
+import Avatars from "../avatar/Avatar";
 
 const ReplayComment = ({data ,userId}) => {
     const [like,setLike]=useState(data.likes.includes(userId))
@@ -41,8 +41,8 @@ const getUserAccount = (user) =>{
       <div className="ml-8 border-t-2 mt-2">
         <div className="flex cursor-pointer">
           <div onClick={()=>getUserAccount(data?.userId)} className="mt-2 ">
-            <Avatar
-              img={data?.ProfileImg?data?.ProfileImg:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png  "}
+            <Avatars
+              img={data?.ProfileImg}
             />
           </div>
           <span onClick={()=>getUserAccount(data?.userId)} className="font-semibold mt-5 italic text-sm ml-2">{data.username}</span>

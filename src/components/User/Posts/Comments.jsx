@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Avatar from "./Avatar";
 import { postComment, getComments } from "../../../Api/userApi/postRequest";
 import InputEmoji from "react-input-emoji";
 import Comment from "./Comment";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Avatars from "../avatar/Avatar";
 
 function Comments({ postId, setCount, count }) {
   const user=useSelector((state) => state?.user?.user);
@@ -50,8 +50,8 @@ function Comments({ postId, setCount, count }) {
     <div className="comment bg-white border-slate-300 p-2 rounded-md border-2  ">
       <div className="flex mt-3 gap-3 ">
         <div className="mt-2 ">
-          <Avatar
-            img={ProfileImg?ProfileImg:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"}
+          <Avatars
+            img={ProfileImg}
           />
         </div>
 

@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import Avatar from "../Posts/Avatar";
 import React from "react";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import Avatars from "../avatar/Avatar";
 
 const Suggestion = ({ user }) => {
   const sideBar = useSelector((state) => state?.sideBar?.sideBar);
@@ -24,13 +24,8 @@ const Suggestion = ({ user }) => {
     <>
       <div onClick={()=>getAccountPage( user._id)} className="flex items-center gap-2 py-2 m-4 px-2 hover:bg-[#bbc0c7] hover:scale-105">
         <div className='cursor-pointer'>
-          <Avatar
-          
-            img={
-              user.ProfileImg
-                ? user.ProfileImg
-                : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
-            }
+          <Avatars
+            img={user.ProfileImg}
           />
         </div>
         <div  className="px-2 font-semibold cursor-pointer">

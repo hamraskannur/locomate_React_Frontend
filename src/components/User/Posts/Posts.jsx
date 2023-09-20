@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 import { BsPencilSquare } from "react-icons/bs";
 import Comments from "./Comments";
-import Avatar from "./Avatar";
 import { AddPostActions } from "../../../redux/AddPost";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
@@ -20,6 +19,7 @@ import EditPost from "../editPost/EditPost";
 import ReportPost from "../ReportPost/ReportPost";
 import { useNavigate } from "react-router-dom";
 import { errorToast, successToast } from "../../Toast/Toast";
+import Avatars from "../avatar/Avatar";
 
 function Post({ post, onePost }) {
   const user = useSelector((state) => state?.user?.user);
@@ -128,7 +128,7 @@ function Post({ post, onePost }) {
       >
         <div className="flex gap-3 ">
           <div>
-            <Avatar
+            <Avatars
               img={
                 post?.userId?.ProfileImg
                   ? post?.userId?.ProfileImg

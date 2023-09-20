@@ -8,6 +8,7 @@ import AddPost from "../UploadPhoto/UploadPhoto";
 import { useSelector } from "react-redux";
 import UploadShorts from "../UploadShorts/UploadShorts";
 import OutsideClickHandler from "react-outside-click-handler";
+import Avatars from "../avatar/Avatar";
 
 function NavBar() {
   const [showModal, setShowModal] = useState(false);
@@ -26,18 +27,11 @@ function NavBar() {
       <div className=" flex gap-3  items-center">
         <Link to="/myAccount">
           <div className="flex ">
-            <div className=" w-8 rounded-full border-white border overflow-hidden shadow-sm shadow-gray-500">
-              <img
-                src={
-                  user?.ProfileImg
-                    ? user?.ProfileImg
-                    : "https://media.easemytrip.com/media/Blog/India/637033873695687971/637033873695687971fsrzol.jpg "
-                }
-                alt="avatars"
-              />
+            <div className="  rounded-full border-white border overflow-hidden shadow-sm shadow-gray-500">
+              <Avatars img={user.ProfileImg}/>
             </div>
             <div className="">
-              <h1 className=" max-sm:hidden max-md:hidden max-lg:hidden mt-2   text-white ">
+              <h1 className="ml-2 max-sm:hidden max-md:hidden max-lg:hidden mt-2   text-white ">
                 {user.username}
               </h1>
             </div>
