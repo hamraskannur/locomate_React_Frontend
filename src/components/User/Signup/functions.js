@@ -10,7 +10,7 @@ export const valid = (setErrors,formData) => {
   ) {
     newErrors.email = "Invalid email address";
   }
-  if (!formData.password || formData.password.length < 8) {
+  if (!formData.password || formData.password.length < 7) {
     newErrors.password = "Password must be at least 8 characters long";
   }
 
