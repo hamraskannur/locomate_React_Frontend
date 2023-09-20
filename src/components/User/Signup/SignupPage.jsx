@@ -209,7 +209,7 @@ const SignupPage = () => {
               Or
             </p>
           </div>
-          <div className="text-center mb-4">
+          <div className="text-center mb-4 cursor-pointer">
             <a
               className="inline-block text-sm text-slate-500 hover:text-slate-900"
               onClick={() => navigate("/login")}
