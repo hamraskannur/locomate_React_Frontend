@@ -43,7 +43,7 @@ function Login() {
                   token: response.token,
                 })
               );
-              successToast('susses fully logged')
+              successToast('Successfully logged')
               navigate("/");
               dispatch(hideLoading());
             }

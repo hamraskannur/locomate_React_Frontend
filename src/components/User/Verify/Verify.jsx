@@ -8,13 +8,12 @@ import { errorToast, successToast } from '../../Toast/Toast';
 function Verify() {
   const navigate = useNavigate()  
   const [searchParams]=useSearchParams()
+  const [ErrMessage, setErrMessage] = useState('');
   const dispatch = useDispatch();
   const userId=searchParams.get('id')
   const token=searchParams.get('token')
 
-    const [ErrMessage, setErrMessage] = useState('');
   const submitVerify = async (event) => {
- 
     event.preventDefault();
     dispatch(showLoading());
     try{
@@ -22,7 +21,7 @@ function Verify() {
       dispatch(hideLoading());
       if (verify.Status) {
         navigate('/login');
-        successToast('susses fully verifyed')
+        successToast('Successfully verifyed')
       } else {
         setErrMessage(verify.message);
         errorToast(verify.message)
