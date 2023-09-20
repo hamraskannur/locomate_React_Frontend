@@ -37,11 +37,11 @@ function Login() {
   const loginHandler = async (e) => {
     e.preventDefault();
     setSubmit(true);
+    setLoading(true);
+
     const newErrors = await valid(setErrors, formData);
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
-      setLoading(true);
-
       const response = await login(formData);
 
       if (response?.Status) {
