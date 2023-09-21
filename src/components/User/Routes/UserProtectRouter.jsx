@@ -1,35 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { getMyProfile } from "../../../Api/userApi/profileApi";
 import { userActions } from "../../../redux/userAuth";
 
 function UserProtectRouter(props) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  useEffect(() => {
-    const routerFunction = async () => {
-      if (localStorage.getItem("token")) {
-        let userData = await getMyProfile();
-        if (userData) {
-          dispatch(
-            userActions.userAddDetails({
-              token: localStorage.getItem("token"),
-              user: userData,
-            })
-          );
-        } else {
-          localStorage.clear();
-          dispatch(userActions.userLogout());
-          navigate("/login");
-        }
-      }
-    };
-    routerFunction();
-  }, []);
-
   const user = useSelector((state) => state?.user?.userToken);
-  if (user) {
+
+  if (localStorage.getItem("token")) {
     return props.children;
   }
   if (!localStorage.getItem("token")) {

@@ -3,6 +3,10 @@ import React, { lazy, Suspense } from 'react';
 import Spinner from "../components/User/Spinner/Spinner";
 import UserProtectRouter from '../components/User/Routes/UserProtectRouter';
 import PublicRoute from '../components/User/Routes/PublicRoute';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMyProfile } from '../Api/userApi/profileApi';
+import { userActions } from '../redux/userAuth';
+import { useEffect } from 'react';
 
 const Home = lazy(() => import('../pages/user/Home'));
 const Signup = lazy(() => import('../pages/user/Signup'));
@@ -20,6 +24,25 @@ const Search = lazy(() => import('../pages/user/Search'));
 const Page = lazy(() => import('../pages/user/404page'));
 
 function User() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state?.user?.userToken);
+
+  useEffect(() => {
+    (async()=>{
+      if (localStorage.getItem("token") && !user) {
+        let userData = await getMyProfile();
+        if (userData) {
+          dispatch(
+            userActions.userAddDetails({
+              token: localStorage.getItem("token"),
+              user: userData,
+            })
+          );
+        }
+      }
+    })()
+  }, []);
+
   return (
     <>
       <Suspense fallback={<Spinner />}>
