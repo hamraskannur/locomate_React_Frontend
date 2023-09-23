@@ -1,16 +1,14 @@
-import React from "react";
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import User from "./Routes/User";
-import Admin from "./Routes/Admin";
 import { useSelector } from "react-redux";
 import Spinner from "./components/User/Spinner/Spinner";
 import ToastContainer from "./components/Toast/ToastContainer";
-import ErrorPage from './pages/user/404page'
+const User = lazy(() => import("./Routes/User"));
+const Admin = lazy(() => import("./Routes/Admin"));
 
 function App() {
   const { loading } = useSelector((state) => state.loader);
-  console.log(loading);
   return (
     <div>
       <Router>
@@ -19,13 +17,15 @@ function App() {
             <Spinner />
           </div>
         )}
-          <>
-            <ToastContainer />
+        <>
+          <ToastContainer />
+          <Suspense fallback={<div className='h-screen'><Spinner /></div>}>
             <Routes>
               <Route path="/*" element={<User />} />
               <Route path="/admin/*" element={<Admin />} />
             </Routes>
-          </>
+          </Suspense>
+        </>
       </Router>
     </div>
   );

@@ -45,7 +45,7 @@ function User() {
 
   return (
     <>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<div className='h-screen'><Spinner /></div>}>
         <Routes>
           <Route exact path="/" element={<UserProtectRouter> <Home /> </UserProtectRouter>} />
           <Route exact path="/signup" element={<PublicRoute> <Signup /></PublicRoute>} />

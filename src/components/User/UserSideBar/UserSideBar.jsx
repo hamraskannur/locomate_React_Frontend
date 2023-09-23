@@ -118,7 +118,7 @@ const UserSideBar = () => {
                   <div>
                     {React.createElement(DiGitPullRequest, { size: "20" })}
                     {!sideBar && count > 0 && (
-                      <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                      <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
                         {count}
                       </span>
                     )}
@@ -131,7 +131,7 @@ const UserSideBar = () => {
                   >
                     Request
                     {count > 0 && (
-                      <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                      <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
                         {count}
                       </span>
                     )}
@@ -161,7 +161,7 @@ const UserSideBar = () => {
                 <div>
                   {React.createElement(MdOutlineNotifications, { size: "20" })}
                   {!sideBar && count > 0 && (
-                    <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                    <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
                       {count}
                     </span>
                   )}
@@ -174,7 +174,7 @@ const UserSideBar = () => {
                 >
                   Notifications
                   {notification && (
-                    <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                    <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
                       new
                     </span>
                   )}
@@ -188,7 +188,7 @@ const UserSideBar = () => {
                 >
                   Notifications{" "}
                   {notification && (
-                    <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                    <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
                       new
                     </span>
                   )}
