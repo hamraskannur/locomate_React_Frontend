@@ -11,23 +11,23 @@ userApi.interceptors.request.use((req) => {
   return req;
 });
 
-
 userApi.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response) {
       const { status } = error.response;
       if (status === 401) {
-           localStorage.clear()
-           window.location.href = "/login";
-      } else{
+        localStorage.clear();
+        window.location.href = "/login";
+      } else if (status === 500) {
+        window.location.href = "/500page";
+      } else {
         window.location.href = "/*";
       }
     }
     return Promise.reject(error);
   }
 );
-
 
 export const adminAPI = axios.create({
   baseURL: process.env.REACT_APP_ADMIN_API,
@@ -43,7 +43,6 @@ adminAPI.interceptors.request.use((req) => {
 export const cloudApi = axios.create({
   baseURL: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_API}/image`,
 });
-
 
 export const cloudApiVideo = axios.create({
   baseURL: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_API}/video`,

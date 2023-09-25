@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMyProfile } from '../Api/userApi/profileApi';
 import { userActions } from '../redux/userAuth';
 import { useEffect } from 'react';
+import Page from '../pages/admin/404page';
+import Internalserver from '../pages/user/500page';
 
 const Home = lazy(() => import('../pages/user/Home'));
 const Signup = lazy(() => import('../pages/user/Signup'));
@@ -21,7 +23,6 @@ const Shorts = lazy(() => import('../pages/user/Shorts'));
 const Settings = lazy(() => import('../pages/user/Settings'));
 const Notification = lazy(() => import('../pages/user/Notification'));
 const Search = lazy(() => import('../pages/user/Search'));
-const Page = lazy(() => import('../pages/user/404page'));
 
 function User() {
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ function User() {
           <Route exact path='/settings' element={<UserProtectRouter><Settings/> </UserProtectRouter>} />
           <Route exact path='/notifications' element={<UserProtectRouter><Notification/> </UserProtectRouter>} />
           <Route exact path='/search' element={<UserProtectRouter><Search/> </UserProtectRouter>} />
+          <Route path="/500page" element={<Internalserver />} />
           <Route path="/*" element={<Page />} />
         </Routes>
       </Suspense>
