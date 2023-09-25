@@ -8,12 +8,10 @@ import { hideLoading, showLoading } from "../../../redux/loadingBar";
 import { useNavigate } from "react-router-dom";
 
 const Messages = () => {
+  const user = useSelector((state) => state?.user?.user);
   const dispatch = useDispatch();
   const [chat, setChat] = useState([]);
-  const navigate = useNavigate();
   const [currentChat, setCurrentChat] = useState(null);
-  const sideBar = useSelector((state) => state?.sideBar?.sideBar);
-  const user = useSelector((state) => state?.user?.user);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sentMessage, setSentMessage] = useState(null);
   const [receiveMessages, setReceiveMessages] = useState(null);
@@ -24,7 +22,7 @@ const Messages = () => {
   useEffect(() => {
     // socket.current = io("http://localhost:8800");
     socket.current = io("https://locomatesocket.onrender.com");
-    socket.current.emit("new-user-add", user._id);
+    socket.current.emit("new-user-add", user?._id);
     socket.current.on("get-user", (users) => {
       setOnlineUsers(users);
     });
@@ -93,9 +91,9 @@ const Messages = () => {
               <Chat
                 setPhoneSizeUser={setPhoneSizeUser}
                 setPhoneSizeChat={setPhoneSizeChat}
-                key={user._id}
+                key={user?._id}
                 chat={currentChat}
-                currentUser={user._id}
+                currentUser={user?._id}
                 setSentMessage={setSentMessage}
                 receiveMessages={receiveMessages}
               />

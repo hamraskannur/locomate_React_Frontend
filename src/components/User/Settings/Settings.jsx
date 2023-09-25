@@ -7,7 +7,7 @@ import { userActions } from "../../../redux/userAuth";
 import { successToast } from "../../Toast/Toast";
 
 const Settings = () => {
-    const userPublic=useSelector((state)=>state.user.user.public)
+    const userPublic=useSelector((state)=>state?.user?.user?.public)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [switchChecked, setStateChecked] = useState(!userPublic);

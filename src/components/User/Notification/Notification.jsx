@@ -6,7 +6,7 @@ import { getAllNotifications } from "../../../Api/userApi/profileApi";
 import { viewNotification } from "../../../redux/notification";
 
 const NotificationCard = () => {
-    const userId = useSelector((state) => state?.user?.user._id);
+    const userId = useSelector((state) => state?.user?.user?._id);
     const dispatch=useDispatch()
   const [notification, setNotification] = useState([]);
   const navigate=useNavigate()

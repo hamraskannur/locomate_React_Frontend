@@ -10,6 +10,7 @@ const Suggestions = () => {
   const [user, setUsers] = useState([]);
   const userId = useSelector((state) => state?.user?.user?._id);
   useEffect(() => {
+    
     const fetchData = async () => {
         const users = await suggestionUsers();
         setUsers(users);
