@@ -30,7 +30,7 @@ function User() {
 
   useEffect(() => {
     (async()=>{
-      if (localStorage.getItem("token") && !user) {
+      if (localStorage.getItem("token") ) {
         let userData = await getMyProfile();
         if (userData) {
           dispatch(

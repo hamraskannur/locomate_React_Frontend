@@ -19,7 +19,6 @@ const Post = () => {
     const getPost = async () => {
       try{
         newPost = await getAllPosts();
-        console.log(newPost);
         newPost = newPost?.reverse();
         setPosts(newPost);
       }catch(error){

@@ -4,7 +4,7 @@ import "./App.css";
 import { useSelector } from "react-redux";
 import Spinner from "./components/User/Spinner/Spinner";
 import ToastContainer from "./components/Toast/ToastContainer";
-const User = lazy(() => import("./Routes/User"));
+import User from './Routes/User';
 const Admin = lazy(() => import("./Routes/Admin"));
 
 function App() {
