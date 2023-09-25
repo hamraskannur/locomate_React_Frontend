@@ -27,8 +27,8 @@ const UserSideBar = () => {
   const [addPost, setAddPost] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const newNotification = useSelector((state) => state?.user?.user.read);
-  const notificationSchedule =useSelector((state)=>state.notification.notificationChange)
+  const newNotification = useSelector((state) => state?.user?.user?.read);
+  const notificationSchedule =useSelector((state)=>state?.notification?.notificationChange)
  const [notification,setNotification]=useState(newNotification)
  useEffect(()=>{
  if(notificationSchedule){

@@ -21,7 +21,7 @@ const Post = () => {
     }
     getPost();
     dispatch(hideLoading());
-      dispatch(AddPostActions.Update())
+    dispatch(AddPostActions.Update())
   }, [update===true]);
 
   return (

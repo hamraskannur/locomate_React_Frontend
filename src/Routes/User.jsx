@@ -9,8 +9,8 @@ import { userActions } from '../redux/userAuth';
 import { useEffect } from 'react';
 import Page from '../pages/admin/404page';
 import Internalserver from '../pages/user/500page';
-import Home from '../pages/user/Home';
 
+const Home = lazy(() => import('../pages/user/Home'));
 const Signup = lazy(() => import('../pages/user/Signup'));
 const MyAccountPage = lazy(() => import('../pages/user/MyAccount'));
 const MessagesPage = lazy(() => import('../pages/user/Messages'));

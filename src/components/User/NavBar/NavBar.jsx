@@ -28,11 +28,11 @@ function NavBar() {
         <Link to="/myAccount">
           <div className="flex ">
             <div className="  rounded-full border-white border overflow-hidden shadow-sm shadow-gray-500">
-              <Avatars img={user.ProfileImg}/>
+              <Avatars img={user?.ProfileImg}/>
             </div>
             <div className="">
               <h1 className="ml-2 max-sm:hidden max-md:hidden max-lg:hidden mt-2   text-white ">
-                {user.username}
+                {user?.username}
               </h1>
             </div>
           </div>
