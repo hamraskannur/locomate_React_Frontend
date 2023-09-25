@@ -8,17 +8,11 @@ import Suggestion from "../Suggestion/Suggestion";
 
 const Suggestions = () => {
   const [user, setUsers] = useState([]);
-  const navigate=useNavigate()
   const userId = useSelector((state) => state?.user?.user._id);
   useEffect(() => {
     const fetchData = async () => {
-      try{
-      
         const users = await suggestionUsers();
         setUsers(users);
-      }catch(error){
-        navigate('*');
-      }
     };
     fetchData();
   }, []);
