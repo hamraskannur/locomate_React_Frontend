@@ -3,17 +3,16 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getSavedPost, getUserAllPost } from "../../../Api/userApi/postRequest";
 
-const AllPost = ({ userId, type, postCount, SavedPost,setOnePostId }) => {
+const AllPost = ({ userId, type, postCount, SavedPost, setOnePostId }) => {
   const [posts, setPosts] = useState([]);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   let newPost;
   useEffect(() => {
-    try{
-    const getPost = async () => {
-      if (SavedPost) {  
-          const response= await getSavedPost(userId)
-          setPosts(response)
-
+    try {
+      const getPost = async () => {
+        if (SavedPost) {
+          const response = await getSavedPost(userId);
+          setPosts(response);
         } else {
           if (userId) {
             newPost = await getUserAllPost(userId);
@@ -23,37 +22,56 @@ const AllPost = ({ userId, type, postCount, SavedPost,setOnePostId }) => {
         }
       };
       getPost();
-    }catch(error){
-      navigate('*');
+    } catch (error) {
+      navigate("*");
     }
   }, [userId]);
-  
-  const getSavedOnePost =(post,postUser)=>{
-    
-      post.userId=postUser
-      setOnePostId(post )
 
-  }
+  const getSavedOnePost = (post, postUser) => {
+    post.userId = postUser;
+    setOnePostId(post);
+  };
   const getOnePost = (post) => {
-    setOnePostId(post )
-
+    setOnePostId(post);
   };
   return (
     <>
       <hr />
       <div className="grid grid-cols-3 gap-3 mt-5 ">
         {posts?.map((post) => (
-          <div key={post._id}  onClick={() => {SavedPost?getSavedOnePost(post?.post,post?.userId): getOnePost(post)}}>
-            <img
-              className="rounded-md overflow-hidden h-48 flex items-center object-cover"
-              src={SavedPost?post?.post?.img[0]:post?.img[0]}
-              alt="posts"
-            />
+          <div
+            key={post._id}
+            onClick={() => {
+              SavedPost
+                ? getSavedOnePost(post?.post, post?.userId)
+                : getOnePost(post);
+            }}
+          >
+            {(SavedPost ? post?.post?.img[0] : post?.img[0]) ? (
+              <img
+                className="rounded-md overflow-hidden h-48 flex items-center object-cover"
+                src={SavedPost ? post?.post?.img[0] : post?.img[0]}
+                alt="posts"
+              />
+            ) : (
+              <video
+                class="rounded-md overflow-hidden h-48 flex items-center object-cover"
+                onClick={() => {
+                  SavedPost
+                    ? getSavedOnePost(post?.post, post?.userId)
+                    : getOnePost(post);
+                }}
+                width="400"
+                controls
+              >
+                <source src={SavedPost ? post?.post?.shorts : post?.shorts} />
+              </video>
+            )}
           </div>
         ))}
       </div>
 
-      {posts.length === 0  && type && (
+      {posts.length === 0 && type && (
         <div className="">
           <div className="flex justify-center  bg-white">
             <img

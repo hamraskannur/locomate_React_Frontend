@@ -27,12 +27,11 @@ const Post = () => {
   return (
     <>
     <div className="bg-[#F3F3F6] mb-10 ">
-      
+    
       {posts.length>0 &&  posts.map((post) => (
         <>
        {(post?.userId?.public || post?.userId?.Followers.includes(userId)  ) && post.status && <Posts post={post} key={post?._id} onePost={false} />}
        </>
-
         ))}
     </div>
         </> 

@@ -5,6 +5,7 @@ import {
   getFollowingUser,
   getFollowersUser,
 } from "../../../Api/userApi/followRequest";
+import Avatars from "../avatar/Avatar";
 
 const ShowUser = ({ type, userId }) => {
   const user = useSelector((state) => state?.user?.user?._id);
@@ -51,9 +52,7 @@ const ShowUser = ({ type, userId }) => {
                   onClick={() => goToAccountPage(user?.result?._id)}
                   className="flex gap-3 cursor-pointer"
                 >
-                  <div className="w-12 h-12 rounded-full overflow-hidden shadow-sm shadow-gray-500">
-                    <img src={user?.result?.ProfileImg} alt="avatars" />
-                  </div>
+                    <Avatars img={user?.result?.ProfileImg}/>
                   <div>
                     <h3 className="font-bold text-lg">
                       {user?.result?.username}

@@ -13,4 +13,4 @@ export const notification = createSlice({
   }
 });
 
-export const {viewNotification}=notification.actions
+export const { viewNotification }=notification.actions
