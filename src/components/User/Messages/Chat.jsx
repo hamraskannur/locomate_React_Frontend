@@ -5,6 +5,7 @@ import Moment from "react-moment";
 import { IoMdArrowBack } from "react-icons/io";
 import InputEmoji from "react-input-emoji";
 import { useNavigate } from "react-router-dom";
+import Avatars from "../avatar/Avatar";
 
 const Chat = ({
   chat,
@@ -30,12 +31,11 @@ const Chat = ({
   useEffect(() => {
     const userId = chat?.members?.find((id) => id != currentUser);
     const getUserData = async () => {
-      try{
-
+      try {
         const data = await getFriendsAccount(userId);
         setUserData(data[0]);
-      }catch(error){
-        navigate('*');
+      } catch (error) {
+        navigate("*");
       }
     };
     if (chat != null) {
@@ -49,7 +49,7 @@ const Chat = ({
         const data = await getMessages(chat?._id);
         setMessages(data);
       } catch (error) {
-        navigate('*');
+        navigate("*");
       }
     };
     fetchMessage();
@@ -79,8 +79,6 @@ const Chat = ({
     }
   };
 
-
-
   useEffect(() => {
     scroll?.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -102,11 +100,7 @@ const Chat = ({
                     <div onClick={clickUser} className="text-white  lg:hidden">
                       {React.createElement(IoMdArrowBack, { size: "20" })}
                     </div>
-                    <img
-                      src={userData?.ProfileImg?userData.ProfileImg:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"}
-                      className="lg:ml-0 ml-2 object-cover h-10 w-10 rounded-full "
-                      alt=""
-                    />
+                    <Avatars img={userData?.ProfileImg} />
                     <div className="text-white  p-3 text-lg font-semibold">
                       {userData?.username}
                     </div>

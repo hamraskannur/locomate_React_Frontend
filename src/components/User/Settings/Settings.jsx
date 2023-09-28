@@ -7,10 +7,10 @@ import { userActions } from "../../../redux/userAuth";
 import { successToast } from "../../Toast/Toast";
 
 const Settings = () => {
-    const userPublic=useSelector((state)=>state?.user?.user?.public)
+  const user=useSelector((state)=>state?.user?.user)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [switchChecked, setStateChecked] = useState(!userPublic);
+  const [switchChecked, setStateChecked] = useState(!user?.public);
   const handleLogout = () => {
     localStorage.clear();
     dispatch(userActions.userLogout());
@@ -20,11 +20,16 @@ const Settings = () => {
     const fetchData=async () =>{
        const checked = state.target.checked
        try{
-      
          const response= await changeToPrivate({checked:!checked})
          if(response.success){
-           successToast(`your account changed ${switchChecked?"public":"private"} `)
-             setStateChecked(!switchChecked);
+          setStateChecked(!switchChecked);
+          const updatedUser = { ...user, public: !user?.public };
+          dispatch(
+            userActions.userAddDetails({
+              user: updatedUser,
+            })
+            );
+            successToast(`your account changed ${switchChecked?"public":"private"} `)
          }
        }catch(error){
          navigate('*');

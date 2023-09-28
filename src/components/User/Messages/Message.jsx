@@ -15,6 +15,7 @@ const Messages = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sentMessage, setSentMessage] = useState(null);
   const [receiveMessages, setReceiveMessages] = useState(null);
+  const [searchValue,setSearchValue]= useState('');
   const [phoneSizeUser, setPhoneSizeUser] = useState(" lg:inline-block");
   const [phoneSizeChat, setPhoneSizeChat] = useState("hidden lg:inline-block");
 
@@ -59,6 +60,10 @@ const Messages = () => {
     setPhoneSizeUser("hidden lg:flex");
     setPhoneSizeChat(" lg:flex");
   };
+
+  const searchHandler=(e)=>{
+    setSearchValue(e.target.value)
+  }
   return (
     <>
       <div className="h-full ">
@@ -70,6 +75,7 @@ const Messages = () => {
               <div className="border-b-2 py-4 px-2 bg-slate-700 ">
                 <input
                   type="text"
+                  onChange={searchHandler}
                   placeholder="search chatting"
                   className="py-2 px-2 border-2 border-gray-200 rounded-2xl w-full"
                 />
@@ -78,6 +84,7 @@ const Messages = () => {
                 {chat?.map((chat) => (
                   <div onClick={() => clickUser(chat)}>
                     <AllUser
+                    searchUser={searchValue}
                       key={chat._id}
                       data={chat}
                       currentUserId={user?._id}

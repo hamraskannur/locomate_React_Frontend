@@ -118,12 +118,7 @@ function Post({ post, onePost }) {
       >
         <div className="flex gap-3 ">
           <div>
-            <Avatars
-              img={
-                post?.userId?.ProfileImg
-                  ? post?.userId?.ProfileImg
-                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
-              }
+            <Avatars img={post?.userId?.ProfileImg }
             />
           </div>
           <div
@@ -142,7 +137,7 @@ function Post({ post, onePost }) {
               )}
             </p>
           </div>
-          <div className="">
+          <div className="z-50">
             <button
               type="button"
               className="text-gray-400"

@@ -1,46 +1,46 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAllNotifications } from "../../../Api/userApi/profileApi";
-import { viewNotification } from "../../../redux/notification";
+import { userActions } from "../../../redux/userAuth";
 
 const NotificationCard = () => {
-    const userId = useSelector((state) => state?.user?.user?._id);
-    const dispatch=useDispatch()
+  const user = useSelector((state) => state?.user?.user);
+  const dispatch = useDispatch();
   const [notification, setNotification] = useState([]);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
-      try{
-
-        const notification = await getAllNotifications();
-        setNotification(notification.reverse());
-        dispatch(viewNotification())
-      }catch(error){
-        navigate('*');
-      }
-
+      const notification = await getAllNotifications();
+      setNotification(notification.reverse());
+      const updatedUser = { ...user, read:false };
+      dispatch(
+        userActions.userAddDetails({
+          user: updatedUser,
+        })
+      );
     };
     fetchData();
   }, []);
-  const getAccountPage = async (user) => {
- 
-    if (userId === user) {
 
+  const getAccountPage = async (user) => {
+    if (user._id === user) {
       navigate("/myAccount");
     } else {
-      
-      navigate('/friendsAccount',{ state: { userId: user,  }} );
+      navigate("/friendsAccount", { state: { userId: user._id } });
     }
-  
-};
+  };
   return (
     <>
       {notification.length > 0 &&
         notification.map((item) => (
           <div className="m-4 bg-white ">
-            <div onClick={()=>getAccountPage(item.userId._id)} className="flex items-center gap-3 bottom-b border-b-heavy-metal-600 p-4">
+            <div
+              onClick={() => getAccountPage(item.userId._id)}
+              className="flex items-center gap-3 bottom-b border-b-heavy-metal-600 p-4"
+            >
               <div className="w-12 rounded-full overflow-hidden shadow-sm shadow-gray-500 cursor-pointer">
                 <img
                   src={
@@ -59,7 +59,6 @@ const NotificationCard = () => {
                   {item?.text}
                 </div>
               </div>
-          
             </div>
           </div>
         ))}

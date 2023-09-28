@@ -20,6 +20,7 @@ import { userActions } from "../../../redux/userAuth";
 import UploadShorts from "../UploadShorts/UploadShorts";
 
 const UserSideBar = () => {
+  const user = useSelector((state) => state?.user?.user);
   const [showModal, setShowModal] = useState(false);
   const [shortsModal, setShortsModal] = useState(false);
   const [userPublic, setUserPublic] = useState(false);
@@ -27,14 +28,14 @@ const UserSideBar = () => {
   const [addPost, setAddPost] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const newNotification = useSelector((state) => state?.user?.user?.read);
-  const notificationSchedule =useSelector((state)=>state?.notification?.notificationChange)
- const [notification,setNotification]=useState(newNotification)
- useEffect(()=>{
- if(notificationSchedule){
-  setNotification(false)
- }
- },[notificationSchedule])
+ const [notification,setNotification]=useState(user?.read)
+  useEffect(() => {
+    setUserPublic(user?.public);
+    setCount(user?.Requests?.length);
+    setNotification(user?.read)
+  }, [user]);
+
+
   const menus = [
     { name: "Home", link: "/", icon: BiHomeAlt },
     { name: "search", link: "/search", icon: BiSearch },
@@ -42,18 +43,13 @@ const UserSideBar = () => {
     { name: "shorts", link: "/shorts", icon: MdSlowMotionVideo },
     { name: "settings", link: "/settings", icon: FiSettings },
   ];
-  const user = useSelector((state) => state?.user?.user);
-  useEffect(() => {
-    setUserPublic(user?.public);
-    setCount(user?.Requests?.length);
-  }, []);
+  
 
   const sideBar = useSelector((state) => state?.sideBar?.sideBar);
   const logOut = (e) => {
     localStorage.clear();
     dispatch(userActions.userLogout());
-    navigate("/login");
-    
+    navigate("/login")
   };
 
   return (
@@ -286,7 +282,7 @@ const UserSideBar = () => {
             >
               <button
                 type="button"
-                className="group flex items-center text-sm  font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
+                className="group flex items-center text-sm gap-3.5 font-medium p-2 hover:bg-[#bbc0c7]  rounded-md"
               >
                 <div>{React.createElement(BiLogOut, { size: "20" })}</div>
                 <h2

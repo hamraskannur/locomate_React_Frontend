@@ -8,6 +8,7 @@ import { TiTick } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../../redux/loadingBar";
 import { useNavigate } from "react-router-dom";
+import { userActions } from "../../../redux/userAuth";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,6 @@ const EditProfile = () => {
     async function getUser() {
       try{
         user = await getUserData();
-        console.log(user,"000");
         setUserData(user);
       }catch(error){
         navigate('*');
@@ -60,6 +60,11 @@ const EditProfile = () => {
         const response = await saveUserData(userData);
         
         if (response?.success === true) {
+          dispatch(
+            userActions.userAddDetails({
+              user: userData,
+            })
+          );
           setSuccess(true);
         } else if (response?.success === "noUpdates") {
           setSuccess(false);

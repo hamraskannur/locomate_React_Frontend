@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Avatars from "../avatar/Avatar";
 
 const SearchResults = ({ searchResults }) => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const userId = useSelector((state) => state?.user?.user._id);
   const goToAccount = (user) => {
     if (userId === user) {
@@ -14,25 +15,17 @@ const SearchResults = ({ searchResults }) => {
 
   return (
     <div className="bg-white ml-5">
-      
       <div className="px-5">
         {searchResults.length !== 0 ? (
           searchResults.map((result) => {
             return (
               <div
-                onClick={()=>goToAccount(result._id)}
+                onClick={() => goToAccount(result._id)}
                 className="border-b p-4 -mx-4 border-b-heavy-metal-300 hover:bg-heavy-metal-200 cursor-pointer"
               >
                 <div className="flex gap-3">
-                  <div className="w-12 h-12 rounded-full overflow-hidden shadow-sm shadow-gray-500">
-                    <img
-                      src={
-                        result?.ProfileImg
-                          ? result?.ProfileImg
-                          : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
-                      }
-                      alt="avatars"
-                    />
+                  <div className=" rounded-full overflow-hidden shadow-sm shadow-gray-500">
+                    <Avatars img={result?.ProfileImg} size="w-12 h-12"/>
                   </div>
                   <div>
                     <h3 className="font-bold text-lg">{result?.username}</h3>
@@ -44,7 +37,7 @@ const SearchResults = ({ searchResults }) => {
           })
         ) : (
           <div>
-            <div className="py-10 flex justify-center" >
+            <div className="py-10 flex justify-center">
               <p className="font-bold text-heavy-metal-800">No User Found</p>
             </div>
           </div>

@@ -1,9 +1,9 @@
 import React from "react";
 
-const Avatars = ({img}) => {
+const Avatars = ({img,size}) => {
   return (
     <div>
-      <div class="w-9 rounded-full overflow-hidden">
+      <div class={`${size?size:"w-9"} rounded-full overflow-hidden`}>
         <img
           src={
             img

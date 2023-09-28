@@ -51,16 +51,17 @@ function User() {
           <Route exact path="/" element={<UserProtectRouter> <Home /> </UserProtectRouter>} />
           <Route exact path="/signup" element={<PublicRoute> <Signup /></PublicRoute>} />
           <Route exact path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-          <Route exact path="/myAccount" element={<UserProtectRouter><MyAccountPage/> </UserProtectRouter>} />
-          <Route exact path="/messages" element={<UserProtectRouter><MessagesPage /></UserProtectRouter>} />
-          <Route exact path='/friendsAccount' element={<UserProtectRouter><FriendsAccountPage /> </UserProtectRouter>} />
-          <Route exact path="/friends" element={<UserProtectRouter> <FriendsPage /> </UserProtectRouter>} />
-          <Route exact path="/editProfile" element={<UserProtectRouter> <EditProfilePage /> </UserProtectRouter>} />
           <Route exact path="/verify" element={<PublicRoute><VerifyPage /></PublicRoute>} />
+          <Route exact path='/search' element={<UserProtectRouter><Search/> </UserProtectRouter>} />
+          <Route exact path="/messages" element={<UserProtectRouter><MessagesPage /></UserProtectRouter>} />
           <Route exact path='/shorts' element={<UserProtectRouter><Shorts /></UserProtectRouter>} />
           <Route exact path='/settings' element={<UserProtectRouter><Settings/> </UserProtectRouter>} />
+          <Route exact path="/friends" element={<UserProtectRouter> <FriendsPage /> </UserProtectRouter>} />
           <Route exact path='/notifications' element={<UserProtectRouter><Notification/> </UserProtectRouter>} />
-          <Route exact path='/search' element={<UserProtectRouter><Search/> </UserProtectRouter>} />
+          <Route exact path="/editProfile" element={<UserProtectRouter> <EditProfilePage /> </UserProtectRouter>} />
+
+          <Route exact path='/friendsAccount' element={<UserProtectRouter><FriendsAccountPage /> </UserProtectRouter>} />
+          <Route exact path="/myAccount" element={<UserProtectRouter><MyAccountPage/> </UserProtectRouter>} />
           <Route path="/500page" element={<Internalserver />} />
           <Route path="/*" element={<Page />} />
         </Routes>

@@ -14,7 +14,6 @@ const Search = () => {
     try {
       const fetchSearchData = async () => {
         if (searchInput !== "") {
-          console.log(searchInput);
           try {
             const searchResponse = await searchUserApi(searchInput);
             setSearchUsers(searchResponse);

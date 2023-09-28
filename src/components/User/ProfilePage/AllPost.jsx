@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getSavedPost, getUserAllPost } from "../../../Api/userApi/postRequest";
+import { getUserAllShorts } from "../../../Api/userApi/videoRequest";
 
-const AllPost = ({ userId, type, postCount, SavedPost, setOnePostId }) => {
+const AllPost = ({ userId, type, postCount, SavedPost, setOnePostId,shorts }) => {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
   let newPost;
   useEffect(() => {
     try {
       const getPost = async () => {
-        if (SavedPost) {
+        if(shorts){
+          const shorts = await getUserAllShorts(userId)
+          setPosts(shorts);
+        }else if (SavedPost) {
           const response = await getSavedPost(userId);
           setPosts(response);
         } else {
@@ -71,7 +75,7 @@ const AllPost = ({ userId, type, postCount, SavedPost, setOnePostId }) => {
         ))}
       </div>
 
-      {posts.length === 0 && type && (
+      {posts.length === 0 && type && !SavedPost && (
         <div className="">
           <div className="flex justify-center  bg-white">
             <img
@@ -81,7 +85,7 @@ const AllPost = ({ userId, type, postCount, SavedPost, setOnePostId }) => {
             />
           </div>
           <div className="flex justify-center">
-            <h1 className="not-italic">share your post</h1>
+            <h1 className="not-italic">share your {shorts?"shorts":"post"}</h1>
           </div>
         </div>
       )}

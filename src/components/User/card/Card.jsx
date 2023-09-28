@@ -36,6 +36,7 @@ const Card = ({ data, functionName, button, request, deleteReq }) => {
             onClick={() => getAccountPage(data?._id)}
             className="h-24 cursor-pointer"
             src={
+              data?.ProfileImg?data?.ProfileImg:
               "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
             }
             alt=""

@@ -1,10 +1,10 @@
 import React,{ useState, useEffect } from "react";
-import Shorts from "./Shorts";
-import {  useDispatch, useSelector } from "react-redux";
-import { getAllVideo } from "../../../Api/userApi/videoRequest";
-import { hideLoading, showLoading } from "../../../redux/loadingBar";  
-import { AddPostActions } from '../../../redux/AddPost'
 import { useNavigate } from "react-router-dom";
+import {  useDispatch, useSelector } from "react-redux";
+
+import { getAllVideo } from "../../../Api/userApi/videoRequest";
+import { AddPostActions } from '../../../redux/AddPost'
+import Posts from "../Posts/Posts"
 
 const GetShorts = () => {
   const [posts, setPosts] = useState([]);
@@ -32,8 +32,7 @@ const GetShorts = () => {
 
       {posts.map((post) => (
         <>
-
-       { (post?.userId?.public || post?.userId?.Followers.includes(userId)  ) && post.status && <Shorts post={post} key={post?._id} onePost={false} />}
+       { (post?.userId?.public || post?.userId?.Followers.includes(userId)  ) && post.status && <Posts post={post} key={post?._id} onePost={false} />}
        </>
 
 ))}
