@@ -20,6 +20,8 @@ const AllUser = ({ data, currentUserId, onlineUsers ,searchUser}) => {
   useEffect(()=>{
     if(searchUser){
       setNotAllowed(userData.username.toLowerCase().includes(searchUser.toLowerCase())) 
+    }else{
+      setNotAllowed(true);
     }
   },[searchUser])
   return (
