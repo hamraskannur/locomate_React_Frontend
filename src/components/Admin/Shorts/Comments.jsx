@@ -12,19 +12,11 @@ const navigate=useNavigate()
   const [comment, setComment] = useState([]);
   
   useEffect(() => {
-    const getCommentAll = async () => {
-      try{
-        const response = await getComments(postId);
-        console.log(response);
-        setComment(response);
-        setCount(response.length);
-
-      }catch(error){
-        navigate('/admin/*');
-      }
-    };
-    
-    getCommentAll();
+    (async () => {
+      const response = await getComments(postId);
+      setComment(response);
+      setCount(response.length);
+    })()
   }, []);
 
   const changeComment = (e) => {

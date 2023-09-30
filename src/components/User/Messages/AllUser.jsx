@@ -9,13 +9,11 @@ const AllUser = ({ data, currentUserId, onlineUsers ,searchUser}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    
     const userId = data.members.find((id) => id != currentUserId);
-    const getUserData = async () => {
+    (async () => {
       const data = await getFriendsAccount(userId);
       setUserData(data[0]);
-    };
-    getUserData();
+    })()
   }, []);
 
 

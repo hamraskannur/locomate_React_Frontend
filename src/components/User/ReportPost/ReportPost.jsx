@@ -8,7 +8,6 @@ const ReportPost = ({setReport ,postId,video}) => {
      const navigate=useNavigate()
     const submitHandler =async () => {
       try{
-
         const response=await reportPost({newDescription,postId,video})
         if(response.success){
           setReport(false)

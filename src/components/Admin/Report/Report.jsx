@@ -8,16 +8,10 @@ const Report = () => {
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    const functionGetAllReportPost = async () => {
-      try{
-        const response = await getAllReportPost();
-        setPost(response.Posts);
-
-      }catch(error){
-        navigate('/admin/*');
-      }
-    };
-    functionGetAllReportPost();
+    (async()=>{
+      const response = await getAllReportPost();
+      setPost(response.Posts);
+    })()
   }, [loading]);
 
   const handleBlockPost = async (postId) => {

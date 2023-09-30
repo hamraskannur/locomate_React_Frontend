@@ -12,21 +12,16 @@ const ShowUser = ({ type, userId }) => {
   const navigate = useNavigate();
   const [users, setUsers] = useState();
   useEffect(() => {
-    const getUserData = async (type) => {
-      try {
-        if (type === "Following") {
-          const user = await getFollowingUser(userId);
-          setUsers(user);
-        }
-        if (type === "Followers") {
-          const user = await getFollowersUser(userId);
-          setUsers(user);
-        }
-      } catch (error) {
-        navigate("/admin/*");
+    (async () => {
+      if (type === "Following") {
+        const user = await getFollowingUser(userId);
+        setUsers(user);
       }
-    };
-    getUserData(type);
+      if (type === "Followers") {
+        const user = await getFollowersUser(userId);
+        setUsers(user);
+      }
+    })();
   }, [type, userId]);
 
   const goToAccountPage = (userId) => {

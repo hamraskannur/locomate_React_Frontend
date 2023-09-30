@@ -43,15 +43,10 @@ const Messages = () => {
 
   useEffect(() => {
     dispatch(showLoading());
-    const getChat = async () => {
-      try {
-        const data = await userChat(user?._id);
-        setChat(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getChat();
+    (async () => {
+      const data = await userChat(user?._id);
+      setChat(data);
+    })()
     dispatch(hideLoading());
   }, []);
 

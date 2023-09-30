@@ -10,18 +10,13 @@ const NotificationCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const allNotifications = await getAllNotifications();
-        if (allNotifications) {
-          setNotifications(allNotifications.reverse());
-          dispatch(viewNotification());
-        }
-      } catch (error) {
-        navigate("/admin/*");
+    (async () => {
+      const allNotifications = await getAllNotifications();
+      if (allNotifications) {
+        setNotifications(allNotifications.reverse());
+        dispatch(viewNotification());
       }
-    };
-    fetchData();
+    })();
   }, []);
 
   const getAccountPage = async () => {

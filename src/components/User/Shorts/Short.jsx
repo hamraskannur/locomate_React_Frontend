@@ -1,42 +1,37 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getAllVideo } from "../../../Api/userApi/videoRequest";
-import { AddPostActions } from '../../../redux/AddPost'
-import Posts from "../Posts/Posts"
+import { AddPostActions } from "../../../redux/AddPost";
+import Posts from "../Posts/Posts";
 
 const GetShorts = () => {
   const [posts, setPosts] = useState([]);
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const userId = useSelector((state) => state?.user?.user?._id);
-  const update = useSelector((state) => state.addPost.AddPost); 
+  const update = useSelector((state) => state.addPost.AddPost);
   useEffect(() => {
-    const getPost = async () => {
-      try{
-        let newPost = await getAllVideo();
-        newPost = newPost?.reverse();
-        setPosts(newPost);
-      
-      }catch(error){
-        navigate('*');
-      }
-    };
-    getPost();
-    dispatch(AddPostActions.Update())
-  }, [update===true]);
+    (async () => {
+      let newPost = await getAllVideo();
+      newPost = newPost?.reverse();
+      setPosts(newPost);
+    })();
+    dispatch(AddPostActions.Update());
+  }, [update === true]);
 
   return (
     <div className="mb-10">
-
       {posts.map((post) => (
         <>
-       { (post?.userId?.public || post?.userId?.Followers.includes(userId)  ) && post.status && <Posts post={post} key={post?._id} onePost={false} />}
-       </>
-
-))}
-</div>
+          {(post?.userId?.public || post?.userId?.Followers.includes(userId)) &&
+            post.status && (
+              <Posts post={post} key={post?._id} onePost={false} />
+            )}
+        </>
+      ))}
+    </div>
   );
 };
 

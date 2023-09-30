@@ -8,9 +8,8 @@ const AllPost = ({ userId, type, postCount, SavedPost, setOnePostId,shorts }) =>
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
   let newPost;
-  useEffect(() => {
-    try {
-      const getPost = async () => {
+  useEffect(() => {      
+      (async()=>{
         if(shorts){
           const shorts = await getUserAllShorts(userId)
           setPosts(shorts);
@@ -24,11 +23,7 @@ const AllPost = ({ userId, type, postCount, SavedPost, setOnePostId,shorts }) =>
             postCount(newPost.length);
           }
         }
-      };
-      getPost();
-    } catch (error) {
-      navigate("*");
-    }
+      })()
   }, [userId]);
 
   const getSavedOnePost = (post, postUser) => {

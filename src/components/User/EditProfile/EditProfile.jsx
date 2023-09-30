@@ -12,7 +12,7 @@ import { userActions } from "../../../redux/userAuth";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
- const navigate = useNavigate()
+  const navigate = useNavigate();
   const proImageRef = useRef();
   const coverImageRef = useRef();
   const [proImg, setProImg] = useState();
@@ -21,19 +21,14 @@ const EditProfile = () => {
   const [imgErr, setImgErr] = useState("");
   const [success, setSuccess] = useState(false);
   const [noUpdates, setNoUpdates] = useState(false);
- 
+
   let user;
   useEffect(() => {
     dispatch(showLoading());
-    async function getUser() {
-      try{
-        user = await getUserData();
-        setUserData(user);
-      }catch(error){
-        navigate('*');
-      }
-    }
-    getUser();
+    (async () => {
+      user = await getUserData();
+      setUserData(user);
+    })();
     dispatch(hideLoading());
   }, []);
   const handleEdit = async (e) => {
@@ -42,45 +37,43 @@ const EditProfile = () => {
   };
 
   const submitHandler = async (e) => {
-    try{
+    try {
+      if (userData.username.trim().length > 0) {
+        if (userData.name.trim().length > 0) {
+          if (coverImg) {
+            const coverImageLink = await uploadImage(coverImg);
+            userData.coverImg = coverImageLink;
+            setCoverImg(null);
+          }
+          if (proImg) {
+            const proImageLink = await uploadImage(proImg);
+            userData.ProfileImg = proImageLink;
+            setProImg(null);
+          }
+          const response = await saveUserData(userData);
 
-   
-    if (userData.username.trim().length > 0) {
-      if (userData.name.trim().length > 0) {
-        if (coverImg) {
-          const coverImageLink = await uploadImage(coverImg);
-          userData.coverImg = coverImageLink;
-          setCoverImg(null);
-        }
-        if (proImg) {
-          const proImageLink = await uploadImage(proImg);
-          userData.ProfileImg = proImageLink;
-          setProImg(null);
-        }
-        const response = await saveUserData(userData);
-        
-        if (response?.success === true) {
-          dispatch(
-            userActions.userAddDetails({
-              user: userData,
-            })
-          );
-          setSuccess(true);
-        } else if (response?.success === "noUpdates") {
-          setSuccess(false);
-          setNoUpdates(true);
+          if (response?.success === true) {
+            dispatch(
+              userActions.userAddDetails({
+                user: userData,
+              })
+            );
+            setSuccess(true);
+          } else if (response?.success === "noUpdates") {
+            setSuccess(false);
+            setNoUpdates(true);
+          } else {
+            setImgErr(response.message);
+          }
         } else {
-          setImgErr(response.message);
+          setImgErr("please fill name");
         }
       } else {
-        setImgErr("please fill name");
+        setImgErr("please fill userName");
       }
-    } else {
-      setImgErr("please fill userName");
+    } catch (error) {
+      navigate("*");
     }
-  }catch(error){
-    navigate('*');
-  }
   };
 
   const coverImgChangeHandler = (e) => {
@@ -218,7 +211,7 @@ const EditProfile = () => {
                       Name
                     </label>
                     <input
-                    name="name"
+                      name="name"
                       onChange={handleEdit}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"

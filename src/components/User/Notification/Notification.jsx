@@ -12,17 +12,16 @@ const NotificationCard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       const notification = await getAllNotifications();
       setNotification(notification.reverse());
-      const updatedUser = { ...user, read:false };
+      const updatedUser = { ...user, read: false };
       dispatch(
         userActions.userAddDetails({
           user: updatedUser,
         })
       );
-    };
-    fetchData();
+    })();
   }, []);
 
   const getAccountPage = async (user) => {

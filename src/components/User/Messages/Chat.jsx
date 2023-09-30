@@ -25,28 +25,20 @@ const Chat = ({chat,currentUser,setSentMessage,receiveMessages,setPhoneSizeUser,
   useEffect(() => {
     const userId = chat?.members?.find((id) => id != currentUser);
     const getUserData = async () => {
-      try {
         const data = await getFriendsAccount(userId);
         setUserData(data[0]);
-      } catch (error) {
-        navigate("*");
-      }
     };
     if (chat != null) {
       getUserData();
     }
+
   }, [chat, currentUser]);
 
   useEffect(() => {
-    const fetchMessage = async () => {
-      try {
-        const data = await getMessages(chat?._id);
-        setMessages(data);
-      } catch (error) {
-        navigate("*");
-      }
-    };
-    fetchMessage();
+    (async () => {
+      const data = await getMessages(chat?._id);
+      setMessages(data);
+    })()
   }, [chat, currentUser]);
 
   const changeMessage = (message) => {

@@ -6,7 +6,6 @@ import { AddPostActions } from "../../../redux/AddPost";
 import { errorToast, successToast } from "../../Toast/Toast";
 
 const EditPost = ({ setEditPost,shorts, img, description, postId,setDescription }) => {
-  const dispatch = useDispatch();
   const navigate=useNavigate()
   const [newDescription, setNewDescription] = useState(description);
   const [loading, setLoading] = useState(false);

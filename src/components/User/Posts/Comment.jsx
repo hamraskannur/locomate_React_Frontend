@@ -12,9 +12,9 @@ import InputEmoji from "react-input-emoji";
 import { useNavigate } from "react-router-dom";
 
 const Comment = ({ comment }) => {
-  const navigate = useNavigate()  
+  const navigate = useNavigate();
 
-    const user = useSelector((state) => state?.user?.user);
+  const user = useSelector((state) => state?.user?.user);
   const userId = user._id;
   const [AllReplayComment, setAllReplayComment] = useState();
   const [Reply, setReply] = useState(false);
@@ -23,32 +23,24 @@ const Comment = ({ comment }) => {
   const [likeCount, setLikeCount] = useState(comment?.likes?.length);
   const [replayCommentCount, setReplayCommentCount] = useState(0);
 
-
-  const getUserAccount = (user) =>{
+  const getUserAccount = (user) => {
     if (userId === user) {
       navigate("/myAccount");
     } else {
       navigate("/friendsAccount", { state: { userId: user } });
     }
-  }
+  };
 
   useEffect(() => {
-    const getReplayCommentReq = async () => {
-      try{
-        const response = await getReplayComment(comment._id);
-        setAllReplayComment(response);
-        setReplayCommentCount(response.length);
-
-      }catch(error){
-        navigate('*');
-      }
-    };
-    getReplayCommentReq();
+    (async () => {
+      const response = await getReplayComment(comment._id);
+      setAllReplayComment(response);
+      setReplayCommentCount(response.length);
+    })();
   }, []);
 
   const likeMainLike = async (commentId) => {
-    try{
-
+    try {
       const response = await likeMainComment({ commentId });
       if (response.success) {
         if (like) {
@@ -59,8 +51,8 @@ const Comment = ({ comment }) => {
           setLike(true);
         }
       }
-    }catch(error){
-      navigate('*');
+    } catch (error) {
+      navigate("*");
     }
   };
 
@@ -75,12 +67,12 @@ const Comment = ({ comment }) => {
       const response = await postReplayComment({ commentId, newComment });
       response.username = user.username;
       response.ProfileImg = user.ProfileImg;
-      response.likes=[]
+      response.likes = [];
       setAllReplayComment([response, ...AllReplayComment]);
       setReplayCommentCount(replayCommentCount + 1);
       setNewComment("");
     } catch (error) {
-       navigate('*');
+      navigate("*");
     }
   };
   return (
@@ -88,7 +80,7 @@ const Comment = ({ comment }) => {
       <div className="flex comment mt-0 p-2 border-slate-300 rounded-full ">
         <div className="cursor-pointer rounded-full h-9 w-9 overflow-hidden border-slate-700 cur">
           <img
-          onClick={()=>getUserAccount(comment.userId)}
+            onClick={() => getUserAccount(comment.userId)}
             src={
               comment?.ProfileImg
                 ? comment?.ProfileImg
@@ -98,7 +90,10 @@ const Comment = ({ comment }) => {
           />
         </div>
         <div className="ml-3 bg-gray-100 w-full cursor-pointer rounded-md ">
-          <span onClick={()=>getUserAccount(comment.userId)} className="mt-3 ml-1 italic text-sm cursor-pointer font-semibold">
+          <span
+            onClick={() => getUserAccount(comment.userId)}
+            className="mt-3 ml-1 italic text-sm cursor-pointer font-semibold"
+          >
             {comment.username}
           </span>
 
@@ -108,7 +103,7 @@ const Comment = ({ comment }) => {
           >
             {comment.createdAt}
           </Moment>
-        
+
           <div className="info ml-3 mt-2 text-sm">
             <p>{comment.comment}</p>
           </div>
@@ -156,7 +151,7 @@ const Comment = ({ comment }) => {
                 />
               </div>
               {AllReplayComment.map((data) => (
-                <ReplayComment data={data} userId={user._id} key={data._id}/>
+                <ReplayComment data={data} userId={user._id} key={data._id} />
               ))}
             </>
           )}

@@ -9,17 +9,11 @@ function Comments({ postId, setCount, count }) {
   const [comment, setComment] = useState();
   
   useEffect(() => {
-    const getCommentAll = async () => {
-      try{
-        const response = await getComments(postId);
-        setComment(response);
-        setCount(response.length);
-
-      }catch(error){
-        navigate('/admin/*');
-      }
-    };
-    getCommentAll();
+    (async () => {
+      const response = await getComments(postId);
+      setComment(response);
+      setCount(response.length);
+    })()
   }, []);
 
 

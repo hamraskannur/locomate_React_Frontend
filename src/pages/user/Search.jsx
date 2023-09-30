@@ -11,29 +11,19 @@ const Search = () => {
   const [searchUsers, setSearchUsers] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    try {
-      const fetchSearchData = async () => {
-        if (searchInput !== "") {
-          try {
-            const searchResponse = await searchUserApi(searchInput);
-            setSearchUsers(searchResponse);
-          } catch (error) {
-            navigate("*");
-          }
-        } else {
-          setSearchUsers([]);
-          console.log("null search input");
-        }
-      };
-      fetchSearchData();
-    } catch (error) {
-      console.log(error);
-    }
+    (async () => {
+      if (searchInput !== "") {
+        const searchResponse = await searchUserApi(searchInput);
+        setSearchUsers(searchResponse);
+      } else {
+        setSearchUsers([]);
+      }
+    })();
   }, [searchInput]);
   return (
     <Layout>
       <div className="w-6/12 max-sm:w-full mx-auto max-md:w-full max-lg:w-full">
-        <h2 className="hidden md:block text-3xl m-5 text-heavy-metal-500 mx-auto opacity-40">
+        <h2 className="pl-5 hidden md:block text-3xl m-5 text-heavy-metal-500 mx-auto opacity-40">
           Search here
         </h2>
         <SearchBar setSearchInput={setSearchInput} />

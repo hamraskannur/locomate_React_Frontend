@@ -7,21 +7,20 @@ import { useNavigate } from "react-router-dom";
 import Avatars from "../avatar/Avatar";
 
 function Comments({ postId, setCount, count }) {
-  const user=useSelector((state) => state?.user?.user);
-  const ProfileImg = user.ProfileImg
-  const navigate = useNavigate
+  const user = useSelector((state) => state?.user?.user);
+  const ProfileImg = user.ProfileImg;
+  const navigate = useNavigate;
 
   const [newComment, setNewComment] = useState("");
   const [img, setImg] = useState("");
   const [comment, setComment] = useState([]);
-  
+
   useEffect(() => {
-    const getCommentAll = async () => {
+    (async () => {
       const response = await getComments(postId);
       setComment(response);
       setCount(response.length);
-    };
-    getCommentAll();
+    })();
   }, []);
 
   const changeComment = (e) => {
@@ -30,29 +29,24 @@ function Comments({ postId, setCount, count }) {
 
   const handlePostComment = async () => {
     if (newComment.trim().length === 0) return;
-    try{
-
+    try {
       const response = await postComment(postId, newComment);
-        response.username=user.username
-        response.ProfileImg=user.ProfileImg
-        response.likes=[]
-        response._id=response._id
-        setComment([response, ...comment]);
-        setCount(count + 1);
-        setNewComment("");
-        
-    }catch(error){
-      navigate('*');
+      response.username = user.username;
+      response.ProfileImg = user.ProfileImg;
+      response.likes = [];
+      response._id = response._id;
+      setComment([response, ...comment]);
+      setCount(count + 1);
+      setNewComment("");
+    } catch (error) {
+      navigate("*");
     }
-    
   };
   return (
     <div className="comment bg-white border-slate-300 p-2 rounded-md border-2  ">
       <div className="flex mt-3 gap-3 ">
         <div className="mt-2 ">
-          <Avatars
-            img={ProfileImg}
-          />
+          <Avatars img={ProfileImg} />
         </div>
 
         <div className="border-none ml-0  grow rounded-full">
@@ -70,12 +64,9 @@ function Comments({ postId, setCount, count }) {
           src="https://cdn-icons-png.flaticon.com/512/3106/3106794.png"
         />
       </div>
-      <div
-        className="max-h-96	overflow-y-scroll"
-        
-      >
+      <div className="max-h-96	overflow-y-scroll">
         {comment?.map((comment) => (
-         <Comment comment={comment} key={comment?._id} />
+          <Comment comment={comment} key={comment?._id} />
         ))}
       </div>
     </div>

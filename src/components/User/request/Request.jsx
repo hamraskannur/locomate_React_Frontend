@@ -16,37 +16,46 @@ const Request = () => {
   const [request, setRequest] = useState([]);
   useEffect(() => {
     dispatch(showLoading());
-    const req = async () => {
+    (async () => {
       const request = await getAllRequest();
       setRequest(request);
-    };
-    req();
+    })();
     dispatch(hideLoading());
   }, []);
 
   const acceptReq = async (acceptId) => {
     const response = await acceptRequest({ acceptId });
     if (response.success) {
-      setRequest((prevRequest) => prevRequest.filter((req) => req.Requests[0]._id !== acceptId));
-      const updatedUser = { ...user, Requests: user?.Requests.filter((request) => request !== acceptId) };
+      setRequest((prevRequest) =>
+        prevRequest.filter((req) => req.Requests[0]._id !== acceptId)
+      );
+      const updatedUser = {
+        ...user,
+        Requests: user?.Requests.filter((request) => request !== acceptId),
+      };
       dispatch(
         userActions.userAddDetails({
           user: updatedUser,
         })
-        );
+      );
     }
   };
 
   const deleteReq = async (deleteId) => {
     const response = await deleteRequests(deleteId);
     if (response.success) {
-      setRequest((prevRequest) => prevRequest.filter((req) => req.Requests[0]._id !== deleteId));
-      const updatedUser = { ...user,  Requests: user?.Requests.filter((request) => request !== deleteId)  };
+      setRequest((prevRequest) =>
+        prevRequest.filter((req) => req.Requests[0]._id !== deleteId)
+      );
+      const updatedUser = {
+        ...user,
+        Requests: user?.Requests.filter((request) => request !== deleteId),
+      };
       dispatch(
         userActions.userAddDetails({
           user: updatedUser,
         })
-        );
+      );
     }
   };
 

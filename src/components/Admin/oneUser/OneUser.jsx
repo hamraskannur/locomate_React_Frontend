@@ -13,17 +13,12 @@ const OneUser = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const myProfile = async () => {
+    (async () => {
       if (userId) {
-        try {
-          const newUserData = await getOneUser(userId);
-          setUserData(newUserData);
-        } catch (error) {
-          navigate("/admin/*");
-        }
+        const newUserData = await getOneUser(userId);
+        setUserData(newUserData);
       }
-    };
-    myProfile();
+    })();
   }, [userId]);
   return <>{userData && <ProfilePage userData={userData[0]} />}</>;
 };

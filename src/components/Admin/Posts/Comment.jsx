@@ -20,17 +20,13 @@ const Comment = ({ comment }) => {
  
  
   useEffect(() => {
-    const getReplayCommentReq = async () => {
-      try{
-        const response = await getReplayComment(comment._id);
-        setAllReplayComment(response);
-        setReplayCommentCount(response.length);
+   
+    (async () => {
+      const response = await getReplayComment(comment._id);
+      setAllReplayComment(response);
+      setReplayCommentCount(response.length);
 
-      }catch(error){
-        navigate('/admin/*');
-      }
-    };
-    getReplayCommentReq();
+    })()
   }, []);
 
 
