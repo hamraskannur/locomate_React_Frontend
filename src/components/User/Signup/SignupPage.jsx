@@ -52,6 +52,8 @@ const SignupPage = () => {
 
         setErrMessage(response.message);
       }
+    }else{
+     setLoading(false);
     }
   };
   return (
