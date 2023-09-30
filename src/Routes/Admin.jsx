@@ -1,7 +1,9 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import AdminProtectRouter from '../components/Admin/Routes/AdminProtectRouter';
 import AdminPublicRoute from '../components/Admin/Routes/AdminPublicRoute';
+import Spinner from "../components/User/Spinner/Spinner";
 
 const Dashboard = lazy(() => import('../pages/admin/DashboardPage'));
 const ShowUsers = lazy(() => import('../pages/admin/ShowUsers'));
@@ -15,7 +17,7 @@ const ErrorPage = lazy(() => import('../pages/admin/404page'));
 
 function Admin() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className='h-screen'><Spinner /></div>}>
       <Routes>
         <Route path="/" element={<AdminProtectRouter><Dashboard /></AdminProtectRouter>} />
         <Route path="/allUsers" element={<AdminProtectRouter><ShowUsers /></AdminProtectRouter>} />

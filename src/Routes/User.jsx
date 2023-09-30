@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense,useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getMyProfile } from '../Api/userApi/profileApi';
+import { userActions } from '../redux/userAuth';
 import Spinner from "../components/User/Spinner/Spinner";
 import UserProtectRouter from '../components/User/Routes/UserProtectRouter';
 import PublicRoute from '../components/User/Routes/PublicRoute';
-import { useDispatch, useSelector } from 'react-redux';
-import { getMyProfile } from '../Api/userApi/profileApi';
-import { userActions } from '../redux/userAuth';
-import { useEffect } from 'react';
 import Page from '../pages/admin/404page';
 import Internalserver from '../pages/user/500page';
 
