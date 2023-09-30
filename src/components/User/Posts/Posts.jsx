@@ -32,6 +32,7 @@ function Post({ post, onePost }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [PostLength, setPostLength] = useState(post?.likes?.length);
+  const [description,setDescription]=useState(post?.description)
   const [savedStatus, setSavedStatus] = useState(false);
   const [editPost, setEditPost] = useState(false);
   const [report, setReport] = useState(false);
@@ -39,6 +40,7 @@ function Post({ post, onePost }) {
   useEffect(() => {
     setSavedStatus(user?.saved?.includes(post?._id));
     setCurrentUser(userId === post?.userId?._id);
+    setDescription(post?.description)
   }, [post, user, userId]);
 
   const getAccountPage = async (user) => {
@@ -51,7 +53,6 @@ function Post({ post, onePost }) {
   const handleSavePost = async (postId) => {
     try {
       const response = await savePost({ postId });
-      console.log(response);
       if (response.success) {
         setSavedStatus(!savedStatus);
       }
@@ -320,7 +321,7 @@ function Post({ post, onePost }) {
           </div>
         </div>
         <div>
-          <p className="my-1 break-all text-sm">{post?.description}</p>
+          <p className="my-1 break-all text-sm">{description}</p>
           <div className="rounded-md overflow-hidden w-full">
             {
               post?.shorts?
@@ -386,7 +387,8 @@ function Post({ post, onePost }) {
           <EditPost
             img={post?.img[0]}
             shorts={false}
-            description={post?.description}
+            description={description}
+            setDescription={setDescription}
             postId={post?._id}
             setEditPost={setEditPost}
           />

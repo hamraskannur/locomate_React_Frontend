@@ -162,7 +162,7 @@ const ProfilePage = ({ userData, type }) => {
       )}
           
          { onePostId && (
-        <div className="mt-5">
+        <div className="mt-5 w-full">
           <Post
            onePost={true}
             post={onePostId}

@@ -1,0 +1,21 @@
+
+.empty-chat-container {
+    text-align: center;
+  }
+
+  .empty-chat-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .empty-chat-message {
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 20px;
+  }
+
+  .empty-chat-action a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+  }

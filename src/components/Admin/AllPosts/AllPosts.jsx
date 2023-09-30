@@ -15,14 +15,14 @@ const AllPosts = ({selected}) => {
             if(selected){
                 try{
                 const data=await getAllPost()
-                setAllPosts(data)
+                setAllPosts(data.reverse())
                 }catch(err){
                   navigate('/admin/*');
                 }
             }else{
                 try{
                     const data=await getAllVideo()
-                    setAllVideo(data)
+                    setAllVideo(data.reverse())
                 }catch(err){
                   navigate('/admin/*');
                 }

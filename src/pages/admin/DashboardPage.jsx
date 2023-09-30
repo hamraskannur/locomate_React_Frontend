@@ -18,6 +18,8 @@ function DashboardPage() {
   useEffect(() => {
     const fetchData =async () => {
       const data=await getChartData()
+      if(data){
+        
       setUserCount(data.userCount)
       setPostCount(data.postCount)
       setShortsCount(data.shortsCount)
@@ -37,6 +39,7 @@ function DashboardPage() {
         return items.count
       })
       setPostGraphData(postGraphCount)    
+      }
     };
     fetchData()
   }, []);

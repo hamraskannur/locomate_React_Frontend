@@ -14,7 +14,7 @@ const NotificationCard = () => {
       try {
         const allNotifications = await getAllNotifications();
         if (allNotifications) {
-          setNotifications(allNotifications);
+          setNotifications(allNotifications.reverse());
           dispatch(viewNotification());
         }
       } catch (error) {

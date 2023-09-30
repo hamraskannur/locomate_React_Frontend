@@ -13,6 +13,7 @@ const GetAllShorts = ({userId}) => {
       if (userId) {
         try{
           const {AllPosts} = await getUserAllShorts(userId);
+          console.log(AllPosts)
            setPosts(AllPosts);
         }catch(error){
           navigate('/admin/*');

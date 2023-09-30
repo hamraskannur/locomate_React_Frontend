@@ -35,8 +35,7 @@ const AllPost = ({ userId, type, postCount,setOnePostId }) => {
           <div key={post._id}  onClick={() => getOnePost(post)}>
             <img
               className="rounded-md overflow-hidden h-48 flex items-center object-cover"
-              // src={SavedPost?post.post.img[0]:post?.img[0]}
-              src="https://freepngimg.com/thumb/photography/59850-and-instagram-photography-black-logo-white.png  "
+              src={post?.img[0]}
               alt="posts"
             />
           </div>

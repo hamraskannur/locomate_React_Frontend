@@ -47,9 +47,9 @@ function AdminLogin() {
         <div className="absolute inset-0 bg-gradient-to-r from-slate-500 to-slate-700  shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl" />
         <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
           <div className="max-w-md mx-auto">
-            <div>
-              <h1 className="text-2xl font-semibold">
-                Login
+          <div className="mb-4">
+              <h1 className="text-2xl text-center font-semibold font-mono uppercase">
+              LOGIN TO YOUR ADMIN ACCOUNT
               </h1>
             </div>
             <div className="divide-y divide-gray-200">
@@ -73,7 +73,7 @@ function AdminLogin() {
                 <div className="relative mt-8" />
                 <div className="relative">
 
-                  <button type="button" onClick={submitHandler} className={formIsValid ? 'bg-slate-500 text-white rounded-md px-2 py-1' : 'bg-slate-300 text-white rounded-md px-2 py-1 cursor-not-allowed'}>
+                  <button type="button" onClick={submitHandler} className={`${formIsValid  && 'text-white bg-slate-500 rounded-md px-2 py-1  cursor-auto'} ml-2 inline-block rounded cursor-not-allowed bg-slate-300  px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]`}>
                     Login
                   </button>
                 </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import "./chat.css"
 import { AddMessage, getMessages } from "../../../Api/userApi/chatRequest";
 import { getFriendsAccount } from "../../../Api/userApi/postRequest";
 import Moment from "react-moment";
@@ -7,14 +8,7 @@ import InputEmoji from "react-input-emoji";
 import { useNavigate } from "react-router-dom";
 import Avatars from "../avatar/Avatar";
 
-const Chat = ({
-  chat,
-  currentUser,
-  setSentMessage,
-  receiveMessages,
-  setPhoneSizeUser,
-  setPhoneSizeChat,
-}) => {
+const Chat = ({chat,currentUser,setSentMessage,receiveMessages,setPhoneSizeUser,setPhoneSizeChat}) => {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState(null);
@@ -195,8 +189,21 @@ const Chat = ({
           </div>
         </div>
       ) : (
-        <div className="flex items-center justify-center py-56">
-          <span>tap on chat to start conversation</span>
+        <div class="flex items-center justify-center py-40">
+          <div class="empty-chat-container">
+            <div class="empty-chat-icon">💬</div>
+            <div class="empty-chat-message">
+              tap on chat to start conversation.
+            </div>
+            <div class="empty-chat-message">or</div>
+            <div class="empty-chat-message">
+              Please go to your friend's profile page and create a chat with
+              <br /> them first, and then send a message
+            </div>
+            <div class="empty-chat-action">
+              <a>select you friend</a>
+            </div>
+          </div>
         </div>
       )}
     </>
