@@ -130,9 +130,12 @@ const ProfilePage = ({ userData, type }) => {
           <div className="text-heavy-metal-500 leading-4 mt-2">
             {userData?.name ? userData.name : ""},
           </div>
+          <div className="text-heavy-metal-500 leading-4 mt-2">
+            {userData?.email ? userData.email : ""},
+          </div>
           <div className="text-heavy-metal-500 leading-4 mt-1">
-            {userData?.city ? userData.city : "place"},
-            {userData?.country ? userData.country : "country"}
+            {userData?.city ? userData.city : ""},
+            {userData?.country ? userData.country : ""}
           </div>
           <p className="my-2   max-w-6xl text-sm">
             {userData?.description ? userData?.description : ""}
